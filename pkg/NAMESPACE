@@ -1,0 +1,12 @@
+import("methods")
+import("raster")
+importFrom("graphics", "abline", "polygon")
+importFrom("stats", "lm", "mahalanobis", "sd", "var")
+importFrom("utils", "setTxtProgressBar", "txtProgressBar")
+
+export(ea_spline)
+export(bbRaster)
+export(plot_soilProfile)
+export(plot_ea_spline)
+export(goof)
+export(goofcat)
