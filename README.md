@@ -8,4 +8,4 @@ install.packages("devtools")
 
 library(devtools)
 
-install_github("brendo1001/ithir/pkg")
+install_github("brendo1001/ithir_github/pkg")
