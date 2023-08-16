@@ -3,16 +3,16 @@
 \alias{edgeroi SOC 1km}
 \alias{target}
 \title{Subset of the 1km resolution soil carbon map of the Edgeroi District, NSW}
-\description{A \code{RasterLayer} of a subset of the 1km SOC map for the Edgeroi District, NSW. It portrays soil carbon stock for the 0-30cm depth interval only}
-\usage{data(edgeTarget_C)}
+\description{A Geotiff of a subset of the 1km SOC map for the Edgeroi District, NSW. It portrays soil carbon stock for the 0-30cm depth interval only}
+\usage{system.file("extdata/edgeTarget_C.tif", package="ithir")}
 \format{
-\code{edgeTarget_C} is an 7 row, 10 column \code{RasterLayer} of soil carbon stock for a small area in the Edgeroi district NSW, Australia. The grid has a pixel resolution of 1km x 1km. It contains the layer:
+\code{edgeTarget_C} is an 7 row, 10 column Geotiff of soil carbon stock for a small area in the Edgeroi district NSW, Australia. The grid has a pixel resolution of 1km x 1km. It contains the layer:
   \describe{
   \item{\code{target}}{numeric; predicted soil carbon stock for the 0-30cm depth interval}
 }
 }
 \details{The Edgeroi District, NSW is an intensive cropping area upon the fertile alluvial Namoi River plain. The District has been the subject of many soil invetigations, namely McGarry et al. (1989) whom describe an extensive soil data set collected from the area. More recently, digital soil mapping studies of the area have been conducted, for example, Malone et al. (2009). The 1km mapping of soil carbon stock was performed using digital soil mapping methods McBratney et al. (2003) using the soil data from McGarry et al. (1989) and available environmental covariates.}
-\note{The projection for the \code{RasterLayer} is WGS 84 Zone 55. It has the same mapping extent i.e. of the exact same area as the \code{edgeGrids} dataset provided in this package, but a different resolution.}
+\note{The projection for the raster is WGS 84 Zone 55. It has the same mapping extent i.e. of the exact same area as the edgeroi covariates (subset) Geotiffs provided in this package, but a different resolution.}
 
 \references{
 \itemize{
@@ -22,14 +22,15 @@
 }
 }
 \examples{
-library(ithir)
-library(raster)
 
-data(edgeTarget_C)
-target
+# library(ithir)
+# library(terra)
 
-#plot layer
-plot(target, main= "soil carbon stock 0-30cm")
+# example load the elevation grid
+# edgeroi_soc <- rast(system.file("extdata/edgeTarget_C.tif", package="ithir"))
+
+# simple plot
+#plot(edgeroi_soc, main= "Edgeroi SOC Stocks")
 
 }
 \keyword{datasets}

@@ -38,14 +38,12 @@
 \examples{
 #library(aqp)
 #library(plyr)
-#library(sp)
-
+#library(ithir)
 
 #Fit spline 
 #data(oneProfile)
 #class(oneProfile)
-#sp.fit<- ea_spline(obj = oneProfile, var.name="C.kg.m3.")
-
+#sp.fit<- ithir::ea_spline(obj = oneProfile, var.name="C.kg.m3.")
 
 #Using a SoilProfileCollection
 ## sample profile from Nigeria:
@@ -57,10 +55,8 @@
 ## prepare a SoilProfileCollection:
 #prof1 <- join(data.frame(id, top, bottom, ORCDRC, munsell), 
 #         data.frame(id, lon, lat, FAO1988), type='inner')
-#depths(prof1) <- id ~ top + bottom
-#site(prof1) <- ~ lon + lat + FAO1988 
-#coordinates(prof1) <- ~ lon + lat
-#proj4string(prof1) <- CRS("+proj=longlat +datum=WGS84")
+#aqp::depths(prof1) <- id ~ top + bottom
+#aqp::site(prof1) <- ~ lon + lat + FAO1988 
 
 ## fit spline:
 #ORCDRC.s <- ea_spline(prof1, var.name="ORCDRC")

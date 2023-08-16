@@ -1,5 +1,5 @@
 import("methods")
-import("raster")
+import("terra")
 importFrom("graphics", "abline", "polygon")
 importFrom("stats", "lm", "mahalanobis", "sd", "var")
 importFrom("utils", "setTxtProgressBar", "txtProgressBar")

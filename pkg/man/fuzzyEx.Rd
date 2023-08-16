@@ -28,10 +28,8 @@
 
 
 \examples{
-##NOT RUN
-##library(raster)
-##data(edgeTarget_C)
-##target
-##bbRaster(target)
+## NOT RUN
+
+
 }
 \keyword{methods}

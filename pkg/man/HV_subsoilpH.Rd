@@ -23,24 +23,21 @@
 \details{The area in question is the Hunter Wine Country Private Irrigation District (HWCPID), situated in the Lower Hunter Valley, NSW (32.83S 151.35E), and covers an area of approximately 220 km2. The HWCPID is approximately 140 km north of Sydney, NSW, Australia. Climatically, the HWCPID is situated in a temperate climatic zone, and experiences warm humid summers, and relatively cooler yet also humid winters. Rainfall is mostly uniformly distributed throughout the year. On average the HWCPID receives just over 750 mm of rainfall annually. In terms of land use, an expansive viticultural industry is situated in the area and is possibly most widespread
 of rural industries, followed by dry land agricultural grazing systems.}
 
-\note{This data set is used in the Use R for Digital Soil Mapping manual in the section about quantification of uncertainties.}
+\note{This data set is used in the Use R for Digital Soil Mapping course of exercises in the section about quantification of uncertainties.}
 
 \references{
 \itemize{
 \item Gallant, J. C., Dowling, T. I., (2003) \href{http://dx.doi.org/10.1029/2002WR001426}{A multiresolution index of valley bottom flatness for mapping depositional areas}. Water Resources Research 39(12), 1347. 
-\item Malone, B.P., Hughes, P.,  McBratney, A.B., Minasny, B. (2009) \href{http://dx.doi.org/10.1016/j.geodrs.2014.08.001}{A model for the identification of terrons in the Lower Hunter
-Valley, Australia}. Geoderma Regional 1, 31-47.
-\item This data is copyright of the Soil Security Lab, The University of Sydney. If any part of this data is to be used in any publication or report, please provide a citation:
-Soil Security Laboratory, 2015. Use R for Digital Soil Mapping Manual. The University of Sydney, Sydney, Australia.
+\item Malone, B.P., Hughes, P.,  McBratney, A.B., Minasny, B. (2009) \href{http://dx.doi.org/10.1016/j.geodrs.2014.08.001}{A model for the identification of terrons in the Lower Hunter Valley, Australia}. Geoderma Regional 1, 31-47.
+\item Malone, B.P., Minasny, B., McBratney, A.B. (2017) \href{https://link.springer.com/book/10.1007/978-3-319-44327-0}{Using R for Digital Soil Mapping}. Springer Cham. 262 Pages.
 }
 }
 
 \examples{
-library(ithir)
 
-
-data(HV_subsoilpH)
-summary(HV_subsoilpH)
+# library(ithir)
+# data(HV_subsoilpH)
+# summary(HV_subsoilpH)
 
 }
 \keyword{datasets}

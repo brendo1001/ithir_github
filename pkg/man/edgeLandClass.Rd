@@ -18,13 +18,12 @@ Soil Security Laboratory, 2015. Use R for Digital Soil Mapping Manual. The Unive
 }
 
 \examples{
-library(ithir)
 
-data(edgeLandClass)
+# library(ithir)
+# data(edgeLandClass)
 
-#data summary
-summary(edgeLandClass$LandClass)
-
+## data summary
+# summary(edgeLandClass$LandClass)
 
 }
 \keyword{datasets}

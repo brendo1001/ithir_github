@@ -25,15 +25,16 @@
 
 
 \examples{
-##NOT RUN
-#library(ithir)
-#library(MASS)
-#some data
-#data(USYD_soil1)
-#fit a linear model
-#mod.1 <- lm(CEC ~ clay, data = USYD_soil1 , y = TRUE, x = TRUE)
-#Goodness of fit
-#goof(observed = mod.1$y, predicted = mod.1$fitted.values, plot.it = TRUE)
+
+## NOT RUN
+# library(ithir)
+# library(MASS)
+## some data
+# data(USYD_soil1)
+## fit a linear model
+# mod.1 <- lm(CEC ~ clay, data = USYD_soil1 , y = TRUE, x = TRUE)
+## Goodness of fit
+# goof(observed = mod.1$y, predicted = mod.1$fitted.values, plot.it = TRUE)
 
 }
 \keyword{methods}

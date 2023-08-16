@@ -12,17 +12,15 @@ of rural industries, followed by dryland agricultural grazing systems.}
 
 \references{
 \itemize{
-\item Malone, B.P., Hughes, P.,  McBratney, A.B., Minasny, B. (2009) \href{http://dx.doi.org/10.1016/j.geodrs.2014.08.001}{A model for the identification of terrons in the Lower Hunter
-Valley, Australia}. Geoderma Regional 1, 31-47.
+\item Malone, B.P., Hughes, P.,  McBratney, A.B., Minasny, B. (2009) \href{http://dx.doi.org/10.1016/j.geodrs.2014.08.001}{A model for the identification of terrons in the Lower Hunter Valley, Australia}. Geoderma Regional 1, 31-47.
 }
 }
 
 \examples{
-library(ithir)
 
-
-data(hvPoints250)
-summary(hvPoints250)
+# library(ithir)
+# data(hvPoints250)
+# summary(hvPoints250)
 
 }
 \keyword{datasets}

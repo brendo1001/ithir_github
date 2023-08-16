@@ -16,19 +16,17 @@
 \itemize{
 \item Carre, F., McBratney, A.B. (2005) \href{http://dx.doi.org/10.1016/j.geoderma.2005.04.012}{Digital terron mapping}, Geoderma, Volume 128, Issues 3-4, October 2005, Pages 340-353.
 
-\item Malone, B.P., Hughes, P.,  McBratney, A.B., Minasny, B. (2014) \href{http://dx.doi.org/10.1016/j.geodrs.2014.08.001}{A model for the identification of terrons in the Lower Hunter
-Valley, Australia}. Geoderma Regional 1, 31-47.
+\item Malone, B.P., Hughes, P.,  McBratney, A.B., Minasny, B. (2014) \href{http://dx.doi.org/10.1016/j.geodrs.2014.08.001}{A model for the identification of terrons in the Lower Hunter Valley, Australia}. Geoderma Regional 1, 31-47.
 
 
 }
 }
 
 \examples{
-library(ithir)
 
-
-data(hvTerronDat)
-head(hvTerronDat)
+# library(ithir)
+# data(hvTerronDat)
+# head(hvTerronDat)
 
 }
 \keyword{datasets}

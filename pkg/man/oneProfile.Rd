@@ -11,17 +11,15 @@
 
 \references{
 \itemize{
-\item This data is copyright of the Soil Security Lab, The University of Sydney. If any part of this data is to be used in any publication or report, please provide a citation:
-Soil Security Laboratory, 2015. Use R for Digital Soil Mapping Manual. The University of Sydney, Sydney, Australia.
+\item Malone, B.P., Minasny, B., McBratney, A.B. (2017) \href{https://link.springer.com/book/10.1007/978-3-319-44327-0}{Using R for Digital Soil Mapping}. Springer Cham. 262 Pages.
 }
 }
 
 \examples{
-library(ithir)
 
-
-data(oneProfile)
-str(oneProfile)
+# library(ithir)
+# data(oneProfile)
+# str(oneProfile)
 
 }
 \keyword{datasets}

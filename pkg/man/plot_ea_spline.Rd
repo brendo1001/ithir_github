@@ -21,18 +21,19 @@
 
 
 \examples{
-#library(ithir)
-#library(aqp)
 
+# library(ithir)
+# library(aqp)
+ 
+## NOT RUN
+# data(oneProfile)
+# str(oneProfile)
+## convert to SoilProfileCollection object
+# aqp::depths(oneProfile)<- Soil.ID ~ Upper.Boundary + Lower.Boundary
+## fit spline
+# eaFit <- ea_spline(oneProfile, var.name="C.kg.m3.",d= t(c(0,5,15,30,60,100,200)),lam = 0.1, vlow=0, show.progress=FALSE )
+## do plot
+# plot_ea_spline(splineOuts=eaFit, d= t(c(0,5,15,30,60,100,200)), maxd=200, type=1, label="carbon density") 
 
-##NOT RUN
-#data(oneProfile)
-#str(oneProfile)
-##convert to SoilProfileCollection object
-#depths(oneProfile)<- Soil.ID ~ Upper.Boundary + Lower.Boundary
-##fit spline
-#eaFit <- ea_spline(oneProfile, var.name="C.kg.m3.",d= t(c(0,5,15,30,60,100,200)),lam = 0.1, vlow=0, show.progress=FALSE )
-##do plot
-#plot_ea_spline(splineOuts=eaFit, d= t(c(0,5,15,30,60,100,200)), maxd=200, type=1, label="carbon density") 
 }
 \keyword{methods}

@@ -26,23 +26,21 @@
 \examples{
 ##library(ithir)
 
-##NOT RUN
-#Using a pre-constructed confusion matrix
-#con.mat <- matrix(c(5, 0, 1, 2, 0, 15, 0, 5, 0, 1, 31, 0, 0, 10, 2, 11),
-#nrow = 4, ncol = 4)
-#rownames(con.mat) <- c("DE", "VE", "CH", "KU")
-#colnames(con.mat) <- c("DE", "VE", "CH", "KU")
-#con.mat
-#goofcat(conf.mat = con.mat, imp=TRUE)
+## NOT RUN
+## Using a pre-constructed confusion matrix
+# con.mat <- matrix(c(5, 0, 1, 2, 0, 15, 0, 5, 0, 1, 31, 0, 0, 10, 2, 11),nrow = 4, ncol = 4)
+# rownames(con.mat) <- c("DE", "VE", "CH", "KU")
+# colnames(con.mat) <- c("DE", "VE", "CH", "KU")
+# goofcat(conf.mat = con.mat, imp=TRUE)
 
-##NOT RUN
-#Using observations and corresponding predictions
-#Using random intgers
-#set.seed(123)
-#observed<- sample(1:5,1000,replace=TRUE)
-#set.seed(321)
-#predicted<- sample(1:5,1000,replace=TRUE)
-#goofcat(observed = observed, predicted = predicted)
+## NOT RUN
+## Using observations and corresponding predictions
+## Using random intgers
+# set.seed(123)
+# observed<- sample(1:5,1000,replace=TRUE)
+# set.seed(321)
+# predicted<- sample(1:5,1000,replace=TRUE)
+# goofcat(observed = observed, predicted = predicted)
 
 }
 \keyword{methods}

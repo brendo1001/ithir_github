@@ -1,8 +1,8 @@
 # Purpose        : returns the bounding box of a raster layer
-# Maintainer     : Brendan Malone (brendan.malone@sydney.edu.au); 
+# Maintainer     : Brendan Malone (brendan.malone@csiro.au); 
 
 bbRaster<-function(obj){
-  xxx<-extent(obj)
+  xxx<-terra::ext(obj)
   d.mat<- matrix(NA, nrow=4, ncol=2)
   d.mat[1,]<- c(xxx[1],xxx[3])
   d.mat[2,]<- c(xxx[1],xxx[4])

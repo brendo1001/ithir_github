@@ -23,11 +23,10 @@ The lithology is from a global digital map (Durr et al., 2005)  with 7 values wh
 
 
 \examples{
-library(ithir)
 
-
-data(homosoil_globeDat)
-str(homosoil_globeDat)
+# library(ithir)
+# data(homosoil_globeDat)
+# str(homosoil_globeDat)
 
 }
 \keyword{datasets}

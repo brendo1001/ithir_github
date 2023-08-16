@@ -11,9 +11,9 @@ plot_ea_spline<- function(splineOuts, d = t(c(0,5,15,30,60,100,200)), maxd, type
   #type 1 (raw data and spline fit)
   if (type==1)
   { #plot the observed
-    d1<- splineOuts$obs.preds 
+    d1<- splineOuts$obs.preds
     d1<- d1[d1$FID==plot.which,]
-    vals<- d1[,4]
+    vals<- as.numeric(d1[,4])
     depths<- d1[,2:3]
     matX<- matrix(NA, nrow=nrow(d1), ncol= 4)
     matY<- matrix(NA, nrow=nrow(d1), ncol= 4)
@@ -24,14 +24,15 @@ plot_ea_spline<- function(splineOuts, d = t(c(0,5,15,30,60,100,200)), maxd, type
     for (i in 1: nrow(d1)){
       polygon (matX[i,],matY[i,], lty=1, lwd=2, border="black") }
     #plot the fitted spline
-    lines(splineOuts$var.1cm[,plot.which],seq(1,d[length(d)]),lwd=2,col="red" )}
+    lines(splineOuts$var.1cm[,plot.which],seq(1,d[length(d)]),lwd=2,col="red" )
+    }
   
   #type 2 (raw data and spline fitted averages)
   if (type==2)
   {#plot the observed
     d1<- splineOuts$obs.preds 
     d1<- d1[d1$FID==plot.which,]
-    vals<- d1[,4]
+    vals<- as.numeric(d1[,4])
     depths<- d1[,2:3]
     matX<- matrix(NA, nrow=nrow(d1), ncol= 4)
     matY<- matrix(NA, nrow=nrow(d1), ncol= 4)
@@ -58,7 +59,7 @@ plot_ea_spline<- function(splineOuts, d = t(c(0,5,15,30,60,100,200)), maxd, type
   {#plot the observed
     d1<- splineOuts$obs.preds 
     d1<- d1[d1$FID==plot.which,]
-    vals<- d1[,4]
+    vals<- as.numeric(d1[,4])
     depths<- d1[,2:3]
     matX<- matrix(NA, nrow=nrow(d1), ncol= 4)
     matY<- matrix(NA, nrow=nrow(d1), ncol= 4)

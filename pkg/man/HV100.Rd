@@ -16,11 +16,10 @@
 }
 
 \examples{
-library(ithir)
 
-
-data(HV100)
-head(HV100)
+# library(ithir)
+# data(HV100)
+# head(HV100)
 
 }
 \keyword{datasets}

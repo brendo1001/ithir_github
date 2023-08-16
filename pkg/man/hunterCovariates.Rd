@@ -2,11 +2,11 @@
 \docType{data}
 \alias{hunterCovariates}
 \title{Suite of selected environmental covariates for the the Lower Hunter Valley, NSW}
-\description{A \code{RasterStack} of selected environmental covariates covering the Lower Hunter Valley, NSW.}
-\usage{data(hunterCovariates)}
+\description{A set of Geotiffs of selected environmental covariates covering the Lower Hunter Valley, NSW.}
+\usage{system.file("extdata/hunterCovariates_NAME.tif", package="ithir")}
 
 \format{
-\code{hunterCovariates} is a \code{RasterStack} of selected environmental covariate rasters. The rasters have a pixel resolution of 25m x 25m. The CRS of each raster is WGS 84 UTM Zone 56. The \code{RasterStack} contains the following rasters:
+These data are Geotiffs of selected environmental covariates. The rasters have a pixel resolution of 25m x 25m. The CRS of each raster is WGS 84 UTM Zone 56. The following raster are available:
  \itemize{
 \item \code{AACN}: Difference between elevation and an interpolation of a channel network base level elevation. Knowledge of the spatial distribution of channel networks (lines) is therefore necessary for this parameter.
 \item \code{Drainage.Index}: A measure of soil water drainage capability. This index is derived from an empirical model of soil color and soil drainage. 
@@ -19,7 +19,7 @@
 \details{The area in question is the Hunter Wine Country Private Irrigation District (HWCPID), situated in the Lower Hunter Valley, NSW (32.83S 151.35E), and covers an area of approximately 220 km2. The HWCPID is approximately 140 km north of Sydney, NSW, Australia. Climatically, the HWCPID is situated in a temperate climatic zone, and experiences warm humid summers, and relatively cooler yet also humid winters. Rainfall is mostly uniformly distributed throughout the year. On average the HWCPID receives just over 750 mm of rainfall annually. In terms of land use, an expansive viticultural industry is situated in the area and is possibly most widespread
 of rural industries, followed by dry land agricultural grazing systems.}
 
-\note{This \code{RasterStack} is used in the Using R for Digital Soil Mapping manual book.}
+\note{These Geotiffs are used in the Using R for Digital Soil Mapping course of exercises.}
 
 \references{
 \itemize{
@@ -29,12 +29,15 @@ Valley, Australia}. Geoderma Regional 1, 31-47.
 }
 
 \examples{
-library(ithir)
-library(raster)
 
-data(hunterCovariates)
+# library(ithir)
+# library(terra)
 
-#plot 1 of the rasters in the \code{RasterStack}
-plot(hunterCovariates[["AACN"]])
+# example load the altitude above channel network grid
+# aacn <- rast(system.file("extdata/hunterCovariates_hunterCovariates_AACN.tif", package="ithir"))
+
+# simple plot
+# plot(aacn, main= "Hunter Valley AACN Map")
+
 }
 \keyword{datasets}

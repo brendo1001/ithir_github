@@ -8,7 +8,7 @@
 goofcat<- function(observed = NULL, predicted = NULL, conf.mat, imp=FALSE){
   
   if (imp==TRUE){
-    if(class(conf.mat)!="matrix"){
+    if(class(conf.mat)[1]!="matrix"){
       stop("Entered data is NOT a matrix")}
     if(nrow(conf.mat)!= ncol(conf.mat)) {
       stop("Entered data is NOT a confusion matrix")}

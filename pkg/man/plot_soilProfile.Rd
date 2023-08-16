@@ -19,13 +19,15 @@
 
 
 \examples{
-#library(ithir)
 
-##NOT RUN
-##data(oneProfile)
-##str(oneProfile)
+# library(ithir)
 
-#do plot
-##plot_soilProfile(data = oneProfile, vals = oneProfile$C.kg.m3., depths = oneProfile[,2:3], label= names(oneProfile)[4])
+## NOT RUN
+# data(oneProfile)
+# str(oneProfile)
+
+## do plot
+# plot_soilProfile(data = oneProfile, vals = oneProfile$C.kg.m3., depths = oneProfile[,2:3], label= names(oneProfile)[4])
+
 }
 \keyword{methods}
