@@ -6,8 +6,10 @@
 \usage{system.file("extdata/hunterCovariates_sub_NAME.tif", package="ithir")}
 
 \format{
-\code{The data are Geotiffs of selected environmental covariate rasters. The rasters have a pixel resolution of 25m x 25m. The CRS of each raster is WGS 84 UTM Zone 56. The following rasters are available:
- \itemize{
+
+The data are Geotiffs of selected environmental covariate rasters. The rasters have a pixel resolution of 25m x 25m. The CRS of each raster is WGS 84 UTM Zone 56. The following rasters are available:
+
+\itemize{
 \item \code{Terrain_Ruggedness_Index}: A quantitative measure of topographic heterogeneity. High values indicate terrain is rugged or heterogeneous.  
 \item \code{AACN}: Difference between elevation and an interpolation of a channel network base level elevation. Knowledge of the spatial distribution of channel networks (lines) is therefore necessary for this parameter.
 \item \code{Landsat_Band1}: Earth surface reflectance information derived from Landsat 7 ETM+ satellite. Band 1 spectral range is .45 to .52 microns (visible blue).
@@ -46,7 +48,6 @@ Soil Security Laboratory, 2015. Use R for Digital Soil Mapping Manual. The Unive
 # elevation <- rast(system.file("extdata/hunterCovariates_sub_Elevation.tif", package="ithir"))
 
 # simple plot
-#plot(elevation, main= "Hunter Valley (sub area) Elevation")
+#plot(elevation, main= "Hunter Valley (sub area) Elevation")}
 
-}
 \keyword{datasets}
