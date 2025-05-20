@@ -1,0 +1,1552 @@
+\nonstopmode{}
+\documentclass[a4paper]{book}
+\usepackage[times,inconsolata,hyper]{Rd}
+\usepackage{makeidx}
+\usepackage[utf8]{inputenc} % @SET ENCODING@
+% \usepackage{graphicx} % @USE GRAPHICX@
+\makeindex{}
+\begin{document}
+\chapter*{}
+\begin{center}
+{\textbf{\huge Package `ithir'}}
+\par\bigskip{\large \today}
+\end{center}
+\inputencoding{utf8}
+\ifthenelse{\boolean{Rd@use@hyper}}{\hypersetup{pdftitle = {ithir: Tools and Data for Digital Soil Informatics}}}{}
+\begin{description}
+\raggedright{}
+\item[Type]\AsIs{Package}
+\item[Title]\AsIs{Tools and Data for Digital Soil Informatics}
+\item[Version]\AsIs{1.0.0}
+\item[Date]\AsIs{2025-05-20}
+\item[Author]\AsIs{Brendan Malone [aut, cre]}
+\item[Maintainer]\AsIs{Brendan Malone }\email{brendan.malone@csiro.au}\AsIs{}
+\item[Description]\AsIs{Provides tools and datasets to support digital soil mapping and analysis workflows. Includes fast mass-preserving spline functions for raster and profile data, model evaluation metrics for both continuous and categorical predictions, and example datasets for demonstration and testing.}
+\item[Depends]\AsIs{R (>= 4.0)}
+\item[Imports]\AsIs{methods, terra}
+\item[Suggests]\AsIs{MASS, sf, graphics, stats, utils, testthat}
+\item[License]\AsIs{GPL-2}
+\item[Encoding]\AsIs{UTF-8}
+\item[LazyData]\AsIs{true}
+\item[RoxygenNote]\AsIs{7.2.3}
+\item[NeedsCompilation]\AsIs{no}
+\end{description}
+\Rdcontents{\R{} topics documented:}
+\inputencoding{utf8}
+\HeaderA{1km resolution soil carbon map of the Edgeroi District, NSW (S1)}{Subset of the 1km resolution soil carbon map of the Edgeroi District, NSW}{1km resolution soil carbon map of the Edgeroi District, NSW (S1)}
+\aliasA{edgeroi SOC 1km}{1km resolution soil carbon map of the Edgeroi District, NSW (S1)}{edgeroi SOC 1km}
+\aliasA{target}{1km resolution soil carbon map of the Edgeroi District, NSW (S1)}{target}
+\keyword{datasets}{1km resolution soil carbon map of the Edgeroi District, NSW (S1)}
+%
+\begin{Description}
+A Geotiff of a subset of the 1km SOC map for the Edgeroi District, NSW. It portrays soil carbon stock for the 0-30cm depth interval only
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+system.file("extdata/edgeTarget_C.tif", package="ithir")
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+\code{edgeTarget\_C} is an 7 row, 10 column Geotiff of soil carbon stock for a small area in the Edgeroi district NSW, Australia. The grid has a pixel resolution of 1km x 1km. It contains the layer:
+\begin{description}
+
+\item[\code{target}] numeric; predicted soil carbon stock for the 0-30cm depth interval
+
+\end{description}
+
+\end{Format}
+%
+\begin{Details}
+The Edgeroi District, NSW is an intensive cropping area upon the fertile alluvial Namoi River plain. The District has been the subject of many soil invetigations, namely McGarry et al. (1989) whom describe an extensive soil data set collected from the area. More recently, digital soil mapping studies of the area have been conducted, for example, Malone et al. (2009). The 1km mapping of soil carbon stock was performed using digital soil mapping methods McBratney et al. (2003) using the soil data from McGarry et al. (1989) and available environmental covariates.
+\end{Details}
+%
+\begin{Note}
+The projection for the raster is WGS 84 Zone 55. It has the same mapping extent i.e. of the exact same area as the edgeroi covariates (subset) Geotiffs provided in this package, but a different resolution.
+\end{Note}
+%
+\begin{References}
+\begin{itemize}
+
+\item{} Malone, B.P., McBratney, A.B., Minasny, B. (2009) \Rhref{http://dx.doi.org/10.1016/j.geoderma.2009.10.007}{Mapping continuous depth functions of soil carbon storage and available water capacity}. Geoderma 154, 138-152.
+\item{} McBratney, A.B., Mendonca Santos, M.L., Minasny, B. (2003) \Rhref{http://dx.doi.org/10.1016/S0016-7061(03)00223-4}{On Digtial Soil mapping}. Geoderma 117: 3-52.
+\item{} McGarry, D., Ward, W.T., McBratney, A.B. (1989) Soil Studies in the Lower Namoi Valley: Methods and Data. The Edgeroi Data Set. (2 vols) (CSIRO Division of Soils: Adelaide).
+
+\end{itemize}
+
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# library(ithir)
+# library(terra)
+
+# example load the elevation grid
+# edgeroi_soc <- rast(system.file("extdata/edgeTarget_C.tif", package="ithir"))
+
+# simple plot
+#plot(edgeroi_soc, main= "Edgeroi SOC Stocks")
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{bbRaster}{Get the bounding box information of a \code{SpatRaster} from its extents.}{bbRaster}
+\keyword{methods}{bbRaster}
+%
+\begin{Description}
+This is a simple function that returns a 4 by 2 matrix of a \code{SpatRaster} bounding box
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+bbRaster(obj)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{obj}] object of class \code{"SpatRaster"}
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+Returns a 4  x 2 matrix with each row indicating a coordinate pair of the bounding box
+\end{Value}
+%
+\begin{Author}
+Brendan Malone
+\end{Author}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# library(terra)
+# target <- rast(system.file("extdata/edgeTarget_C.tif", package="ithir"))
+# target
+# bbRaster(target)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{ea\_rasSp\_fast}{Fast Mass-Preserving Spline on Raster Soil Data}{ea.Rul.rasSp.Rul.fast}
+\keyword{methods}{ea\_rasSp\_fast}
+%
+\begin{Description}
+Fits a mass-preserving spline model to a multi-layer soil property \code{SpatRaster} and returns raster layers containing spline-averaged values over user-defined depth intervals.
+This function uses precomputed spline matrices for efficiency and applies the spline cell-wise using \code{terra::app()}.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+ea_rasSp_fast(obj, lam = 0.1, dIn, dOut, vlow = 0, vhigh = 100, depth_res = 1)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{obj}] object of class \code{"SpatRaster"} with one layer per input depth interval.
+\item[\code{lam}] spline stiffness parameter (\eqn{\lambda}{}); smaller values = smoother splines.
+\item[\code{dIn}] numeric vector of input depth boundaries (e.g. \code{c(0,5,15,...)}).
+\item[\code{dOut}] numeric vector defining output depth intervals (e.g. \code{c(0,30,60)}).
+\item[\code{vlow}] minimum bound to truncate spline predictions (default = 0).
+\item[\code{vhigh}] maximum bound to truncate spline predictions (default = 100).
+\item[\code{depth\_res}] numeric; depth interpolation resolution (e.g. 1 = 1cm, 5 = 5cm).
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+Returns a \code{SpatRaster} with one layer per output depth interval.
+\end{Value}
+%
+\begin{Author}
+Brendan Malone
+\end{Author}
+%
+\begin{Examples}
+\begin{ExampleCode}
+# Not run on CRAN due to file size and download time
+## Not run: 
+library(terra)
+
+# Define SLGA V2 clay layer URLs (0–200 cm depth range)
+clay_urls <- c(
+  '/vsicurl/https://esoil.io/TERNLandscapes/Public/Products/TERN/SLGA/CLY/CLY_000_005_EV_N_P_AU_TRN_N_20210902.tif',
+  '/vsicurl/https://esoil.io/TERNLandscapes/Public/Products/TERN/SLGA/CLY/CLY_005_015_EV_N_P_AU_TRN_N_20210902.tif',
+  '/vsicurl/https://esoil.io/TERNLandscapes/Public/Products/TERN/SLGA/CLY/CLY_015_030_EV_N_P_AU_TRN_N_20210902.tif',
+  '/vsicurl/https://esoil.io/TERNLandscapes/Public/Products/TERN/SLGA/CLY/CLY_030_060_EV_N_P_AU_TRN_N_20210902.tif',
+  '/vsicurl/https://esoil.io/TERNLandscapes/Public/Products/TERN/SLGA/CLY/CLY_060_100_EV_N_P_AU_TRN_N_20210902.tif',
+  '/vsicurl/https://esoil.io/TERNLandscapes/Public/Products/TERN/SLGA/CLY/CLY_100_200_EV_N_P_AU_TRN_N_20210902.tif'
+)
+
+# Load and crop a small extent near Canberra
+clay_stack <- rast(clay_urls)
+aoi <- ext(149.00, 149.10, -36.00, -35.90)
+clay_crop <- crop(clay_stack, aoi)
+
+# Fit spline and generate interpolated output
+out <- ea_rasSp_fast(
+  obj = clay_crop,
+  lam = 0.1,
+  dIn = c(0, 5, 15, 30, 60, 100, 200),
+  dOut = c(0, 30, 60),
+  depth_res = 2
+)
+
+# Plot the result
+plot(out)
+
+## End(Not run)
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{ea\_spline}{Fits a mass preserving spline}{ea.Rul.spline}
+\keyword{methods}{ea\_spline}
+%
+\begin{Description}
+This function is specific for soil profile data. A continous spline function is fitted upon information recieved about a target soil property at specified depths intervals or soil horizons. The spline however has the unique property of maintaining the integrity of the observed information i.e. the spline has mass preserving properties.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+ea_spline(obj, var.name, lam = 0.1, d = c(0,5,15,30,60,100,200), vlow = 0, vhigh = 1000, show.progress=TRUE)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{obj}] Can be an object of class \code{"data.frame"} or \code{"SoilProfileCollection"}
+\item[\code{var.name}] character; target variable name (must be a numeric variable)    
+\item[\code{lam}] numeric; lambda the smoothing parameter
+\item[\code{d}] numeric; standard depths that are used to extract values from fitted spline i.e harmonising depths
+\item[\code{vlow}] numeric; smallest value of the target variable (smaller values will be replaced)
+\item[\code{vhigh}] numeric; highest value of the target variable (larger values will be replaced)
+\item[\code{show.progress}] logical; Display the progress bar?
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+Returns a list with four elements:
+\begin{description}
+
+\item[\code{harmonised}] data frame; are spline-estimated values of the target variable at standard depths
+\item[\code{obs.preds}] data frame; are observed values together with associated spline predictions for each profile at each depth.
+\item[\code{var.1cm}] matrix; are spline-estimated values of the target variable using the 1 cm increments 
+\item[\code{tmse}] matrix; True mean square error estimate between observed profiles and associated fitted splines.
+
+
+\end{description}
+
+\end{Value}
+%
+\begin{Note}
+Target variable needs to be a numeric vector measured at least 2 horizons for the spline to be fitted. Profiles with 1 horizon are accepted and processed as per output requirements, but no spline is fitted as such. Only positive numbers for upper and lower depths can be accepted. It is assumed that soil variables collected per horizon refer to block support i.e. they represent averaged values for the whole horizon. This operation can be time-consuming for large data sets.
+\end{Note}
+%
+\begin{Author}
+ Brendan Malone 
+\end{Author}
+%
+\begin{References}
+\begin{itemize}
+
+\item{} Bishop, T.F.A., McBratney, A.B., Laslett, G.M., (1999) \Rhref{http://dx.doi.org/10.1016/S0016-7061(99)00003-8}{Modelling soil attribute depth functions with equal-area quadratic smoothing splines}. Geoderma, 91(1-2): 27-45. 
+\item{} Malone, B.P., McBratney, A.B., Minasny, B., Laslett, G.M. (2009) \Rhref{http://dx.doi.org/10.1016/j.geoderma.2009.10.007}{Mapping continuous depth functions of soil carbon storage and available water capacity}. Geoderma, 154(1-2): 138-152.
+
+\end{itemize}
+
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+#library(aqp)
+#library(plyr)
+#library(ithir)
+
+#Fit spline 
+#data(oneProfile)
+#class(oneProfile)
+#sp.fit<- ithir::ea_spline(obj = oneProfile, var.name="C.kg.m3.")
+
+#Using a SoilProfileCollection
+## sample profile from Nigeria:
+#lon = 3.90; lat = 7.50; id = "ISRIC:NG0017"; FAO1988 = "LXp" 
+#top = c(0, 18, 36, 65, 87, 127) 
+#bottom = c(18, 36, 65, 87, 127, 181)
+#ORCDRC = c(18.4, 4.4, 3.6, 3.6, 3.2, 1.2)
+#munsell = c("7.5YR3/2", "7.5YR4/4", "2.5YR5/6", "5YR5/8", "5YR5/4", "10YR7/3")
+## prepare a SoilProfileCollection:
+#prof1 <- join(data.frame(id, top, bottom, ORCDRC, munsell), 
+#         data.frame(id, lon, lat, FAO1988), type='inner')
+#aqp::depths(prof1) <- id ~ top + bottom
+#aqp::site(prof1) <- ~ lon + lat + FAO1988 
+
+## fit spline:
+#ORCDRC.s <- ea_spline(prof1, var.name="ORCDRC")
+#str(ORCDRC.s)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{edgeroi covariates (subset)}{Selected subset of environmental covariates for the Edgeroi District, NSW}{edgeroi covariates (subset)}
+\aliasA{edgeGrids}{edgeroi covariates (subset)}{edgeGrids}
+\aliasA{edgeroi covariates}{edgeroi covariates (subset)}{edgeroi covariates}
+\keyword{datasets}{edgeroi covariates (subset)}
+%
+\begin{Description}
+Geotiffs of selected environmental covariates for a small area of the Edgeroi district in NSW, Australia.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+system.file("extdata/edgeGrids_NAME.tif", package="ithir")
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+\code{edgeroi covariates (subset)} are Geotiffs of selected environmental covariates from a small area in the Edgeroi district NSW, Australia. The grids have a pixel resolution of 90m x 90m. The following grids are available:
+\begin{description}
+
+\item[\code{Doserate.tif}] numeric; gamma radiometric data
+\item[\code{Elevation.tif}] numeric; topographic variable of bare earth ground elevation. Derived from digital elevation model
+\item[\code{Panchromat.tif}] numeric; panchromatic band of the Landsat 7 satelite
+\item[\code{Slope.tif}] numeric; Slope gradient of the land surface. Derived from digital elevation model  
+\item[\code{TWI.tif}] numeric; topographic wetness index. Secondary derivative of the digital elevation model  
+
+\end{description}
+
+\end{Format}
+%
+\begin{Details}
+The Edgeroi District, NSW is an intensive cropping area upon the fertile alluvial Namoi River plain. The District has been the subject of many soil invetigations, namely McGarry et al. (1989) whom describe an extensive soil data set collected from the area. More recently, digital soil mapping studies of the area have been conducted, for example, Malone et al. (2009).
+\end{Details}
+%
+\begin{Note}
+The raw spatial data that contributed to the creation of these data were sourced from publically accessable repositories hosted by various Australian Government and international agencies including CSIRO (for the DEM), Geosciences Australia (for the radiometric data) and NASA (for the Landsat 7 ETM+ data). The projection for the raster grids is WGS 84 Zone 55.
+\end{Note}
+%
+\begin{References}
+\begin{itemize}
+
+\item{} Malone, B.P., McBratney, A.B., Minasny, B. (2009) \Rhref{http://dx.doi.org/10.1016/j.geoderma.2009.10.007}{Mapping continuous depth functions of soil carbon storage and available water capacity}. Geoderma 154, 138-152.
+\item{} McGarry, D., Ward, W.T., McBratney, A.B. (1989) Soil Studies in the Lower Namoi Valley: Methods and Data. The Edgeroi Data Set. (2 vols) (CSIRO Division of Soils: Adelaide).
+
+\end{itemize}
+
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# library(ithir)
+# library(terra)
+
+# example load the elevation grid
+# elevation <- rast(system.file("extdata/edgeGrids_Elevation.tif", package="ithir"))
+
+# simple plot
+#plot(elevation, main= "Edgeroi Elevation Map")
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{edgeroi covariates (whole district)}{Suite of selected environmental covariates for the Edgeroi District, NSW}{edgeroi covariates (whole district)}
+\aliasA{edgeroiCovariates}{edgeroi covariates (whole district)}{edgeroiCovariates}
+\keyword{datasets}{edgeroi covariates (whole district)}
+%
+\begin{Description}
+Geotiffs of selected environmental covariates with near complete coverage of the Edgeroi district in NSW, Australia.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+system.file("extdata/edgeCovariates_NAME.tif", package="ithir")
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+\code{edgeroiCovariates} consists of 5 Geotiffs of selected environmental covariates for the near entire Edgeroi district NSW, Australia. The grids have a pixel resolution of 90m x 90m. The available rasters are:
+\begin{description}
+
+\item[\code{elevation.tif}] numeric; topographic variable of bare earth ground elevation. Derived from digital elevation model
+\item[\code{twi.tif}] numeric; topographic wetness index. Secondary derivative of the digital elevation model
+\item[\code{radK.tif}] numeric; gamma radiometric data
+\item[\code{landsat\_b3.tif}] numeric; band 3 reflectance of the Landsat 7 satelite  
+\item[\code{landsat\_b4.tif}] numeric; band 4 reflectance of the Landsat 7 satelite  
+
+\end{description}
+
+\end{Format}
+%
+\begin{Details}
+The Edgeroi District, NSW is an intensive cropping area upon the fertile alluvial Namoi River plain. The District has been the subject of many soil invetigations, namely McGarry et al. (1989) whom describe an extensive soil data set collected from the area. More recently, digital soil mapping studies of the area have been conducted, for example, Malone et al. (2009).
+\end{Details}
+%
+\begin{Note}
+The raw spatial data that contributed to the creation of the Geotiffs were sourced from publically accessable repositories hosted by various Australian Government and international agencies including CSIRO (for the DEM), Geosciences Australia (for the radiometric data) and NASA (for the Landsat 7 ETM+ data). The projection for each raster is WGS 84 Zone 55.
+\end{Note}
+%
+\begin{References}
+\begin{itemize}
+
+\item{} Malone, B.P., McBratney, A.B., Minasny, B. (2009) \Rhref{http://dx.doi.org/10.1016/j.geoderma.2009.10.007}{Mapping continuous depth functions of soil carbon storage and available water capacity}. Geoderma 154, 138-152.
+\item{} McGarry, D., Ward, W.T., McBratney, A.B. (1989) Soil Studies in the Lower Namoi Valley: Methods and Data. The Edgeroi Data Set. (2 vols) (CSIRO Division of Soils: Adelaide).
+
+\end{itemize}
+
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# library(ithir)
+# library(terra)
+
+# example load the elevation grid
+# elevation <- rast(system.file("extdata/edgeroiCovariates_elevation.tif", package="ithir"))
+
+# simple plot
+#plot(elevation, main= "Edgeroi Elevation Map")
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{Edgeroi Land Class Points}{Point data of estimated land classes from the Edgeroi District, NSW, Australia.}{Edgeroi Land Class Points}
+\aliasA{edgeLandClass}{Edgeroi Land Class Points}{edgeLandClass}
+\keyword{datasets}{Edgeroi Land Class Points}
+%
+\begin{Description}
+A \code{dataframe} of 500 point locations in the Edgeroi District, NSW, Australia (30.11S 149.66E) where there is an estimated Land Classification. The Land classification is based upon an unsupervised classification of unknown date Landsat 7 ETM+ spectral bands. The points represent a random sample of grid locations of the land classification map. The are 6 land classes and have a numeric identifier. The land classes roughly correspond to: 1) dense forest; 2) open forest; 3) water bodies; 4) woody vegetation and native grassland; 5) Irrigated cropping; and 6) dry land cropping. The CRS of the points is WGS84 UTM Zone 55.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+data(edgeLandClass)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+\code{edgeLandClass} is a 500 row \code{dataframe} with locational (2 columns) and land class information (1 column)
+\end{Format}
+%
+\begin{Details}
+This data frame is typical point data of environmental phenomena. 
+\end{Details}
+%
+\begin{References}
+\begin{itemize}
+
+\item{} This data is copyright of the Soil Security Lab, The University of Sydney. If any part of this data is to be used in any publication or report, please provide a citation:
+Soil Security Laboratory, 2015. Use R for Digital Soil Mapping Manual. The University of Sydney, Sydney, Australia.
+
+\end{itemize}
+
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# library(ithir)
+# data(edgeLandClass)
+
+## data summary
+# summary(edgeLandClass$LandClass)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{Edgeroi soil carbon data}{Soil point data from the Edgeroi District, NSW, Australia.}{Edgeroi soil carbon data}
+\aliasA{edgeroi\_splineCarbon}{Edgeroi soil carbon data}{edgeroi.Rul.splineCarbon}
+\keyword{datasets}{Edgeroi soil carbon data}
+%
+\begin{Description}
+A soil information \code{dataframe} derived from 341 obsevations at various locations of the Edgeroi District, NSW, Australia (30.11S 149.66E). The soil data in this data set is soil carbon density and was estimated via a pedotransfer function that included measured soil attributes soil carbon concentration and soil texture information. Mass preserving splines were fitted to the original data in order to harmonise the depth intervals in accordances to specifications of the GlobalSoilMap project (Arrouays et al. 2014). In terms of the sampling locations, 210 were sampled on a systematic, equilateral triangular grid with a spacing of 2.8 km between sites (McGarry et al., 1989). The further 131 soil profiles are distributed more irregularly or on transects. Locations are attributed to a site name as designated by McGarry et al. (1989) and have a recorded coordinate location. The CRS of the points is WGS84 UTM Zone 55.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+data(edgeroi_splineCarbon)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+\code{edgeroi\_splineCarbon} is a 341 row \code{dataframe} with identifier, locational and soil carbon density information for the following depth intervals: 0-5cm, 5-15cm, 15-30cm, 30-60cm, 60-100cm and 100-200cm. A column which specifies the soil depth at each location irrespective of maximum spline fitted depth. 
+\end{Format}
+%
+\begin{Details}
+This data frame is a typical soil information table
+\end{Details}
+%
+\begin{References}
+\begin{itemize}
+
+\item{} Arrouays, D., McKenzie, N., Hempel, J., Richer de Forges, A., and McBratney, A. (eds) (2014). GlobalSoilMap: Basis of the Global Spatial Soil Information System. CRC Press.
+\item{} McGarry, D., Ward, W.T., McBratney, A.B. (1989) Soil Studies in the Lower Namoi Valley: Methods and Data. The Edgeroi Data Set. (2 vols) (CSIRO Division of Soils: Adelaide).
+
+\end{itemize}
+
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# library(ithir)
+# library(sf)
+
+## load data
+# data(edgeroi_splineCarbon)
+
+## plot the point locations
+# spat_edgeroi_splineCarbon<- sf::st_as_sf(x = edgeroi_splineCarbon,coords = c("east", "north"))
+# plot(spat_edgeroi_splineCarbon, pch = 9, cex = 0.3)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{fit\_mpspline\_optimized}{Fit Mass-Preserving Spline to a Single Soil Profile}{fit.Rul.mpspline.Rul.optimized}
+\keyword{methods}{fit\_mpspline\_optimized}
+%
+\begin{Description}
+Applies the mass-preserving spline algorithm to a numeric vector of soil profile values and returns averaged values over specified output depth intervals. 
+It uses precomputed matrix structures for efficiency.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+fit_mpspline_optimized(vals, spline_info, dOut, vlow, vhigh, depth_res = 1)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{vals}] numeric vector of input values across input soil depth intervals (e.g., from one raster pixel).
+\item[\code{spline\_info}] list output from \code{\LinkA{precompute\_spline\_structures}{precompute.Rul.spline.Rul.structures}} that contains spline matrix components.
+\item[\code{dOut}] numeric vector defining output depth intervals (e.g., \code{c(0,30,60)}).
+\item[\code{vlow}] minimum bound to truncate spline predictions (e.g., 0).
+\item[\code{vhigh}] maximum bound to truncate spline predictions (e.g., 100).
+\item[\code{depth\_res}] numeric; resolution for interpolating spline (e.g., 1 = 1cm steps).
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+Returns a numeric vector of spline-averaged values for each specified output depth interval.
+\end{Value}
+%
+\begin{Author}
+Brendan Malone
+\end{Author}
+%
+\begin{SeeAlso}
+\code{\LinkA{precompute\_spline\_structures}{precompute.Rul.spline.Rul.structures}}, \code{\LinkA{ea\_rasSp\_fast}{ea.Rul.rasSp.Rul.fast}}
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+# Not run on CRAN due to external raster data size
+## Not run: 
+library(terra)
+
+# Define SLGA clay raster URLs
+clay_urls <- c(
+  '/vsicurl/https://esoil.io/TERNLandscapes/Public/Products/TERN/SLGA/CLY/CLY_000_005_EV_N_P_AU_TRN_N_20210902.tif',
+  '/vsicurl/https://esoil.io/TERNLandscapes/Public/Products/TERN/SLGA/CLY/CLY_005_015_EV_N_P_AU_TRN_N_20210902.tif',
+  '/vsicurl/https://esoil.io/TERNLandscapes/Public/Products/TERN/SLGA/CLY/CLY_015_030_EV_N_P_AU_TRN_N_20210902.tif',
+  '/vsicurl/https://esoil.io/TERNLandscapes/Public/Products/TERN/SLGA/CLY/CLY_030_060_EV_N_P_AU_TRN_N_20210902.tif',
+  '/vsicurl/https://esoil.io/TERNLandscapes/Public/Products/TERN/SLGA/CLY/CLY_060_100_EV_N_P_AU_TRN_N_20210902.tif',
+  '/vsicurl/https://esoil.io/TERNLandscapes/Public/Products/TERN/SLGA/CLY/CLY_100_200_EV_N_P_AU_TRN_N_20210902.tif'
+)
+
+# Load and crop raster stack
+clay_stack <- rast(clay_urls)
+aoi <- ext(149.00, 149.10, -36.00, -35.90)
+clay_crop <- crop(clay_stack, aoi)
+
+# Extract a single profile (pixel)
+vals <- terra::extract(clay_crop, cbind(149.05, -35.95))[1, -1]
+
+# Precompute spline structures
+dIn <- c(0, 5, 15, 30, 60, 100, 200)
+spline_info <- precompute_spline_structures(dIn, lam = 0.1)
+
+# Fit spline to single profile
+fit <- fit_mpspline_optimized(
+  vals = vals,
+  spline_info = spline_info,
+  dOut = c(0, 30, 60),
+  vlow = 0,
+  vhigh = 100,
+  depth_res = 1
+)
+
+fit
+
+## End(Not run)
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{fuzzyEx}{Derivation of fuzzy membership to classes}{fuzzyEx}
+\keyword{methods}{fuzzyEx}
+%
+\begin{Description}
+This is a simple function that complements the outputs from the Fuzme software developed by Minasny and McBratney (2002) and specifically upon outputs of the fuzzy kmeans with extragrades algorithm from McBratney and de Gruijter (1992). The function, given some inputs of multivariate data, together with a centroid table of the same multivariate information, will estimate the membership or belongingness of each row to each class. As the estimation is based on the fuzzy kmeans with extragrades algorithm, the membership are always derived for 1 + n classes i.e. a membership to each candidate class as defined in centroidal terms of the centroid table and a membership to the to extragrade class.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+fuzzyEx(data,centroid,cv,expon,alfa)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{data}] A data frame where the first row is a row or observation identifier. The remaining columns hold data relating to the centroid table.
+\item[\code{centroid}] A matrix of the class centroids
+\item[\code{cv}] A variance-covariance matrix used for the estimation of Mahalinobis distance.
+\item[\code{expon}] numeric. The fuzzy exponent value
+\item[\code{alfa}] numeric. a value indicating the level of membership to extragrade class. This value is an output from fuzme.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+Re tuns a matrix with the same number ow rows in the \code{data} input and the number of columns equal to 2 + n where n is the number of classes. One of the extra columns contains the memberships to the extragrade class. The last remaining column information about which class the row has the highest membership to.
+\end{Value}
+%
+\begin{Note}
+The distance measure for evaluating the difference between class centroids and observation is the Mahalinobis distance
+\end{Note}
+%
+\begin{Author}
+Brendan Malone
+\end{Author}
+%
+\begin{References}
+\begin{itemize}
+
+\item{} McBratney, A.B., de Gruijter, J.J., (1992) \Rhref{http://dx.doi.org/10.1111/j.1365-2389.1992.tb00127.x}{Continuum approach to soil classification by modified fuzzy k-means with extragrades}. Journal of Soil Science, 43:159-175.  
+\item{} Minasny, B., McBratney, A.B., (2002) \Rhref{http://sydney.edu.au/agriculture/pal/software/fuzme.shtml}{FuzMe version 3.0}. Australian Centre for Precision Agriculture, The University of Sydney, Australia.
+
+\end{itemize}
+
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+## NOT RUN
+
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{Goodness of fit measures}{Goodness of fit measures}{Goodness of fit measures}
+\aliasA{goof}{Goodness of fit measures}{goof}
+\keyword{methods}{Goodness of fit measures}
+%
+\begin{Description}
+This function performs a number of model goodness of fit measures which include the root mean square error (RMSE), mean square error (MSE),  prediction bias, coefficient of determination (R squared), concordance correlation coefficient (CCC), ratio of performance to deviation (RPD), ratio of performance to interquartile distance (RPIQ), and residual variance estimates. These goodness of fit measures are used in both digital soil mapping and soil chemometric studies to test the relative performance of competing models.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+goof(observed,predicted, plot.it = FALSE, type="DSM")
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{observed}] numeric; a vector or matrix of values that are actual observations of some phenomenon.
+\item[\code{predicted}] numeric; a vector or matrix of values of predictions of the phenomenon that was observed .    
+\item[\code{plot.it}] logical; If TRUE an xy-plot of the observations and predictions will be generated. 
+\item[\code{type}] character; Selection from either ``DSM'' or ``spec'' to generate the goodness of fit statistics of greatest relevance to either digital soil mapping and soil spectroscopy respectively.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+Returns a dataframe with the goodness of fit statistics. The column headers of the \code{dataframe} are: \code{R2} (coefficient of determination), \code{concordance} (concordance correlation coefficient), \code{MSE} (mean square error), \code{RMSE} (root mean square error), \code{bias} (prediction bias), \code{MSEc} (mean residual variance), \code{RMSEc} (root mean residual variance), \code{RPD} (ratio of performance to deviation), \code{RPIQ} (ratio of performance to interquartile distance). An xy-plot will also be generated if requested. 
+\end{Value}
+%
+\begin{Note}
+These goodness of fit measures are not exclusive to digital soil mapping or soil spectroscopy.
+\end{Note}
+%
+\begin{Author}
+Brendan Malone
+\end{Author}
+%
+\begin{References}
+\begin{itemize}
+
+\item{} Bellon-Maurel, V., Fernandez-Ahumada, E., Palagos, B., Roger, J., McBratney, A., (2010) \Rhref{http://dx.doi.org/10.1016/j.trac.2010.05.006}{Critical review of chemometric indicators commonly used for assessing the quality of the prediction of soil attributes by NIR spectroscopy}. Trends in Analytical Chemistry, 29(9): 1073-1081.
+\item{} Hastie, T., Tibshirani, R., Friedman, J., (2009)  The Elements of Statisitcal Learning. Springer Series in Statistics.
+\end{itemize}
+
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+## NOT RUN
+# library(ithir)
+# library(MASS)
+## some data
+# data(USYD_soil1)
+## fit a linear model
+# mod.1 <- lm(CEC ~ clay, data = USYD_soil1 , y = TRUE, x = TRUE)
+## Goodness of fit
+# goof(observed = mod.1$y, predicted = mod.1$fitted.values, plot.it = TRUE)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{Goodness of fit measures for categorial variable models}{Goodness of fit measures for categorical variable models}{Goodness of fit measures for categorial variable models}
+\aliasA{goofcat}{Goodness of fit measures for categorial variable models}{goofcat}
+\keyword{methods}{Goodness of fit measures for categorial variable models}
+%
+\begin{Description}
+This function performs a number of model diagnostic goodness of fit measures for categorical variables which include: Overall accuracy, Producer's Accuracy, User's Accuracy, and Kappa Statistic. See Congalton (1991) for details on these statistics. They are commonly used to assess the performance of models where the target variable is a class or category.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+goofcat(observed = NULL, predicted = NULL, conf.mat, imp=FALSE)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{observed}] a vector values that could either be integer or character class that are actual observations of some categorical phenomenon.
+\item[\code{predicted}] a vector values that could either be integer or character class that are predictions of the phenomenon that was observed.    
+\item[\code{conf.mat}] matrix; Optional input. A square matrix called a confusion matrix that summarizes observation and subsequent prediction from a particular model.
+\item[\code{imp}] logical; If a confusion matrix is being entered directly into the function through the \code{conf.mat} parametisation, this is set to \code{TRUE}. Default is \code{FALSE}.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+Returns an element labelled \code{list} containing the goodness of fit statistics.
+\end{Value}
+%
+\begin{Note}
+If for whatever reason the \code{conf.mat} input is not of \code{matrix} class, and is not square in dimension the function will halt and provide an error message.
+\end{Note}
+%
+\begin{Author}
+Brendan Malone
+\end{Author}
+%
+\begin{References}
+\begin{itemize}
+
+\item{} Congalton, R. G., (1991) \Rhref{http://dx.doi.org/10.1016/0034-4257(91)90048-B}{A review of assessing the accuracy of classifications of remotely sensed data.}. Remote Sensing of the Environment, 37:35-46.
+
+\end{itemize}
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+##library(ithir)
+
+## NOT RUN
+## Using a pre-constructed confusion matrix
+# con.mat <- matrix(c(5, 0, 1, 2, 0, 15, 0, 5, 0, 1, 31, 0, 0, 10, 2, 11),nrow = 4, ncol = 4)
+# rownames(con.mat) <- c("DE", "VE", "CH", "KU")
+# colnames(con.mat) <- c("DE", "VE", "CH", "KU")
+# goofcat(conf.mat = con.mat, imp=TRUE)
+
+## NOT RUN
+## Using observations and corresponding predictions
+## Using random intgers
+# set.seed(123)
+# observed<- sample(1:5,1000,replace=TRUE)
+# set.seed(321)
+# predicted<- sample(1:5,1000,replace=TRUE)
+# goofcat(observed = observed, predicted = predicted)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{homosoil\_globeDat}{Global Environmental Data }{homosoil.Rul.globeDat}
+\keyword{datasets}{homosoil\_globeDat}
+%
+\begin{Description}
+A data frame of global (0.5 degree resolution) climatic, litholgoy and topographic data.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+data(homosoil_globeDat)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+\code{homosoil\_globeDat} is an 62254 row \code{data.frame} with 58 columns.  
+\end{Format}
+%
+\begin{Details}
+The basis is a global 0.5 degree resolution grid data of climate, topography, and lithology.
+
+For climate, this consists of variables representing long-term mean monthly and seasonal temperature, rainfall, solar radiation and evapotranspiration data. We also use the DEM representing topography, and lithology, which gives broad information on the parent material. The climate data come from the ERA-40 reanalysis and Climate Research Unit (CRU) dataset. More details on the datasets are available on the website \url{http://www.ipcc-data.org/obs/get_30yr_means.html}. For each of the 4 climatic variables (rainfall, temperature, solar radiation and evapotranspiration), we calculated 13 indicators: annual mean, mean for the driest month, mean at the wettest month, annual range, driest quarter mean, wettest quarter mean, coldest quarter mean, hottest quarter mean, lowest ET quarter mean, highest ET quarter mean, darkest quarter mean, lightest quarter mean, and seasonality. From this analysis and including the acquired data, 52 global climatic variables were composed.
+
+The DEM is from the Hydro1k dataset supplied from the USGS (\url{https://lta.cr.usgs.gov/HYDRO1K}), which includes the mean elevation, slope, and compound topgraphic index (CTI).
+
+The lithology is from a global digital map (Durr et al., 2005)  with 7 values which represent the different broad groups of parent materials. The lithology classes are: non- or semi-consolidated sediments, mixed consolidated sediments, silic-clastic sediments, acid volcanic rocks, basic volcanic rocks, complex of metamorphic and igneous rocks, and complex lithology.
+\end{Details}
+%
+\begin{References}
+\begin{itemize}
+
+\item{} Durr, H.H., Meybeck, M., and Durr, S.H. (2005) \Rhref{http://dx.doi.org/10.1029/2005GB002515}{Lithologic composition of the Earth's continental surfaces derived from a new digital map emphasizing riverine material transfer}. Global Biogeochemical Cycles, 19, GB4S10. 
+
+\end{itemize}
+
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# library(ithir)
+# data(homosoil_globeDat)
+# str(homosoil_globeDat)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{Hunter Valley covariates}{Suite of selected environmental covariates for the the Lower Hunter Valley, NSW}{Hunter Valley covariates}
+\aliasA{hunterCovariates}{Hunter Valley covariates}{hunterCovariates}
+\keyword{datasets}{Hunter Valley covariates}
+%
+\begin{Description}
+A set of Geotiffs of selected environmental covariates covering the Lower Hunter Valley, NSW.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+system.file("extdata/hunterCovariates_NAME.tif", package="ithir")
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+These data are Geotiffs of selected environmental covariates. The rasters have a pixel resolution of 25m x 25m. The CRS of each raster is WGS 84 UTM Zone 56. The following raster are available:
+\begin{itemize}
+
+\item{} \code{AACN}: Difference between elevation and an interpolation of a channel network base level elevation. Knowledge of the spatial distribution of channel networks (lines) is therefore necessary for this parameter.
+\item{} \code{Drainage.Index}: A measure of soil water drainage capability. This index is derived from an empirical model of soil color and soil drainage. 
+\item{} \code{Light\_insolation}: Measure of potential incoming solar radiation, and used as a parameter for evaluating the positional aspect effect. Derived from digital elevation model, this parameter was evaluated over the duration of a single calendar year with a 5 day time step.
+\item{} \code{TWI}: A secondary land form parameter which estimates for each pixel, its tendency to accumulate water.
+\item{} \code{Gamma.Total.Count}: Gamma radiometric data. Here the variable is total gamma count im ppm.
+
+\end{itemize}
+
+\end{Format}
+%
+\begin{Details}
+The area in question is the Hunter Wine Country Private Irrigation District (HWCPID), situated in the Lower Hunter Valley, NSW (32.83S 151.35E), and covers an area of approximately 220 km2. The HWCPID is approximately 140 km north of Sydney, NSW, Australia. Climatically, the HWCPID is situated in a temperate climatic zone, and experiences warm humid summers, and relatively cooler yet also humid winters. Rainfall is mostly uniformly distributed throughout the year. On average the HWCPID receives just over 750 mm of rainfall annually. In terms of land use, an expansive viticultural industry is situated in the area and is possibly most widespread
+of rural industries, followed by dry land agricultural grazing systems.
+\end{Details}
+%
+\begin{Note}
+These Geotiffs are used in the Using R for Digital Soil Mapping course of exercises.
+\end{Note}
+%
+\begin{References}
+\begin{itemize}
+
+\item{} Malone, B.P., Hughes, P.,  McBratney, A.B., Minasny, B. (2014) \Rhref{http://dx.doi.org/10.1016/j.geodrs.2014.08.001}{A model for the identification of terrons in the Lower Hunter
+Valley, Australia}. Geoderma Regional 1, 31-47.
+
+\end{itemize}
+
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# library(ithir)
+# library(terra)
+
+# example load the altitude above channel network grid
+# aacn <- rast(system.file("extdata/hunterCovariates_hunterCovariates_AACN.tif", package="ithir"))
+
+# simple plot
+# plot(aacn, main= "Hunter Valley AACN Map")
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{Hunter Valley covariates (subset area)}{Suite of selected environmental covariates for a subset the Lower Hunter Valley, NSW}{Hunter Valley covariates (subset area)}
+\aliasA{hunterCovariates\_sub}{Hunter Valley covariates (subset area)}{hunterCovariates.Rul.sub}
+\keyword{datasets}{Hunter Valley covariates (subset area)}
+%
+\begin{Description}
+Geotiffs of selected environmental covariates from a subset area of the Lower Hunter Valley, NSW.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+system.file("extdata/hunterCovariates_sub_NAME.tif", package="ithir")
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+
+The data are Geotiffs of selected environmental covariate rasters. The rasters have a pixel resolution of 25m x 25m. The CRS of each raster is WGS 84 UTM Zone 56. The following rasters are available:
+
+\begin{itemize}
+
+\item{} \code{Terrain\_Ruggedness\_Index}: A quantitative measure of topographic heterogeneity. High values indicate terrain is rugged or heterogeneous.  
+\item{} \code{AACN}: Difference between elevation and an interpolation of a channel network base level elevation. Knowledge of the spatial distribution of channel networks (lines) is therefore necessary for this parameter.
+\item{} \code{Landsat\_Band1}: Earth surface reflectance information derived from Landsat 7 ETM+ satellite. Band 1 spectral range is .45 to .52 microns (visible blue).
+\item{} \code{Elevation}: Meters above sea level; derived from a digital elevation model.
+\item{} \code{Hillshading}: Analytic hill shading derived from digital elevation model and a fixed sun degree angle.
+\item{} \code{Light\_insolation}: Measure of potential incoming solar radiation, and used as a parameter for evaluating the positional aspect effect. Derived from digital elevation model, this parameter was evaluated over the duration of a single calendar year with a 5 day time step.
+\item{} \code{Mid\_Slope\_Positon}: A relative slope position parameter which gives a classification of the slope position in both valley and crest positions.
+\item{} \code{MRVBF}: Multi-resolution valley bottom flatness is derived using slope and elevation to classify valley bottoms as flat, low areas (Gallant and Dowling 2003). This is accomplished through a series of neighborhood operations at progressively coarser resolutions with the goal of identifying both small and large valleys. MRVBF has been used extensively for the delineation and grading of valley floor units corresponding to areas of alluvial and colluvial deposits. High values of MRVBF indicate relatively low, flat areas of the landscape.
+\item{} \code{NDVI}: Normalized difference vegetation index. Derived from Landsat 7 data (B4-B3)/(B4+B3). High values indicate actively growing vegetation.
+\item{} \code{TWI}: A secondary land form parameter which estimates for each pixel, its tendency to accumulate water.
+\item{} \code{Slope}: Measured in degrees, is the first derivative of elevation in the direction of greatest slope.       
+
+\end{itemize}
+
+\end{Format}
+%
+\begin{Details}
+The area in question is the Hunter Wine Country Private Irrigation District (HWCPID), situated in the Lower Hunter Valley, NSW (32.83S 151.35E), and covers an area of approximately 220 km2. The HWCPID is approximately 140 km north of Sydney, NSW, Australia. Climatically, the HWCPID is situated in a temperate climatic zone, and experiences warm humid summers, and relatively cooler yet also humid winters. Rainfall is mostly uniformly distributed throughout the year. On average the HWCPID receives just over 750 mm of rainfall annually. In terms of land use, an expansive viticultural industry is situated in the area and is possibly most widespread
+of rural industries, followed by dry land agricultural grazing systems.
+\end{Details}
+%
+\begin{Note}
+These rasters are used in the Use R for Digital Soil Mapping course of exercises in the section about quantification of uncertainties.
+\end{Note}
+%
+\begin{References}
+\begin{itemize}
+
+\item{} Gallant, J. C., Dowling, T. I., (2003) \Rhref{http://dx.doi.org/10.1029/2002WR001426}{A multiresolution index of valley bottom flatness for mapping depositional areas}. Water Resources Research 39(12), 1347. 
+\item{} Malone, B.P., Hughes, P.,  McBratney, A.B., Minasny, B. (2014) \Rhref{http://dx.doi.org/10.1016/j.geodrs.2014.08.001}{A model for the identification of terrons in the Lower Hunter
+Valley, Australia}. Geoderma Regional 1, 31-47.
+\item{} This data is copyright of the Soil Security Lab, The University of Sydney. If any part of this data is to be used in any publication or report, please provide a citation:
+Soil Security Laboratory, 2015. Use R for Digital Soil Mapping Manual. The University of Sydney, Sydney, Australia.
+
+\end{itemize}
+
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# library(ithir)
+# library(terra)
+
+# example load the elevation grid
+# elevation <- rast(system.file("extdata/hunterCovariates_sub_Elevation.tif", package="ithir"))
+
+# simple plot
+#plot(elevation, main= "Hunter Valley (sub area) Elevation")
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{Hunter Valley Grid (S1)}{Raster grid of the Lower Hunter Valley, NSW, Australia}{Hunter Valley Grid (S1)}
+\aliasA{Hunter Valley Grid}{Hunter Valley Grid (S1)}{Hunter Valley Grid}
+\keyword{datasets}{Hunter Valley Grid (S1)}
+%
+\begin{Description}
+A Geotiff of pixel numbers for the area covering the Lower Hunter Valley, NSW, Australia. The pixel resolution is 25m
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+system.file("extdata/hvGrid25m_grid.tif", package="ithir")
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+\code{hvGrid25m} is an 860 row, 676 column, 1 layer Geotiff of pixel numbers for the Lower Hunter Valley, NSW, Australia. The grid has a pixel resolution of 25m x 25m. It contains the following layers:
+\end{Format}
+%
+\begin{Details}
+The area in question is the Hunter Wine Country Private Irrigation District (HWCPID), situated in the Lower Hunter Valley, NSW (32.83S 151.35E), and covers an area of approximately 220 km2. The HWCPID is approximately 140 km north of Sydney, NSW, Australia. Climatically, the HWCPID is situated in a temperate climatic zone, and experiences warm humid summers, and relatively cooler yet also humid winters. Rainfall is mostly uniformly distributed throughout the year. On average the HWCPID receives just over 750 mm of rainfall annually. In terms of landuse, an expansive viticultural industry is situated in the area and is possibly most widespread
+of rural industries, followed by dryland agricultural grazing systems.The projection for the \code{RasterLayer} is WGS 84 Zone 56. See Malone et al. (2014) for more detailed information about the area and research that has been conducted there by the University of Sydney.
+\end{Details}
+%
+\begin{References}
+\begin{itemize}
+
+\item{} Malone, B.P., Hughes, P.,  McBratney, A.B., Minasny, B. (2009) \Rhref{http://dx.doi.org/10.1016/j.geodrs.2014.08.001}{A model for the identification of terrons in the Lower Hunter Valley, Australia}. Geoderma Regional 1, 31-47.
+
+\end{itemize}
+
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+# library(ithir)
+# library(terra)
+
+## NOT RUN
+# hv.grid<- rast(system.file("extdata/hvGrid25m_grid.tif", package="ithir"))
+# plot(hv.grid)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{Hunter Valley Points (S1)}{Random selection of point locations: Hunter Valley}{Hunter Valley Points (S1)}
+\aliasA{Hunter Valley Points}{Hunter Valley Points (S1)}{Hunter Valley Points}
+\keyword{datasets}{Hunter Valley Points (S1)}
+%
+\begin{Description}
+A \code{dataframe} carrying point coordinates for 250 randomly selected locations in the Lower Hunter Valley, NSW, Australia.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+data(hvPoints250)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+\code{hvPoints250} is 250 row \code{dataframe} with the first 2 columns indicating the projected coordinate locations. The coordinate reference system is WGS 84 Zone 56. 
+\end{Format}
+%
+\begin{Details}
+The area in question is the Hunter Wine Country Private Irrigation District (HWCPID), situated in the Lower Hunter Valley, NSW (32.83S 151.35E), and covers an area of approximately 220 km2. The HWCPID is approximately 140 km north of Sydney, NSW, Australia. Climatically, the HWCPID is situated in a temperate climatic zone, and experiences warm humid summers, and relatively cooler yet also humid winters. Rainfall is mostly uniformly distributed throughout the year. On average the HWCPID receives just over 750 mm of rainfall annually. In terms of landuse, an expansive viticultural industry is situated in the area and is possibly most widespread
+of rural industries, followed by dryland agricultural grazing systems.
+\end{Details}
+%
+\begin{References}
+\begin{itemize}
+
+\item{} Malone, B.P., Hughes, P.,  McBratney, A.B., Minasny, B. (2009) \Rhref{http://dx.doi.org/10.1016/j.geodrs.2014.08.001}{A model for the identification of terrons in the Lower Hunter Valley, Australia}. Geoderma Regional 1, 31-47.
+
+\end{itemize}
+
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# library(ithir)
+# data(hvPoints250)
+# summary(hvPoints250)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{Hunter Valley soil data}{Soil point data from the Hunter Valley, NSW, Australia}{Hunter Valley soil data}
+\keyword{datasets}{Hunter Valley soil data}
+%
+\begin{Description}
+A soil information \code{dataframe} of 100 obsevations from various locations of the Hunter Valley, NSW, Australia (32.83S 151.35E). The data were collected, using a stratified random sampling design in 2010 and is described in Malone et al. (2011). Each row represents an observation at the 0-5cm depth interval. Various soil attribute information is attibuted to each observation, which includes soil organic carbon, soil pH (1:5 soil:water), and electrical conductivity. Locations are attributed to a site name and have a recorded coordinate location. The CRS of the points is WGS84 UTM Zone 56.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+data(HV100)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+\code{HV100} is a 100 row \code{dataframe} with identifier, locational and soil attribute information labelled in respective columns. 
+\end{Format}
+%
+\begin{Details}
+This data frame is a typical soil information table
+\end{Details}
+%
+\begin{References}
+\begin{itemize}
+
+\item{} Malone, B.P., de Gruijter, J.J., McBratney, A.B., Minasny, B., Brus, D.J. (2011) \Rhref{http://dx.doi.org/10.2136/sssaj2010.0280}{Using Additional Criteria for Measuring the Quality of Predictions and Their Uncertainties in a Digital Soil Mapping Framework}. Soil Science Society of America Journal, 75(3): 1032-1043. 
+
+\end{itemize}
+
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# library(ithir)
+# data(HV100)
+# head(HV100)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{Hunter Valley subsoil pH points}{Hunter Valley subsoil pH data with environmental covariates}{Hunter Valley subsoil pH points}
+\aliasA{HV\_subsoilpH}{Hunter Valley subsoil pH points}{HV.Rul.subsoilpH}
+\keyword{datasets}{Hunter Valley subsoil pH points}
+%
+\begin{Description}
+A \code{dataframe} carrying point coordinates for 506 observations of soil pH from the Lower Hunter Valley, NSW, Australia. The depth interval of the observation is 60-100cm. Together with the soil pH information is environmental covariate data that have been intersected with the point data. The environmental covariates have been sourced from a digital elevation model and Landsat 7 spectral band reflectance.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+data(HV_subsoilpH)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+\code{HV\_subsoilpH} is 506 row \code{dataframe} with the first 2 columns indicating the projected coordinate locations. The coordinate reference system is WGS 84 Zone 56. Soil pH for the 60-100cm depth interval is recorded in the following column. A suite of intersected environmental covariate data fills the remaining columns. This environmental covariate information refers to: 
+\begin{itemize}
+
+\item{} \code{Terrain\_Ruggedness\_Index}: A quantitative measure of topographic heterogeneity. High values indicate terrain is rugged or heterogeneous.  
+\item{} \code{AACN}: Difference between elevation and an interpolation of a channel network base level elevation. Knowledge of the spatial distribution of channel networks (lines) is therefore necessary for this parameter.
+\item{} \code{Landsat\_Band1}: Earth surface reflectance information derived from Landsat 7 ETM+ satellite. Band 1 spectral range is .45 to .52 microns (visible blue).
+\item{} \code{Elevation}: Meters above sea level; derived from a digital elevation model.
+\item{} \code{Hillshading}: Analytic hill shading derived from digital elevation model and a fixed sun degree angle.
+\item{} \code{Light\_insolation}: Measure of potential incoming solar radiation, and used as a parameter for evaluating the positional aspect effect. Derived from digital elevation model, this parameter was evaluated over the duration of a single calendar year with a 5 day time step.
+\item{} \code{Mid\_Slope\_Positon}: A relative slope position parameter which gives a classification of the slope position in both valley and crest positions.
+\item{} \code{MRVBF}: Multi-resolution valley bottom flatness is derived using slope and elevation to classify valley bottoms as flat, low areas (Gallant and Dowling 2003). This is accomplished through a series of neighborhood operations at progressively coarser resolutions with the goal of identifying both small and large valleys. MRVBF has been used extensively for the delineation and grading of valley floor units corresponding to areas of alluvial and colluvial deposits. High values of MRVBF indicate relatively low, flat areas of the landscape.
+\item{} \code{NDVI}: Normalized difference vegetation index. Derived from Landsat 7 data (B4-B3)/(B4+B3). High values indicate actively growing vegetation.
+\item{} \code{TWI}: A secondary land form parameter which estimates for each pixel, its tendency to accumulate water.
+\item{} \code{Slope}: Measured in degrees, is the first derivative of elevation in the direction of greatest slope.
+\end{itemize}
+\end{Format}
+%
+\begin{Details}
+The area in question is the Hunter Wine Country Private Irrigation District (HWCPID), situated in the Lower Hunter Valley, NSW (32.83S 151.35E), and covers an area of approximately 220 km2. The HWCPID is approximately 140 km north of Sydney, NSW, Australia. Climatically, the HWCPID is situated in a temperate climatic zone, and experiences warm humid summers, and relatively cooler yet also humid winters. Rainfall is mostly uniformly distributed throughout the year. On average the HWCPID receives just over 750 mm of rainfall annually. In terms of land use, an expansive viticultural industry is situated in the area and is possibly most widespread
+of rural industries, followed by dry land agricultural grazing systems.
+\end{Details}
+%
+\begin{Note}
+This data set is used in the Use R for Digital Soil Mapping course of exercises in the section about quantification of uncertainties.
+\end{Note}
+%
+\begin{References}
+\begin{itemize}
+
+\item{} Gallant, J. C., Dowling, T. I., (2003) \Rhref{http://dx.doi.org/10.1029/2002WR001426}{A multiresolution index of valley bottom flatness for mapping depositional areas}. Water Resources Research 39(12), 1347. 
+\item{} Malone, B.P., Hughes, P.,  McBratney, A.B., Minasny, B. (2009) \Rhref{http://dx.doi.org/10.1016/j.geodrs.2014.08.001}{A model for the identification of terrons in the Lower Hunter Valley, Australia}. Geoderma Regional 1, 31-47.
+\item{} Malone, B.P., Minasny, B., McBratney, A.B. (2017) \Rhref{https://link.springer.com/book/10.1007/978-3-319-44327-0}{Using R for Digital Soil Mapping}. Springer Cham. 262 Pages.
+
+\end{itemize}
+
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# library(ithir)
+# data(HV_subsoilpH)
+# summary(HV_subsoilpH)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{Hunter Valley terron data}{Soil point data from the Hunter Valley, NSW, Australia}{Hunter Valley terron data}
+\aliasA{hvTerronDat}{Hunter Valley terron data}{hvTerronDat}
+\keyword{datasets}{Hunter Valley terron data}
+%
+\begin{Description}
+A \code{dataframe} of 1000 sites containing information of terron classes from various locations of the Hunter Valley, NSW, Australia (32.83S 151.35E). Terrons are soil and landscape entities, similar to a soil class, yet have been created from a bottom up approach using soil and landscape information deemed necessary for evaluating areas for suitability and/or  differentiation of wine growing regions. The terron concept is described in XXX and brought into implementation in Malone et al. (2014). Specifically, the data are Terron classes as sampled from the map presented in Malone et al. (2014).The sample data contains 1000 entries of which there are 12 different Terron classes. Locations have a recorded coordinate location. The CRS of the points is WGS84 UTM Zone 56.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+data(hvTerronDat)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+\code{terron.dat} is a 1000 row \code{dataframe} with locational and terron information labelled in respective columns. 
+\end{Format}
+%
+\begin{Details}
+This data frame is a typical soil information table
+\end{Details}
+%
+\begin{References}
+\begin{itemize}
+
+\item{} Carre, F., McBratney, A.B. (2005) \Rhref{http://dx.doi.org/10.1016/j.geoderma.2005.04.012}{Digital terron mapping}, Geoderma, Volume 128, Issues 3-4, October 2005, Pages 340-353.
+
+\item{} Malone, B.P., Hughes, P.,  McBratney, A.B., Minasny, B. (2014) \Rhref{http://dx.doi.org/10.1016/j.geodrs.2014.08.001}{A model for the identification of terrons in the Lower Hunter Valley, Australia}. Geoderma Regional 1, 31-47.
+
+
+
+\end{itemize}
+
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# library(ithir)
+# data(hvTerronDat)
+# head(hvTerronDat)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{Hunter Valley, NSW 100m digital elevation model}{Hunter Valley DEM}{Hunter Valley, NSW 100m digital elevation model}
+\aliasA{Hunter Valley DEM}{Hunter Valley, NSW 100m digital elevation model}{Hunter Valley DEM}
+\keyword{datasets}{Hunter Valley, NSW 100m digital elevation model}
+%
+\begin{Description}
+A \code{dataframe} that is easily converted to a grid raster. It has 3 columns, with the first two being spatial coordinates, and the third being ground elevation information. The coordinates are a regular grid point pattern with 100m spacing, and when converted to raster, resolve to be a digital elevation model for the Lower Hunter Valley region, NSW, Australia. The CRS of the coordinates is WGS 84 UTM Zone 56. 
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+data(HV_dem)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+\code{HV\_dem} is a large \code{dataframe} with spatial coordinates, and elevation information labelled in respective columns. 
+\end{Format}
+%
+\begin{Details}
+This \code{dataframe} stores information that depicts a regular raster grid
+\end{Details}
+%
+\begin{References}
+\begin{itemize}
+
+\item{} Malone, B.P., Minasny, B., McBratney, A.B. (2017) \Rhref{https://link.springer.com/book/10.1007/978-3-319-44327-0}{Using R for Digital Soil Mapping}. Springer Cham. 262 Pages.
+
+\end{itemize}
+
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+## HV DEM
+# library(ithir)
+# library(terra)
+ 
+# data(HV_dem)
+# map<- terra::rast(x = HV_dem, type = "xyz")
+# plot(map, main = "Hunter Valley DEM") 
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{One soil profile}{One soil profile}{One soil profile}
+\aliasA{Soil carbon soil profile}{One soil profile}{Soil carbon soil profile}
+\keyword{datasets}{One soil profile}
+%
+\begin{Description}
+A soil information \code{dataframe} of one soil profile for one soil attribute; soil carbon density. Each row is a specified depth interval.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+data(oneProfile)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+\code{oneProfile} is an 8 row \code{dataframe} with 4 columns. Columns correspond to identifier, upper soil depth interval, lower depth interval and soil carbon density value. 
+\end{Format}
+%
+\begin{Details}
+This data frame is a typical soil data table
+\end{Details}
+%
+\begin{References}
+\begin{itemize}
+
+\item{} Malone, B.P., Minasny, B., McBratney, A.B. (2017) \Rhref{https://link.springer.com/book/10.1007/978-3-319-44327-0}{Using R for Digital Soil Mapping}. Springer Cham. 262 Pages.
+
+\end{itemize}
+
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# library(ithir)
+# data(oneProfile)
+# str(oneProfile)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{plot\_ea\_spline}{plot soil profile outputs from \code{ea\_spline}}{plot.Rul.ea.Rul.spline}
+\keyword{methods}{plot\_ea\_spline}
+%
+\begin{Description}
+This is a simple function for plotting outputs and soil profile data from the \code{ea\_spline} function.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+plot_ea_spline(splineOuts, d = t(c(0,5,15,30,60,100,200)), maxd, type = 1 , label = "", plot.which = 1)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{splineOuts}] list; This is a returned object from the \code{ea\_spline} function
+\item[\code{d}] numeric; standard depths that were used during the fitting from \code{ea\_spline}.
+\item[\code{maxd}] numeric; Maximum soil depth for generating the outputs plots/s
+\item[\code{type}] numeric; Different themes of plot may be exported. Type 1 is to return the observed soil data plus the continuous spline (default). Type 2 is to return the observed data plus the averages of the spline at the specified depth intervals. Type 3 is to return the observed data, spline averages and continuous spline.
+\item[\code{label}] Character; Optional label to put on x-axis of plot.
+\item[\code{plot.which}] numeric; Integer selction of which plot to produce if multiple soil profiles have been fitted using the \code{ea\_spline} function.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+Function returns a labeled plot of the soil profile information and user selected \code{ea\_spline} outputs.
+\end{Value}
+%
+\begin{Note}
+This is a companion function for \code{ea\_spline}. This function is really designed to plot one soil profile at a time. Would need to be inserted into another function if plotting of a collection of soil profiles is required.
+\end{Note}
+%
+\begin{Author}
+Brendan Malone
+\end{Author}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# library(ithir)
+# library(aqp)
+ 
+## NOT RUN
+# data(oneProfile)
+# str(oneProfile)
+## convert to SoilProfileCollection object
+# aqp::depths(oneProfile)<- Soil.ID ~ Upper.Boundary + Lower.Boundary
+## fit spline
+# eaFit <- ea_spline(oneProfile, var.name="C.kg.m3.",d= t(c(0,5,15,30,60,100,200)),lam = 0.1, vlow=0, show.progress=FALSE )
+## do plot
+# plot_ea_spline(splineOuts=eaFit, d= t(c(0,5,15,30,60,100,200)), maxd=200, type=1, label="carbon density") 
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{plot\_soilProfile}{plot soil profile data}{plot.Rul.soilProfile}
+\keyword{methods}{plot\_soilProfile}
+%
+\begin{Description}
+This is a simple function for plotting soil profile data that is supplied in \code{dataframe} form.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+plot_soilProfile(data, vals, depths, label="")
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{data}] dataframe; Usually a typical soil information data frame with identifier and soil depth labelled columns, followed by one or more columns of soil attribute or even soil categorical data.
+\item[\code{vals}] vector; Would generally point to a column of \code{data}, and is the soil attribute value that needs to be ploted.    
+\item[\code{depths}] dataframe; Would generally point to the two columns of \code{data} which specify the upper and lower depths of the soil profile observations.
+\item[\code{label}] character; An optional input the put a label on the x-axis, otherwise it will remain blank.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+Function returns a labeled plot of the soil profile information. The length of the bars corresponds to the value of the soil variable being plotted.
+\end{Value}
+%
+\begin{Note}
+This function is really designed to plot one soil profile at a time. Would need to be inserted into another function if plotting of a collection of soil profiles is required. 
+\end{Note}
+%
+\begin{Author}
+Brendan Malone
+\end{Author}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# library(ithir)
+
+## NOT RUN
+# data(oneProfile)
+# str(oneProfile)
+
+## do plot
+# plot_soilProfile(data = oneProfile, vals = oneProfile$C.kg.m3., depths = oneProfile[,2:3], label= names(oneProfile)[4])
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{precompute\_spline\_structures}{Precompute Spline Matrix Structures for Soil Profile Modeling}{precompute.Rul.spline.Rul.structures}
+\keyword{methods}{precompute\_spline\_structures}
+%
+\begin{Description}
+Builds the matrix structures needed to fit a mass-preserving spline model, based on a given set of soil depth intervals and a smoothing parameter.
+These matrices are reused across all soil profiles or raster cells for efficient evaluation.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+precompute_spline_structures(dIn, lam = 0.1)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{dIn}] numeric vector of input soil depth boundaries (e.g., \code{c(0,5,15,30,60,100,200)}).
+\item[\code{lam}] numeric; spline smoothing parameter (\eqn{\lambda}{}). Smaller values produce smoother splines.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+Returns a \code{list} containing precomputed matrix components used in mass-preserving spline fitting:
+\begin{itemize}
+
+\item{} \code{z} - coefficient matrix used to solve for spline coefficients
+\item{} \code{rinv} - inverse of spline smoothness matrix
+\item{} \code{q} - difference matrix for first derivatives
+\item{} \code{u} - upper depths of each interval
+\item{} \code{v} - lower depths of each interval
+\item{} \code{delta} - thickness of each interval
+
+\end{itemize}
+
+\end{Value}
+%
+\begin{Author}
+Brendan Malone
+\end{Author}
+%
+\begin{SeeAlso}
+\code{\LinkA{fit\_mpspline\_optimized}{fit.Rul.mpspline.Rul.optimized}}, \code{\LinkA{ea\_rasSp\_fast}{ea.Rul.rasSp.Rul.fast}}
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+# Standard SLGA input depths
+dIn <- c(0,5,15,30,60,100,200)
+
+# Compute the spline matrices
+spline_info <- precompute_spline_structures(dIn = dIn, lam = 0.1)
+
+# View structure
+str(spline_info)
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{topo\_dem}{matrix of digital elevation}{topo.Rul.dem}
+\aliasA{digital elevation}{topo\_dem}{digital elevation}
+\keyword{datasets}{topo\_dem}
+%
+\begin{Description}
+A small matrix that is representative of a digital elevation model. Row and column positions take the place of spatial coordinates
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+data(topo_dem)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+\code{topo\_dem} is an 109 row \code{matrix} with 110 columns. Values correspond to elevation. 
+\end{Format}
+%
+\begin{Details}
+This dataset is used to exemplfy the procedure for generating random catena or toposequences which is described in the Using R for Digital Soil Mapping book.
+\end{Details}
+%
+\begin{References}
+\begin{itemize}
+
+\item{} Malone, B.P., Minasny, B., McBratney, A.B. (2017) \Rhref{https://link.springer.com/book/10.1007/978-3-319-44327-0}{Using R for Digital Soil Mapping}. Springer Cham. 262 Pages.
+
+\end{itemize}
+
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# library(ithir)
+# data(topo_dem)
+# str(topo_dem)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{USYD drainage index data}{Soil drainage index data}{USYD drainage index data}
+\aliasA{USYD soil drainage data}{USYD drainage index data}{USYD soil drainage data}
+\keyword{datasets}{USYD drainage index data}
+%
+\begin{Description}
+A \code{dataframe} of 446 rows. Each row corresponds to a location. Actual location not provided. The \code{dataframe} has 2 variables: \code{DI\_observed} and \code{DI\_predicted}.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+data(USYD_dIndex)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+\code{USYD\_dIndex} is 446 row, 2 column \code{dataframe}. 
+\end{Format}
+%
+\begin{Details}
+This data frame is a typical soil information table where observations are matched prediction predictions from a specified model.
+\end{Details}
+%
+\begin{References}
+\begin{itemize}
+
+\item{} Malone, B.P., Minasny, B., McBratney, A.B. (2017) \Rhref{https://link.springer.com/book/10.1007/978-3-319-44327-0}{Using R for Digital Soil Mapping}. Springer Cham. 262 Pages.
+\item{} Malone, B.P.,  McBratney, A.B., Minasny, B. (2018) \Rhref{https://doi.org/10.7717/peerj.4659}{Description and spatial inference of soil drainage using matrix soil colours in the Lower Hunter Valley, New South Wales, Australia.}. PeerJ 6, e4659.
+
+
+\end{itemize}
+
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# library(ithir)
+# data(USYD_dIndex)
+# summary(USYD_dIndex)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{USYD soil data}{Random selection of soil point data}{USYD soil data}
+\keyword{datasets}{USYD soil data}
+%
+\begin{Description}
+A soil information \code{dataframe} for 29 soil profiles. Each row is a horizon or depth interval observation for a given soil profile. Various soil attribute information is attibuted to each observation 
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+data(USYD_soil1)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+\code{USYD\_soil1} is 166 row \code{dataframe} with identifier, soil depth and soil attribute information labelled in respective columns. 
+\end{Format}
+%
+\begin{Details}
+This data frame is a typical soil information table
+\end{Details}
+%
+\begin{References}
+\begin{itemize}
+
+
+\item{} Malone, B.P., Minasny, B., McBratney, A.B. (2017) \Rhref{https://link.springer.com/book/10.1007/978-3-319-44327-0}{Using R for Digital Soil Mapping}. Springer Cham. 262 Pages.
+
+\end{itemize}
+
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# library(ithir)
+# data(USYD_soil1)
+# summary(USYD_soil1)
+
+\end{ExampleCode}
+\end{Examples}
+\printindex{}
+\end{document}

@@ -1,0 +1,796 @@
+
+R version 4.3.1 (2023-06-16 ucrt) -- "Beagle Scouts"
+Copyright (C) 2023 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "ithir"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> options(pager = "console")
+> library('ithir')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("HV100")
+> ### * HV100
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Hunter Valley soil data
+> ### Title: Soil point data from the Hunter Valley, NSW, Australia
+> ### Aliases: 'Hunter Valley soil data'
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> 
+> # library(ithir)
+> # data(HV100)
+> # head(HV100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("HV_dem")
+> ### * HV_dem
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Hunter Valley, NSW 100m digital elevation model
+> ### Title: Hunter Valley DEM
+> ### Aliases: 'Hunter Valley DEM'
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> 
+> ## HV DEM
+> # library(ithir)
+> # library(terra)
+>  
+> # data(HV_dem)
+> # map<- terra::rast(x = HV_dem, type = "xyz")
+> # plot(map, main = "Hunter Valley DEM") 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("HV_subsoilpH")
+> ### * HV_subsoilpH
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Hunter Valley subsoil pH points
+> ### Title: Hunter Valley subsoil pH data with environmental covariates
+> ### Aliases: HV_subsoilpH
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> 
+> # library(ithir)
+> # data(HV_subsoilpH)
+> # summary(HV_subsoilpH)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("USYD_dIndex")
+> ### * USYD_dIndex
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: USYD drainage index data
+> ### Title: Soil drainage index data
+> ### Aliases: 'USYD soil drainage data'
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> 
+> # library(ithir)
+> # data(USYD_dIndex)
+> # summary(USYD_dIndex)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("USYD_soil1")
+> ### * USYD_soil1
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: USYD soil data
+> ### Title: Random selection of soil point data
+> ### Aliases: 'USYD soil data'
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> 
+> # library(ithir)
+> # data(USYD_soil1)
+> # summary(USYD_soil1)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("bbRaster")
+> ### * bbRaster
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: bbRaster
+> ### Title: Get the bounding box information of a 'SpatRaster' from its
+> ###   extents.
+> ### Aliases: bbRaster
+> ### Keywords: methods
+> 
+> ### ** Examples
+> 
+> 
+> # library(terra)
+> # target <- rast(system.file("extdata/edgeTarget_C.tif", package="ithir"))
+> # target
+> # bbRaster(target)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ea_rasSp_fast")
+> ### * ea_rasSp_fast
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ea_rasSp_fast
+> ### Title: Fast Mass-Preserving Spline on Raster Soil Data
+> ### Aliases: ea_rasSp_fast
+> ### Keywords: methods
+> 
+> ### ** Examples
+> 
+> # Not run on CRAN due to file size and download time
+> ## Not run: 
+> ##D library(terra)
+> ##D 
+> ##D # Define SLGA V2 clay layer URLs (0–200 cm depth range)
+> ##D clay_urls <- c(
+> ##D   '/vsicurl/https://esoil.io/TERNLandscapes/Public/Products/TERN/SLGA/CLY/CLY_000_005_EV_N_P_AU_TRN_N_20210902.tif',
+> ##D   '/vsicurl/https://esoil.io/TERNLandscapes/Public/Products/TERN/SLGA/CLY/CLY_005_015_EV_N_P_AU_TRN_N_20210902.tif',
+> ##D   '/vsicurl/https://esoil.io/TERNLandscapes/Public/Products/TERN/SLGA/CLY/CLY_015_030_EV_N_P_AU_TRN_N_20210902.tif',
+> ##D   '/vsicurl/https://esoil.io/TERNLandscapes/Public/Products/TERN/SLGA/CLY/CLY_030_060_EV_N_P_AU_TRN_N_20210902.tif',
+> ##D   '/vsicurl/https://esoil.io/TERNLandscapes/Public/Products/TERN/SLGA/CLY/CLY_060_100_EV_N_P_AU_TRN_N_20210902.tif',
+> ##D   '/vsicurl/https://esoil.io/TERNLandscapes/Public/Products/TERN/SLGA/CLY/CLY_100_200_EV_N_P_AU_TRN_N_20210902.tif'
+> ##D )
+> ##D 
+> ##D # Load and crop a small extent near Canberra
+> ##D clay_stack <- rast(clay_urls)
+> ##D aoi <- ext(149.00, 149.10, -36.00, -35.90)
+> ##D clay_crop <- crop(clay_stack, aoi)
+> ##D 
+> ##D # Fit spline and generate interpolated output
+> ##D out <- ea_rasSp_fast(
+> ##D   obj = clay_crop,
+> ##D   lam = 0.1,
+> ##D   dIn = c(0, 5, 15, 30, 60, 100, 200),
+> ##D   dOut = c(0, 30, 60),
+> ##D   depth_res = 2
+> ##D )
+> ##D 
+> ##D # Plot the result
+> ##D plot(out)
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ea_spline")
+> ### * ea_spline
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ea_spline
+> ### Title: Fits a mass preserving spline
+> ### Aliases: ea_spline ea_spline
+> ### Keywords: methods
+> 
+> ### ** Examples
+> 
+> #library(aqp)
+> #library(plyr)
+> #library(ithir)
+> 
+> #Fit spline 
+> #data(oneProfile)
+> #class(oneProfile)
+> #sp.fit<- ithir::ea_spline(obj = oneProfile, var.name="C.kg.m3.")
+> 
+> #Using a SoilProfileCollection
+> ## sample profile from Nigeria:
+> #lon = 3.90; lat = 7.50; id = "ISRIC:NG0017"; FAO1988 = "LXp" 
+> #top = c(0, 18, 36, 65, 87, 127) 
+> #bottom = c(18, 36, 65, 87, 127, 181)
+> #ORCDRC = c(18.4, 4.4, 3.6, 3.6, 3.2, 1.2)
+> #munsell = c("7.5YR3/2", "7.5YR4/4", "2.5YR5/6", "5YR5/8", "5YR5/4", "10YR7/3")
+> ## prepare a SoilProfileCollection:
+> #prof1 <- join(data.frame(id, top, bottom, ORCDRC, munsell), 
+> #         data.frame(id, lon, lat, FAO1988), type='inner')
+> #aqp::depths(prof1) <- id ~ top + bottom
+> #aqp::site(prof1) <- ~ lon + lat + FAO1988 
+> 
+> ## fit spline:
+> #ORCDRC.s <- ea_spline(prof1, var.name="ORCDRC")
+> #str(ORCDRC.s)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("edgeGrids")
+> ### * edgeGrids
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: edgeroi covariates (subset)
+> ### Title: Selected subset of environmental covariates for the Edgeroi
+> ###   District, NSW
+> ### Aliases: 'edgeroi covariates' edgeGrids
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> 
+> # library(ithir)
+> # library(terra)
+> 
+> # example load the elevation grid
+> # elevation <- rast(system.file("extdata/edgeGrids_Elevation.tif", package="ithir"))
+> 
+> # simple plot
+> #plot(elevation, main= "Edgeroi Elevation Map")
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("edgeLandClass")
+> ### * edgeLandClass
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Edgeroi Land Class Points
+> ### Title: Point data of estimated land classes from the Edgeroi District,
+> ###   NSW, Australia.
+> ### Aliases: edgeLandClass
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> 
+> # library(ithir)
+> # data(edgeLandClass)
+> 
+> ## data summary
+> # summary(edgeLandClass$LandClass)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("edgeTarget_C")
+> ### * edgeTarget_C
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: 1km resolution soil carbon map of the Edgeroi District, NSW (S1)
+> ### Title: Subset of the 1km resolution soil carbon map of the Edgeroi
+> ###   District, NSW
+> ### Aliases: 'edgeroi SOC 1km' target
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> 
+> # library(ithir)
+> # library(terra)
+> 
+> # example load the elevation grid
+> # edgeroi_soc <- rast(system.file("extdata/edgeTarget_C.tif", package="ithir"))
+> 
+> # simple plot
+> #plot(edgeroi_soc, main= "Edgeroi SOC Stocks")
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("edgeroiCovariates")
+> ### * edgeroiCovariates
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: edgeroi covariates (whole district)
+> ### Title: Suite of selected environmental covariates for the Edgeroi
+> ###   District, NSW
+> ### Aliases: edgeroiCovariates
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> 
+> # library(ithir)
+> # library(terra)
+> 
+> # example load the elevation grid
+> # elevation <- rast(system.file("extdata/edgeroiCovariates_elevation.tif", package="ithir"))
+> 
+> # simple plot
+> #plot(elevation, main= "Edgeroi Elevation Map")
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("edgeroi_splineCarbon")
+> ### * edgeroi_splineCarbon
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Edgeroi soil carbon data
+> ### Title: Soil point data from the Edgeroi District, NSW, Australia.
+> ### Aliases: edgeroi_splineCarbon
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> 
+> # library(ithir)
+> # library(sf)
+> 
+> ## load data
+> # data(edgeroi_splineCarbon)
+> 
+> ## plot the point locations
+> # spat_edgeroi_splineCarbon<- sf::st_as_sf(x = edgeroi_splineCarbon,coords = c("east", "north"))
+> # plot(spat_edgeroi_splineCarbon, pch = 9, cex = 0.3)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("fit_mpspline_optimized")
+> ### * fit_mpspline_optimized
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: fit_mpspline_optimized
+> ### Title: Fit Mass-Preserving Spline to a Single Soil Profile
+> ### Aliases: fit_mpspline_optimized
+> ### Keywords: methods
+> 
+> ### ** Examples
+> 
+> # Not run on CRAN due to external raster data size
+> ## Not run: 
+> ##D library(terra)
+> ##D 
+> ##D # Define SLGA clay raster URLs
+> ##D clay_urls <- c(
+> ##D   '/vsicurl/https://esoil.io/TERNLandscapes/Public/Products/TERN/SLGA/CLY/CLY_000_005_EV_N_P_AU_TRN_N_20210902.tif',
+> ##D   '/vsicurl/https://esoil.io/TERNLandscapes/Public/Products/TERN/SLGA/CLY/CLY_005_015_EV_N_P_AU_TRN_N_20210902.tif',
+> ##D   '/vsicurl/https://esoil.io/TERNLandscapes/Public/Products/TERN/SLGA/CLY/CLY_015_030_EV_N_P_AU_TRN_N_20210902.tif',
+> ##D   '/vsicurl/https://esoil.io/TERNLandscapes/Public/Products/TERN/SLGA/CLY/CLY_030_060_EV_N_P_AU_TRN_N_20210902.tif',
+> ##D   '/vsicurl/https://esoil.io/TERNLandscapes/Public/Products/TERN/SLGA/CLY/CLY_060_100_EV_N_P_AU_TRN_N_20210902.tif',
+> ##D   '/vsicurl/https://esoil.io/TERNLandscapes/Public/Products/TERN/SLGA/CLY/CLY_100_200_EV_N_P_AU_TRN_N_20210902.tif'
+> ##D )
+> ##D 
+> ##D # Load and crop raster stack
+> ##D clay_stack <- rast(clay_urls)
+> ##D aoi <- ext(149.00, 149.10, -36.00, -35.90)
+> ##D clay_crop <- crop(clay_stack, aoi)
+> ##D 
+> ##D # Extract a single profile (pixel)
+> ##D vals <- terra::extract(clay_crop, cbind(149.05, -35.95))[1, -1]
+> ##D 
+> ##D # Precompute spline structures
+> ##D dIn <- c(0, 5, 15, 30, 60, 100, 200)
+> ##D spline_info <- precompute_spline_structures(dIn, lam = 0.1)
+> ##D 
+> ##D # Fit spline to single profile
+> ##D fit <- fit_mpspline_optimized(
+> ##D   vals = vals,
+> ##D   spline_info = spline_info,
+> ##D   dOut = c(0, 30, 60),
+> ##D   vlow = 0,
+> ##D   vhigh = 100,
+> ##D   depth_res = 1
+> ##D )
+> ##D 
+> ##D fit
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("fuzzyEx")
+> ### * fuzzyEx
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: fuzzyEx
+> ### Title: Derivation of fuzzy membership to classes
+> ### Aliases: fuzzyEx
+> ### Keywords: methods
+> 
+> ### ** Examples
+> 
+> ## NOT RUN
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("goof")
+> ### * goof
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Goodness of fit measures
+> ### Title: Goodness of fit measures
+> ### Aliases: goof
+> ### Keywords: methods
+> 
+> ### ** Examples
+> 
+> 
+> ## NOT RUN
+> # library(ithir)
+> # library(MASS)
+> ## some data
+> # data(USYD_soil1)
+> ## fit a linear model
+> # mod.1 <- lm(CEC ~ clay, data = USYD_soil1 , y = TRUE, x = TRUE)
+> ## Goodness of fit
+> # goof(observed = mod.1$y, predicted = mod.1$fitted.values, plot.it = TRUE)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("goofcat")
+> ### * goofcat
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Goodness of fit measures for categorial variable models
+> ### Title: Goodness of fit measures for categorical variable models
+> ### Aliases: goofcat
+> ### Keywords: methods
+> 
+> ### ** Examples
+> 
+> ##library(ithir)
+> 
+> ## NOT RUN
+> ## Using a pre-constructed confusion matrix
+> # con.mat <- matrix(c(5, 0, 1, 2, 0, 15, 0, 5, 0, 1, 31, 0, 0, 10, 2, 11),nrow = 4, ncol = 4)
+> # rownames(con.mat) <- c("DE", "VE", "CH", "KU")
+> # colnames(con.mat) <- c("DE", "VE", "CH", "KU")
+> # goofcat(conf.mat = con.mat, imp=TRUE)
+> 
+> ## NOT RUN
+> ## Using observations and corresponding predictions
+> ## Using random intgers
+> # set.seed(123)
+> # observed<- sample(1:5,1000,replace=TRUE)
+> # set.seed(321)
+> # predicted<- sample(1:5,1000,replace=TRUE)
+> # goofcat(observed = observed, predicted = predicted)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("homosoil_globeDat")
+> ### * homosoil_globeDat
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: homosoil_globeDat
+> ### Title: Global Environmental Data
+> ### Aliases: homosoil_globeDat
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> 
+> # library(ithir)
+> # data(homosoil_globeDat)
+> # str(homosoil_globeDat)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("hunterCovariates")
+> ### * hunterCovariates
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Hunter Valley covariates
+> ### Title: Suite of selected environmental covariates for the the Lower
+> ###   Hunter Valley, NSW
+> ### Aliases: hunterCovariates
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> 
+> # library(ithir)
+> # library(terra)
+> 
+> # example load the altitude above channel network grid
+> # aacn <- rast(system.file("extdata/hunterCovariates_hunterCovariates_AACN.tif", package="ithir"))
+> 
+> # simple plot
+> # plot(aacn, main= "Hunter Valley AACN Map")
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("hunterCovariates_sub")
+> ### * hunterCovariates_sub
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Hunter Valley covariates (subset area)
+> ### Title: Suite of selected environmental covariates for a subset the
+> ###   Lower Hunter Valley, NSW
+> ### Aliases: hunterCovariates_sub
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> 
+> # library(ithir)
+> # library(terra)
+> 
+> # example load the elevation grid
+> # elevation <- rast(system.file("extdata/hunterCovariates_sub_Elevation.tif", package="ithir"))
+> 
+> # simple plot
+> #plot(elevation, main= "Hunter Valley (sub area) Elevation")
+> 
+> 
+> cleanEx()
+> nameEx("hvGrid25m")
+> ### * hvGrid25m
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Hunter Valley Grid (S1)
+> ### Title: Raster grid of the Lower Hunter Valley, NSW, Australia
+> ### Aliases: 'Hunter Valley Grid'
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> # library(ithir)
+> # library(terra)
+> 
+> ## NOT RUN
+> # hv.grid<- rast(system.file("extdata/hvGrid25m_grid.tif", package="ithir"))
+> # plot(hv.grid)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("hvPoints250")
+> ### * hvPoints250
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Hunter Valley Points (S1)
+> ### Title: Random selection of point locations: Hunter Valley
+> ### Aliases: 'Hunter Valley Points'
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> 
+> # library(ithir)
+> # data(hvPoints250)
+> # summary(hvPoints250)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("hvTerronDat")
+> ### * hvTerronDat
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Hunter Valley terron data
+> ### Title: Soil point data from the Hunter Valley, NSW, Australia
+> ### Aliases: hvTerronDat
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> 
+> # library(ithir)
+> # data(hvTerronDat)
+> # head(hvTerronDat)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("oneProfile")
+> ### * oneProfile
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: One soil profile
+> ### Title: One soil profile
+> ### Aliases: 'Soil carbon soil profile'
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> 
+> # library(ithir)
+> # data(oneProfile)
+> # str(oneProfile)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("plot_ea_spline")
+> ### * plot_ea_spline
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: plot_ea_spline
+> ### Title: plot soil profile outputs from 'ea_spline'
+> ### Aliases: plot_ea_spline
+> ### Keywords: methods
+> 
+> ### ** Examples
+> 
+> 
+> # library(ithir)
+> # library(aqp)
+>  
+> ## NOT RUN
+> # data(oneProfile)
+> # str(oneProfile)
+> ## convert to SoilProfileCollection object
+> # aqp::depths(oneProfile)<- Soil.ID ~ Upper.Boundary + Lower.Boundary
+> ## fit spline
+> # eaFit <- ea_spline(oneProfile, var.name="C.kg.m3.",d= t(c(0,5,15,30,60,100,200)),lam = 0.1, vlow=0, show.progress=FALSE )
+> ## do plot
+> # plot_ea_spline(splineOuts=eaFit, d= t(c(0,5,15,30,60,100,200)), maxd=200, type=1, label="carbon density") 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("plot_soilProfile")
+> ### * plot_soilProfile
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: plot_soilProfile
+> ### Title: plot soil profile data
+> ### Aliases: plot_soilProfile
+> ### Keywords: methods
+> 
+> ### ** Examples
+> 
+> 
+> # library(ithir)
+> 
+> ## NOT RUN
+> # data(oneProfile)
+> # str(oneProfile)
+> 
+> ## do plot
+> # plot_soilProfile(data = oneProfile, vals = oneProfile$C.kg.m3., depths = oneProfile[,2:3], label= names(oneProfile)[4])
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("precompute_spline_structures")
+> ### * precompute_spline_structures
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: precompute_spline_structures
+> ### Title: Precompute Spline Matrix Structures for Soil Profile Modeling
+> ### Aliases: precompute_spline_structures
+> ### Keywords: methods
+> 
+> ### ** Examples
+> 
+> # Standard SLGA input depths
+> dIn <- c(0,5,15,30,60,100,200)
+> 
+> # Compute the spline matrices
+> spline_info <- precompute_spline_structures(dIn = dIn, lam = 0.1)
+> 
+> # View structure
+> str(spline_info)
+List of 6
+ $ z    : num [1:6, 1:6] 1.1291 -0.15639 0.03221 -0.00601 0.00125 ...
+ $ rinv : num [1:5, 1:5] 3.59e-02 -7.58e-03 1.37e-03 -3.05e-04 4.36e-05 ...
+ $ q    : num [1:5, 1:6] -1 0 0 0 0 1 -1 0 0 0 ...
+ $ u    : num [1:6] 0 5 15 30 60 100
+ $ v    : num [1:6] 5 15 30 60 100 200
+ $ delta: num [1:6] 5 10 15 30 40 100
+> 
+> 
+> 
+> cleanEx()
+> nameEx("topo_dem")
+> ### * topo_dem
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: topo_dem
+> ### Title: matrix of digital elevation
+> ### Aliases: 'digital elevation'
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> 
+> # library(ithir)
+> # data(topo_dem)
+> # str(topo_dem)
+> 
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  3.57 0.16 5.55 NA NA 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

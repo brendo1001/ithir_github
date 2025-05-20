@@ -1,0 +1,49 @@
+HV_subsoilpH            Hunter Valley subsoil pH data with
+                        environmental covariates
+Hunter Valley DEM       Hunter Valley DEM
+Hunter Valley Grid      Raster grid of the Lower Hunter Valley, NSW,
+                        Australia
+Hunter Valley Points    Random selection of point locations: Hunter
+                        Valley
+Hunter Valley soil data
+                        Soil point data from the Hunter Valley, NSW,
+                        Australia
+Soil carbon soil profile
+                        One soil profile
+USYD soil data          Random selection of soil point data
+USYD soil drainage data
+                        Soil drainage index data
+bbRaster                Get the bounding box information of a
+                        'SpatRaster' from its extents.
+digital elevation       matrix of digital elevation
+ea_rasSp_fast           Fast Mass-Preserving Spline on Raster Soil Data
+ea_spline               Fits a mass preserving spline
+edgeLandClass           Point data of estimated land classes from the
+                        Edgeroi District, NSW, Australia.
+edgeroi SOC 1km         Subset of the 1km resolution soil carbon map of
+                        the Edgeroi District, NSW
+edgeroi covariates      Selected subset of environmental covariates for
+                        the Edgeroi District, NSW
+edgeroiCovariates       Suite of selected environmental covariates for
+                        the Edgeroi District, NSW
+edgeroi_splineCarbon    Soil point data from the Edgeroi District, NSW,
+                        Australia.
+fit_mpspline_optimized
+                        Fit Mass-Preserving Spline to a Single Soil
+                        Profile
+fuzzyEx                 Derivation of fuzzy membership to classes
+goof                    Goodness of fit measures
+goofcat                 Goodness of fit measures for categorical
+                        variable models
+homosoil_globeDat       Global Environmental Data
+hunterCovariates        Suite of selected environmental covariates for
+                        the the Lower Hunter Valley, NSW
+hunterCovariates_sub    Suite of selected environmental covariates for
+                        a subset the Lower Hunter Valley, NSW
+hvTerronDat             Soil point data from the Hunter Valley, NSW,
+                        Australia
+plot_ea_spline          plot soil profile outputs from 'ea_spline'
+plot_soilProfile        plot soil profile data
+precompute_spline_structures
+                        Precompute Spline Matrix Structures for Soil
+                        Profile Modeling

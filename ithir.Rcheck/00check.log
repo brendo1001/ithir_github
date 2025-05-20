@@ -1,0 +1,146 @@
+* using log directory 'Z:/projects/ternlandscapes_2019/rcode/ithir_github/ithir.Rcheck'
+* using R version 4.3.1 (2023-06-16 ucrt)
+* using platform: x86_64-w64-mingw32 (64-bit)
+* R was compiled by
+    gcc.exe (GCC) 12.2.0
+    GNU Fortran (GCC) 12.2.0
+* running under: Windows Server 2016 x64 (build 14393)
+* using session charset: ISO8859-1
+* checking for file 'ithir/DESCRIPTION' ... OK
+* checking extension type ... Package
+* this is package 'ithir' version '1.0.0'
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking whether package 'ithir' can be installed ... OK
+* checking installed package size ... NOTE
+  installed size is 63.8Mb
+  sub-directories of 1Mb or more:
+    data     10.8Mb
+    extdata  52.8Mb
+* checking package directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... NOTE
+ea_spline: no visible global function definition for 'IQR'
+goof: no visible global function definition for 'eqscplot'
+Undefined global functions or variables:
+  IQR eqscplot
+Consider adding
+  importFrom("stats", "IQR")
+to your NAMESPACE file.
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... WARNING
+Undocumented code objects:
+  'HV100' 'HV_dem' 'USYD_dIndex' 'USYD_soil1' 'hvPoints250'
+  'oneProfile' 'topo_dem'
+Undocumented data sets:
+  'HV100' 'HV_dem' 'USYD_dIndex' 'USYD_soil1' '.Random.seed'
+  'hvPoints250' 'oneProfile' 'topo_dem'
+All user-level objects in a package should have documentation entries.
+See chapter 'Writing R documentation files' in the 'Writing R
+Extensions' manual.
+* checking for code/documentation mismatches ... WARNING
+Functions or methods with usage in documentation object 'edgeroi covariates (subset)' but not in code:
+  'system.file'
+
+Functions or methods with usage in documentation object '1km resolution soil carbon map of the Edgeroi District, NSW (S1)' but not in code:
+  'system.file'
+
+Functions or methods with usage in documentation object 'edgeroi covariates (whole district)' but not in code:
+  'system.file'
+
+Functions or methods with usage in documentation object 'Hunter Valley covariates' but not in code:
+  'system.file'
+
+Functions or methods with usage in documentation object 'Hunter Valley covariates (subset area)' but not in code:
+  'system.file'
+
+Functions or methods with usage in documentation object 'Hunter Valley Grid (S1)' but not in code:
+  'system.file'
+
+* checking Rd \usage sections ... WARNING
+Undocumented arguments in documentation object 'edgeroi covariates (subset)'
+  'extdata/edgeGrids_NAME.tif' 'package'
+Objects in \usage without \alias in documentation object 'edgeroi covariates (subset)':
+  'system.file'
+
+Undocumented arguments in documentation object '1km resolution soil carbon map of the Edgeroi District, NSW (S1)'
+  'extdata/edgeTarget_C.tif' 'package'
+Objects in \usage without \alias in documentation object '1km resolution soil carbon map of the Edgeroi District, NSW (S1)':
+  'system.file'
+
+Undocumented arguments in documentation object 'edgeroi covariates (whole district)'
+  'extdata/edgeCovariates_NAME.tif' 'package'
+Objects in \usage without \alias in documentation object 'edgeroi covariates (whole district)':
+  'system.file'
+
+Undocumented arguments in documentation object 'Hunter Valley covariates'
+  'extdata/hunterCovariates_NAME.tif' 'package'
+Objects in \usage without \alias in documentation object 'Hunter Valley covariates':
+  'system.file'
+
+Undocumented arguments in documentation object 'Hunter Valley covariates (subset area)'
+  'extdata/hunterCovariates_sub_NAME.tif' 'package'
+Objects in \usage without \alias in documentation object 'Hunter Valley covariates (subset area)':
+  'system.file'
+
+Undocumented arguments in documentation object 'Hunter Valley Grid (S1)'
+  'extdata/hvGrid25m_grid.tif' 'package'
+Objects in \usage without \alias in documentation object 'Hunter Valley Grid (S1)':
+  'system.file'
+
+Functions with \usage entries need to have the appropriate \alias
+entries, and all their arguments documented.
+The \usage entries must correspond to syntactically valid R code.
+See chapter 'Writing R documentation files' in the 'Writing R
+Extensions' manual.
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking contents of 'data' directory ... WARNING
+Object named '.Random.seed' found in dataset: 'hvPoints250'
+Please remove it.
+* checking data for non-ASCII characters ... OK
+* checking LazyData ... WARNING
+  LazyData DB of 10.8 MB without LazyDataCompression set
+  See §1.1.6 of 'Writing R Extensions'
+* checking data for ASCII and uncompressed saves ... WARNING
+  
+  Note: significantly better compression could be obtained
+        by using R CMD build --resave-data
+                           old_size new_size compress
+  HV_dem.rda                  113Kb     84Kb       xz
+  HV_subsoilpH.rda             41Kb     36Kb       xz
+  edgeroi_splineCarbon.rda     19Kb     16Kb       xz
+  homosoil_globeDat.rda      10.6Mb    5.7Mb       xz
+  topo_dem.rda                 39Kb     29Kb       xz
+* checking examples ... OK
+* checking PDF version of manual ... WARNING
+LaTeX errors when creating PDF version.
+This typically indicates Rd problems.
+* checking PDF version of manual without index ... ERROR
+Re-running with no redirection of stdout/stderr.
+* DONE
+Status: 1 ERROR, 7 WARNINGs, 2 NOTEs

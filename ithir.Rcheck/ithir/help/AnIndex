@@ -1,0 +1,30 @@
+bbRaster	bbRaster
+digital elevation	topo_dem
+ea_rasSp_fast	ea_rasSp_fast
+ea_spline	ea_spline
+edgeGrids	edgeGrids
+edgeLandClass	edgeLandClass
+edgeroi covariates	edgeGrids
+edgeroi SOC 1km	edgeTarget_C
+edgeroiCovariates	edgeroiCovariates
+edgeroi_splineCarbon	edgeroi_splineCarbon
+fit_mpspline_optimized	fit_mpspline_optimized
+fuzzyEx	fuzzyEx
+goof	goof
+goofcat	goofcat
+homosoil_globeDat	homosoil_globeDat
+Hunter Valley DEM	HV_dem
+Hunter Valley Grid	hvGrid25m
+Hunter Valley Points	hvPoints250
+Hunter Valley soil data	HV100
+hunterCovariates	hunterCovariates
+hunterCovariates_sub	hunterCovariates_sub
+hvTerronDat	hvTerronDat
+HV_subsoilpH	HV_subsoilpH
+plot_ea_spline	plot_ea_spline
+plot_soilProfile	plot_soilProfile
+precompute_spline_structures	precompute_spline_structures
+Soil carbon soil profile	oneProfile
+target	edgeTarget_C
+USYD soil data	USYD_soil1
+USYD soil drainage data	USYD_dIndex

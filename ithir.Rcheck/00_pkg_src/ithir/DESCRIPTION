@@ -1,0 +1,17 @@
+Package: ithir
+Type: Package
+Title: Tools and Data for Digital Soil Informatics
+Version: 1.0.0
+Date: 2025-05-20
+Author: Brendan Malone [aut, cre]
+Maintainer: Brendan Malone <brendan.malone@csiro.au>
+Description: Provides tools and datasets to support digital soil mapping and analysis workflows. Includes fast mass-preserving spline functions for raster and profile data, model evaluation metrics for both continuous and categorical predictions, and example datasets for demonstration and testing.
+Depends: R (>= 4.0)
+Imports: methods, terra
+Suggests: MASS, sf, graphics, stats, utils, testthat
+License: GPL-2
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.2.3
+NeedsCompilation: no
+Packaged: 2025-05-20 04:34:07 UTC; mal181

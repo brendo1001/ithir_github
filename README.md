@@ -1,11 +1,24 @@
-## ithir R package
+# ithir R Package
 
-This packages contains data and useful functions for digital soil informatic investigations.
+The `ithir` package provides data, models, and utility functions for digital soil informatics. It supports soil data analysis from both raster (gridded) and profile (point) formats, with tools for interpolation, prediction assessment, and general soil model diagnostics.
 
-For installation in R the following commands work:
+---
 
-install.packages("devtools")
+## 🔧 Key Features
 
-library(devtools)
+- **Mass-preserving spline interpolation** for soil profile data (point and raster)
+- **Fast raster spline implementation** using optimized matrix structures and `terra::app()`
+- **Model evaluation tools**:
+  - For **continuous predictions**: RMSE, concordance correlation, R², bias
+  - For **categorical predictions**: confusion matrix, kappa, accuracy, entropy
+- **Built-in example datasets** for quick testing and demonstration
 
-install_github("brendo1001/ithir_github/pkg")
+---
+
+## 📦 Installation
+
+To install the development version from GitHub:
+
+```r
+install.packages("devtools")  # if needed
+devtools::install_github("brendo1001/ithir_github/pkg")
