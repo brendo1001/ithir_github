@@ -1,25 +1,36 @@
-\name{One soil profile}
+\name{oneProfile}
 \docType{data}
-\alias{Soil carbon soil profile}
-\title{One soil profile}
-\description{A soil information \code{dataframe} of one soil profile for one soil attribute; soil carbon density. Each row is a specified depth interval.}
+\alias{oneProfile}
+\title{Example Soil Profile for Soil Carbon Density}
+\description{
+A soil information \code{data.frame} representing a single soil profile for the variable soil carbon density. Each row corresponds to a horizon (depth interval).
+}
 \usage{data(oneProfile)}
 \format{
-\code{oneProfile} is an 8 row \code{dataframe} with 4 columns. Columns correspond to identifier, upper soil depth interval, lower depth interval and soil carbon density value. 
+A \code{data.frame} with 8 rows and 4 columns:
+\describe{
+  \item{\code{id}}{Profile identifier}
+  \item{\code{top}}{Upper depth (cm)}
+  \item{\code{bottom}}{Lower depth (cm)}
+  \item{\code{carbon_density}}{Soil carbon density (e.g., kg/m^2)}
 }
-\details{This data frame is a typical soil data table}
-
+}
+\details{
+This dataset is useful for illustrating profile spline fitting, e.g., with \code{\link{ea_spline}}, and is structured as a typical harmonized soil profile.
+}
 \references{
 \itemize{
-\item Malone, B.P., Minasny, B., McBratney, A.B. (2017) \href{https://link.springer.com/book/10.1007/978-3-319-44327-0}{Using R for Digital Soil Mapping}. Springer Cham. 262 Pages.
+  \item Malone, B.P., Minasny, B., McBratney, A.B. (2017). \href{https://link.springer.com/book/10.1007/978-3-319-44327-0}{Using R for Digital Soil Mapping}. Springer, Cham. 262 pp.
 }
 }
-
 \examples{
+data(oneProfile)
 
-# library(ithir)
-# data(oneProfile)
-# str(oneProfile)
+# Show profile structure
+str(oneProfile)
 
+# Fit spline (if using ithir)
+# result <- ea_spline(oneProfile, var.name = "carbon_density")
+# result$harmonised
 }
 \keyword{datasets}

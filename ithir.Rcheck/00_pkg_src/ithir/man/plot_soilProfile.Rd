@@ -1,33 +1,41 @@
 \name{plot_soilProfile}
 \docType{methods}
 \alias{plot_soilProfile}
-\title{plot soil profile data}
-\description{This is a simple function for plotting soil profile data that is supplied in \code{dataframe} form.}
-
-\usage{plot_soilProfile(data, vals, depths, label="")}
-\arguments{
-  \item{data}{dataframe; Usually a typical soil information data frame with identifier and soil depth labelled columns, followed by one or more columns of soil attribute or even soil categorical data.} 
-  \item{vals}{vector; Would generally point to a column of \code{data}, and is the soil attribute value that needs to be ploted.}     
-  \item{depths}{dataframe; Would generally point to the two columns of \code{data} which specify the upper and lower depths of the soil profile observations.}
-   \item{label}{character; An optional input the put a label on the x-axis, otherwise it will remain blank.}
+\title{Plot Soil Profile Data}
+\description{
+A simple plotting function to visualize soil profile data from a \code{data.frame}. Each horizon is plotted as a bar, with its vertical extent representing the depth interval and its length representing the value of a soil property.
 }
-\value{Function returns a labeled plot of the soil profile information. The length of the bars corresponds to the value of the soil variable being plotted.}
+\usage{
+plot_soilProfile(data, vals, depths, label = "")
+}
+\arguments{
+  \item{data}{A \code{data.frame}; typically a soil profile table containing at least upper and lower depth columns, along with one or more soil property columns.}
+  \item{vals}{A numeric vector; the soil property values to be plotted, usually a column extracted from \code{data}.}
+  \item{depths}{A \code{data.frame} or \code{matrix} with two columns specifying the upper and lower boundaries of each horizon in the profile.}
+  \item{label}{Character string; optional label to display on the x-axis of the plot.}
+}
+\value{
+Returns a plot representing the soil profile, with bars for each horizon whose length corresponds to the supplied variable values, and height corresponds to the depth interval.
+}
 
-\note{This function is really designed to plot one soil profile at a time. Would need to be inserted into another function if plotting of a collection of soil profiles is required. }
+\note{
+This function is intended to plot one soil profile at a time. To visualize multiple profiles, it should be embedded in a loop or wrapper function.
+}
 
 \author{Brendan Malone}
 
-
 \examples{
+library(ithir)
 
-# library(ithir)
+# Load example profile data
+data(oneProfile)
 
-## NOT RUN
-# data(oneProfile)
-# str(oneProfile)
-
-## do plot
-# plot_soilProfile(data = oneProfile, vals = oneProfile$C.kg.m3., depths = oneProfile[,2:3], label= names(oneProfile)[4])
-
+# Visualize the profile
+plot_soilProfile(
+  data = oneProfile,
+  vals = oneProfile$C.kg.m3.,
+  depths = oneProfile[, 2:3],
+  label = names(oneProfile)[4]
+)
 }
 \keyword{methods}

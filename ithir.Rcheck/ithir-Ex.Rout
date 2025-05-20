@@ -31,18 +31,42 @@ Type 'q()' to quit R.
 > 
 > flush(stderr()); flush(stdout())
 > 
-> ### Name: Hunter Valley soil data
-> ### Title: Soil point data from the Hunter Valley, NSW, Australia
-> ### Aliases: 'Hunter Valley soil data'
+> ### Name: HV100
+> ### Title: Soil Point Data from the Hunter Valley, NSW, Australia
+> ### Aliases: HV100
 > ### Keywords: datasets
 > 
 > ### ** Examples
 > 
+> # Load and inspect the dataset
+> data(HV100)
 > 
-> # library(ithir)
-> # data(HV100)
-> # head(HV100)
-> 
+> # Basic structure and summary
+> str(HV100)
+'data.frame':	100 obs. of  6 variables:
+ $ site: Factor w/ 100 levels "a1","a10","a11",..: 1 2 3 4 5 6 7 8 9 10 ...
+ $ x   : num  337860 344060 347035 338235 341760 ...
+ $ y   : num  6372416 6376716 6372741 6368766 6366016 ...
+ $ OC  : num  2.03 2.6 3.42 4.1 3.04 4.07 2.95 3.1 4.59 1.77 ...
+ $ EC  : num  0.129 0.085 0.036 0.081 0.104 0.138 0.07 0.097 0.114 0.031 ...
+ $ pH  : num  6.9 5.1 5.9 6.3 6.1 6.4 5.9 5.5 5.7 6 ...
+> summary(HV100)
+      site          x                y                 OC       
+ a1     : 1   Min.   :335160   Min.   :6365090   Min.   :0.600  
+ a10    : 1   1st Qu.:338272   1st Qu.:6369709   1st Qu.:2.045  
+ a11    : 1   Median :341247   Median :6374166   Median :2.810  
+ a12    : 1   Mean   :341513   Mean   :6373647   Mean   :2.850  
+ a13    : 1   3rd Qu.:344347   3rd Qu.:6377216   3rd Qu.:3.692  
+ a15    : 1   Max.   :350960   Max.   :6382816   Max.   :5.490  
+ (Other):94                                                     
+       EC               pH       
+ Min.   :0.0260   Min.   :4.700  
+ 1st Qu.:0.0630   1st Qu.:5.600  
+ Median :0.0910   Median :5.900  
+ Mean   :0.1158   Mean   :6.022  
+ 3rd Qu.:0.1385   3rd Qu.:6.400  
+ Max.   :0.8510   Max.   :7.700  
+                                 
 > 
 > 
 > 
@@ -52,43 +76,71 @@ Type 'q()' to quit R.
 > 
 > flush(stderr()); flush(stdout())
 > 
-> ### Name: Hunter Valley, NSW 100m digital elevation model
-> ### Title: Hunter Valley DEM
-> ### Aliases: 'Hunter Valley DEM'
+> ### Name: HV_dem
+> ### Title: Digital Elevation Model of the Hunter Valley, NSW
+> ### Aliases: HV_dem
 > ### Keywords: datasets
 > 
 > ### ** Examples
 > 
+> library(terra)
+Warning: package 'terra' was built under R version 4.3.3
+terra 1.7.78
+> data(HV_dem)
 > 
-> ## HV DEM
-> # library(ithir)
-> # library(terra)
->  
-> # data(HV_dem)
-> # map<- terra::rast(x = HV_dem, type = "xyz")
-> # plot(map, main = "Hunter Valley DEM") 
-> 
+> # Convert to raster and plot
+> dem_rast <- terra::rast(x = HV_dem, type = "xyz")
+> plot(dem_rast, main = "Hunter Valley DEM")
 > 
 > 
 > 
 > cleanEx()
+
+detaching 'package:terra'
+
 > nameEx("HV_subsoilpH")
 > ### * HV_subsoilpH
 > 
 > flush(stderr()); flush(stdout())
 > 
-> ### Name: Hunter Valley subsoil pH points
-> ### Title: Hunter Valley subsoil pH data with environmental covariates
+> ### Name: HV_subsoilpH
+> ### Title: Hunter Valley Subsoil pH Data with Environmental Covariates
 > ### Aliases: HV_subsoilpH
 > ### Keywords: datasets
 > 
 > ### ** Examples
 > 
-> 
-> # library(ithir)
-> # data(HV_subsoilpH)
-> # summary(HV_subsoilpH)
-> 
+> library(ithir)
+> data(HV_subsoilpH)
+> summary(HV_subsoilpH)
+       X                Y             pH60_100cm    Terrain_Ruggedness_Index
+ Min.   :338582   Min.   :6364421   Min.   :2.997   Min.   : 0.4366         
+ 1st Qu.:340187   1st Qu.:6366278   1st Qu.:5.480   1st Qu.: 2.5587         
+ Median :340780   Median :6367524   Median :6.308   Median : 4.1996         
+ Mean   :340793   Mean   :6367505   Mean   :6.488   Mean   : 4.6843         
+ 3rd Qu.:341345   3rd Qu.:6368794   3rd Qu.:7.442   3rd Qu.: 6.5427         
+ Max.   :343421   Max.   :6370400   Max.   :9.742   Max.   :14.8847         
+      AACN        Landsat_Band1     Elevation       Hillshading     
+ Min.   :  0.00   Min.   :35.00   Min.   : 79.18   Min.   : 0.2609  
+ 1st Qu.: 10.29   1st Qu.:47.00   1st Qu.:110.65   1st Qu.: 2.2168  
+ Median : 25.16   Median :53.00   Median :128.66   Median : 4.0746  
+ Mean   : 29.54   Mean   :51.95   Mean   :132.80   Mean   : 4.9475  
+ 3rd Qu.: 41.36   3rd Qu.:56.75   3rd Qu.:150.43   3rd Qu.: 6.3271  
+ Max.   :106.67   Max.   :70.00   Max.   :212.42   Max.   :22.5761  
+ Light_insolation Mid_Slope_Positon     MRVBF               NDVI        
+ Min.   :1343     Min.   :0.00169   Min.   :0.000027   Min.   :-0.4382  
+ 1st Qu.:1679     1st Qu.:0.41341   1st Qu.:0.072183   1st Qu.:-0.2347  
+ Median :1713     Median :0.67273   Median :0.391716   Median :-0.1927  
+ Mean   :1715     Mean   :0.60505   Mean   :1.049828   Mean   :-0.2087  
+ 3rd Qu.:1760     3rd Qu.:0.82901   3rd Qu.:1.795993   3rd Qu.:-0.1667  
+ Max.   :1910     Max.   :0.94982   Max.   :3.982124   Max.   :-0.0800  
+      TWI             Slope       
+ Min.   : 8.464   Min.   : 0.275  
+ 1st Qu.:10.030   1st Qu.: 2.322  
+ Median :12.560   Median : 4.358  
+ Mean   :13.059   Mean   : 5.035  
+ 3rd Qu.:15.920   3rd Qu.: 6.921  
+ Max.   :19.789   Max.   :18.697  
 > 
 > 
 > 
@@ -98,18 +150,29 @@ Type 'q()' to quit R.
 > 
 > flush(stderr()); flush(stdout())
 > 
-> ### Name: USYD drainage index data
-> ### Title: Soil drainage index data
-> ### Aliases: 'USYD soil drainage data'
+> ### Name: USYD_dIndex
+> ### Title: Soil Drainage Index Observations and Predictions
+> ### Aliases: USYD_dIndex
 > ### Keywords: datasets
 > 
 > ### ** Examples
 > 
+> data(USYD_dIndex)
 > 
-> # library(ithir)
-> # data(USYD_dIndex)
-> # summary(USYD_dIndex)
+> # View summary statistics
+> summary(USYD_dIndex)
+  DI_observed      DI_predicted  
+ Min.   :  0.00   Min.   :27.41  
+ 1st Qu.: 40.37   1st Qu.:46.15  
+ Median : 60.05   Median :58.58  
+ Mean   : 55.81   Mean   :54.67  
+ 3rd Qu.: 75.00   3rd Qu.:62.51  
+ Max.   :100.00   Max.   :72.35  
 > 
+> # Plot observed vs predicted
+> with(USYD_dIndex, plot(DI_observed, DI_predicted,
++      main = "Observed vs Predicted Drainage Index",
++      xlab = "Observed", ylab = "Predicted"))
 > 
 > 
 > 
@@ -119,18 +182,53 @@ Type 'q()' to quit R.
 > 
 > flush(stderr()); flush(stdout())
 > 
-> ### Name: USYD soil data
-> ### Title: Random selection of soil point data
-> ### Aliases: 'USYD soil data'
+> ### Name: USYD_soil1
+> ### Title: Random Selection of Soil Profile Data from New South Wales
+> ### Aliases: USYD_soil1
 > ### Keywords: datasets
 > 
 > ### ** Examples
 > 
+> data(USYD_soil1)
 > 
-> # library(ithir)
-> # data(USYD_soil1)
-> # summary(USYD_soil1)
+> # Overview
+> summary(USYD_soil1)
+    PROFILE                 Landclass   Upper.Depth      Lower.Depth    
+ Min.   : 1.00   Cropping        :49   Min.   :0.0000   Min.   :0.0200  
+ 1st Qu.: 8.00   Forest          :50   1st Qu.:0.0200   1st Qu.:0.0500  
+ Median :15.00   improved pasture:35   Median :0.0500   Median :0.1000  
+ Mean   :14.73   native pasture  :32   Mean   :0.1816   Mean   :0.2464  
+ 3rd Qu.:22.00                         3rd Qu.:0.2000   3rd Qu.:0.3000  
+ Max.   :29.00                         Max.   :0.7000   Max.   :0.8000  
+                                                                        
+      clay            silt           sand          pH_CaCl2    
+ Min.   : 5.00   Min.   : 6.0   Min.   :21.00   Min.   :4.150  
+ 1st Qu.:15.00   1st Qu.:11.0   1st Qu.:44.00   1st Qu.:4.890  
+ Median :21.00   Median :15.0   Median :57.00   Median :5.380  
+ Mean   :26.95   Mean   :16.5   Mean   :56.27   Mean   :5.555  
+ 3rd Qu.:37.00   3rd Qu.:20.0   3rd Qu.:68.00   3rd Qu.:6.150  
+ Max.   :68.00   Max.   :32.0   Max.   :85.00   Max.   :7.810  
+ NA's   :17      NA's   :1      NA's   :1       NA's   :1      
+  Total_Carbon          EC               ESP             ExchNa      
+ Min.   : 0.090   Min.   :0.02100   Min.   : 0.000   Min.   :0.0000  
+ 1st Qu.: 0.390   1st Qu.:0.05175   1st Qu.: 0.300   1st Qu.:0.0200  
+ Median : 1.050   Median :0.10300   Median : 0.550   Median :0.0500  
+ Mean   : 1.464   Mean   :0.16791   Mean   : 1.999   Mean   :0.2563  
+ 3rd Qu.: 1.600   3rd Qu.:0.17500   3rd Qu.: 1.875   3rd Qu.:0.1500  
+ Max.   :12.740   Max.   :1.27100   Max.   :21.200   Max.   :6.8100  
+ NA's   :1        NA's   :2         NA's   :20       NA's   :5       
+     ExchK            ExchCa           ExchMg            CEC        
+ Min.   :0.1800   Min.   : 1.010   Min.   : 0.220   Min.   : 1.900  
+ 1st Qu.:0.5200   1st Qu.: 2.920   1st Qu.: 1.400   1st Qu.: 5.350  
+ Median :0.7400   Median : 4.610   Median : 2.210   Median : 8.600  
+ Mean   :0.8725   Mean   : 5.353   Mean   : 3.313   Mean   : 9.515  
+ 3rd Qu.:1.1000   3rd Qu.: 7.240   3rd Qu.: 4.000   3rd Qu.:12.110  
+ Max.   :2.9200   Max.   :25.390   Max.   :19.670   Max.   :28.210  
+ NA's   :5        NA's   :5        NA's   :5        NA's   :5       
 > 
+> # Show profile IDs
+> table(USYD_soil1$id)
+< table of extent 0 >
 > 
 > 
 > 
@@ -141,23 +239,33 @@ Type 'q()' to quit R.
 > flush(stderr()); flush(stdout())
 > 
 > ### Name: bbRaster
-> ### Title: Get the bounding box information of a 'SpatRaster' from its
-> ###   extents.
+> ### Title: Get Bounding Box Coordinates from a 'SpatRaster'
 > ### Aliases: bbRaster
 > ### Keywords: methods
 > 
 > ### ** Examples
 > 
+> library(terra)
+Warning: package 'terra' was built under R version 4.3.3
+terra 1.7.78
 > 
-> # library(terra)
-> # target <- rast(system.file("extdata/edgeTarget_C.tif", package="ithir"))
-> # target
-> # bbRaster(target)
+> # Example raster
+> target <- rast(system.file("extdata/edgeTarget_C.tif", package = "ithir"))
 > 
+> # Get bounding box coordinates
+> bbRaster(target)
+         [,1]    [,2]
+[1,] 778260.1 6649735
+[2,] 778260.1 6656735
+[3,] 788260.1 6649735
+[4,] 788260.1 6656735
 > 
 > 
 > 
 > cleanEx()
+
+detaching 'package:terra'
+
 > nameEx("ea_rasSp_fast")
 > ### * ea_rasSp_fast
 > 
@@ -211,65 +319,37 @@ Type 'q()' to quit R.
 > flush(stderr()); flush(stdout())
 > 
 > ### Name: ea_spline
-> ### Title: Fits a mass preserving spline
-> ### Aliases: ea_spline ea_spline
+> ### Title: Fit a Mass-Preserving Spline to Soil Profile Data
+> ### Aliases: ea_spline
 > ### Keywords: methods
 > 
 > ### ** Examples
 > 
-> #library(aqp)
-> #library(plyr)
-> #library(ithir)
+> # Example using a simple data.frame
+> data(oneProfile)
+> str(oneProfile)
+'data.frame':	8 obs. of  4 variables:
+ $ Soil.ID       : int  1 1 1 1 1 1 1 1
+ $ Upper.Boundary: int  0 10 30 50 70 120 250 350
+ $ Lower.Boundary: int  10 20 40 60 80 130 260 360
+ $ C.kg.m3.      : num  20.72 11.71 8.23 6.3 2.4 ...
+> sp_fit <- ea_spline(obj = oneProfile, var.name = "C.kg.m3.")
+  |                                                                              |                                                                      |   0%  |                                                                              |======================================================================| 100%
 > 
-> #Fit spline 
-> #data(oneProfile)
-> #class(oneProfile)
-> #sp.fit<- ithir::ea_spline(obj = oneProfile, var.name="C.kg.m3.")
-> 
-> #Using a SoilProfileCollection
-> ## sample profile from Nigeria:
-> #lon = 3.90; lat = 7.50; id = "ISRIC:NG0017"; FAO1988 = "LXp" 
-> #top = c(0, 18, 36, 65, 87, 127) 
-> #bottom = c(18, 36, 65, 87, 127, 181)
-> #ORCDRC = c(18.4, 4.4, 3.6, 3.6, 3.2, 1.2)
-> #munsell = c("7.5YR3/2", "7.5YR4/4", "2.5YR5/6", "5YR5/8", "5YR5/4", "10YR7/3")
-> ## prepare a SoilProfileCollection:
-> #prof1 <- join(data.frame(id, top, bottom, ORCDRC, munsell), 
-> #         data.frame(id, lon, lat, FAO1988), type='inner')
-> #aqp::depths(prof1) <- id ~ top + bottom
-> #aqp::site(prof1) <- ~ lon + lat + FAO1988 
-> 
-> ## fit spline:
-> #ORCDRC.s <- ea_spline(prof1, var.name="ORCDRC")
-> #str(ORCDRC.s)
-> 
-> 
-> 
-> 
-> cleanEx()
-> nameEx("edgeGrids")
-> ### * edgeGrids
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: edgeroi covariates (subset)
-> ### Title: Selected subset of environmental covariates for the Edgeroi
-> ###   District, NSW
-> ### Aliases: 'edgeroi covariates' edgeGrids
-> ### Keywords: datasets
-> 
-> ### ** Examples
-> 
-> 
-> # library(ithir)
-> # library(terra)
-> 
-> # example load the elevation grid
-> # elevation <- rast(system.file("extdata/edgeGrids_Elevation.tif", package="ithir"))
-> 
-> # simple plot
-> #plot(elevation, main= "Edgeroi Elevation Map")
-> 
+> # Example using a SoilProfileCollection from the aqp package
+> # library(aqp)
+> # library(plyr)
+> # lon <- 3.90; lat <- 7.50; id <- "ISRIC:NG0017"
+> # top <- c(0, 18, 36, 65, 87, 127)
+> # bottom <- c(18, 36, 65, 87, 127, 181)
+> # ORCDRC <- c(18.4, 4.4, 3.6, 3.6, 3.2, 1.2)
+> # munsell <- c("7.5YR3/2", "7.5YR4/4", "2.5YR5/6", "5YR5/8", "5YR5/4", "10YR7/3")
+> # prof1 <- join(data.frame(id, top, bottom, ORCDRC, munsell),
+> #               data.frame(id, lon, lat), type = 'inner')
+> # depths(prof1) <- id ~ top + bottom
+> # site(prof1) <- ~ lon + lat
+> # ORCDRC.s <- ea_spline(prof1, var.name = "ORCDRC")
+> # str(ORCDRC.s)
 > 
 > 
 > 
@@ -279,21 +359,23 @@ Type 'q()' to quit R.
 > 
 > flush(stderr()); flush(stdout())
 > 
-> ### Name: Edgeroi Land Class Points
-> ### Title: Point data of estimated land classes from the Edgeroi District,
-> ###   NSW, Australia.
+> ### Name: edgeLandClass
+> ### Title: Land Classification Points from the Edgeroi District, NSW
 > ### Aliases: edgeLandClass
 > ### Keywords: datasets
 > 
 > ### ** Examples
 > 
+> data(edgeLandClass)
 > 
-> # library(ithir)
-> # data(edgeLandClass)
+> # View land class summary
+> summary(edgeLandClass$LandClass)
+  1   2   3   4   5   6 
+ 98  19   3  93 145 142 
 > 
-> ## data summary
-> # summary(edgeLandClass$LandClass)
-> 
+> # Plot the locations by class
+> plot(edgeLandClass$x, edgeLandClass$y, col = edgeLandClass$LandClass,
++      pch = 20, main = "Edgeroi Land Classification Points")
 > 
 > 
 > 
@@ -303,82 +385,122 @@ Type 'q()' to quit R.
 > 
 > flush(stderr()); flush(stdout())
 > 
-> ### Name: 1km resolution soil carbon map of the Edgeroi District, NSW (S1)
-> ### Title: Subset of the 1km resolution soil carbon map of the Edgeroi
+> ### Name: edgeTarget_C
+> ### Title: 1 km Resolution Soil Carbon Stock Map (Subset) – Edgeroi
 > ###   District, NSW
-> ### Aliases: 'edgeroi SOC 1km' target
+> ### Aliases: edgeTarget_C edgeTarget_C.tif
 > ### Keywords: datasets
 > 
 > ### ** Examples
 > 
+> library(terra)
+Warning: package 'terra' was built under R version 4.3.3
+terra 1.7.78
 > 
-> # library(ithir)
-> # library(terra)
+> # Load the raster from the package
+> soc_path <- system.file("extdata/edgeTarget_C.tif", package = "ithir")
+> soc_raster <- rast(soc_path)
 > 
-> # example load the elevation grid
-> # edgeroi_soc <- rast(system.file("extdata/edgeTarget_C.tif", package="ithir"))
-> 
-> # simple plot
-> #plot(edgeroi_soc, main= "Edgeroi SOC Stocks")
-> 
+> # Plot the raster
+> plot(soc_raster, main = "Edgeroi SOC Stock (0–30 cm)", col = rev(terrain.colors(20)))
 > 
 > 
 > 
 > cleanEx()
+
+detaching 'package:terra'
+
 > nameEx("edgeroiCovariates")
 > ### * edgeroiCovariates
 > 
 > flush(stderr()); flush(stdout())
 > 
-> ### Name: edgeroi covariates (whole district)
-> ### Title: Suite of selected environmental covariates for the Edgeroi
-> ###   District, NSW
-> ### Aliases: edgeroiCovariates
+> ### Name: edgeroiCovariates
+> ### Title: Environmental Covariate Rasters for the Full Edgeroi District,
+> ###   NSW
+> ### Aliases: edgeroiCovariates edgeroiCovariates_elevation.tif
+> ###   edgeroiCovariates_twi.tif edgeroiCovariates_radK.tif
+> ###   edgeroiCovariates_landsat_b3.tif edgeroiCovariates_landsat_b4.tif
 > ### Keywords: datasets
 > 
 > ### ** Examples
 > 
+> library(terra)
+Warning: package 'terra' was built under R version 4.3.3
+terra 1.7.78
 > 
-> # library(ithir)
-> # library(terra)
-> 
-> # example load the elevation grid
-> # elevation <- rast(system.file("extdata/edgeroiCovariates_elevation.tif", package="ithir"))
-> 
-> # simple plot
-> #plot(elevation, main= "Edgeroi Elevation Map")
-> 
+> # Load elevation layer
+> elev_path <- system.file("extdata/edgeroiCovariates_elevation.tif", package = "ithir")
+> elev_rast <- rast(elev_path)
+> plot(elev_rast, main = "Edgeroi Elevation Map")
 > 
 > 
 > 
 > cleanEx()
+
+detaching 'package:terra'
+
+> nameEx("edgeroi_covariates_subset")
+> ### * edgeroi_covariates_subset
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: edgeroi_covariates_subset
+> ### Title: Selected Subset of Environmental Covariates for the Edgeroi
+> ###   District, NSW
+> ### Aliases: edgeroi_covariates_subset edgeGrids_Doserate
+> ###   edgeGrids_Elevation edgeGrids_Panchromat edgeGrids_Slope
+> ###   edgeGrids_TWI
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> library(ithir)
+> library(terra)
+Warning: package 'terra' was built under R version 4.3.3
+terra 1.7.78
+> 
+> # Load and plot the elevation raster
+> elevation <- rast(system.file("extdata/edgeGrids_Elevation.tif", package = "ithir"))
+> plot(elevation, main = "Edgeroi Elevation Map")
+> 
+> 
+> 
+> cleanEx()
+
+detaching 'package:terra'
+
 > nameEx("edgeroi_splineCarbon")
 > ### * edgeroi_splineCarbon
 > 
 > flush(stderr()); flush(stdout())
 > 
-> ### Name: Edgeroi soil carbon data
-> ### Title: Soil point data from the Edgeroi District, NSW, Australia.
+> ### Name: edgeroi_splineCarbon
+> ### Title: Harmonised Soil Carbon Density Data from the Edgeroi District,
+> ###   NSW
 > ### Aliases: edgeroi_splineCarbon
 > ### Keywords: datasets
 > 
 > ### ** Examples
 > 
+> library(ithir)
+> library(sf)
+Warning: package 'sf' was built under R version 4.3.3
+Linking to GEOS 3.11.2, GDAL 3.8.2, PROJ 9.3.1; sf_use_s2() is TRUE
 > 
-> # library(ithir)
-> # library(sf)
+> # Load the dataset
+> data(edgeroi_splineCarbon)
 > 
-> ## load data
-> # data(edgeroi_splineCarbon)
-> 
-> ## plot the point locations
-> # spat_edgeroi_splineCarbon<- sf::st_as_sf(x = edgeroi_splineCarbon,coords = c("east", "north"))
-> # plot(spat_edgeroi_splineCarbon, pch = 9, cex = 0.3)
-> 
+> # Convert to sf object and plot
+> spat_edgeroi <- st_as_sf(edgeroi_splineCarbon, coords = c("east", "north"), crs = 32755)
+> plot(spat_edgeroi, pch = 16, cex = 0.5, main = "Edgeroi Soil Carbon Point Locations")
 > 
 > 
 > 
 > cleanEx()
+
+detaching 'package:sf'
+
 > nameEx("fit_mpspline_optimized")
 > ### * fit_mpspline_optimized
 > 
@@ -439,15 +561,20 @@ Type 'q()' to quit R.
 > flush(stderr()); flush(stdout())
 > 
 > ### Name: fuzzyEx
-> ### Title: Derivation of fuzzy membership to classes
+> ### Title: Derivation of Fuzzy Memberships to Classes with Extragrades
 > ### Aliases: fuzzyEx
 > ### Keywords: methods
 > 
 > ### ** Examples
 > 
-> ## NOT RUN
-> 
-> 
+> ## Not run: 
+> # Example (requires compatible centroid and covariance data)
+> # memberships <- fuzzyEx(data = input_data, 
+> #                        centroid = centroid_matrix, 
+> #                        cv = cov_matrix, 
+> #                        expon = 2, 
+> #                        alfa = 0.01)
+> ## End(Not run)
 > 
 > 
 > 
@@ -457,58 +584,104 @@ Type 'q()' to quit R.
 > 
 > flush(stderr()); flush(stdout())
 > 
-> ### Name: Goodness of fit measures
-> ### Title: Goodness of fit measures
+> ### Name: goof
+> ### Title: Goodness of Fit Measures
 > ### Aliases: goof
 > ### Keywords: methods
 > 
 > ### ** Examples
 > 
+> library(ithir)
+> library(MASS)
 > 
-> ## NOT RUN
-> # library(ithir)
-> # library(MASS)
-> ## some data
-> # data(USYD_soil1)
-> ## fit a linear model
-> # mod.1 <- lm(CEC ~ clay, data = USYD_soil1 , y = TRUE, x = TRUE)
-> ## Goodness of fit
-> # goof(observed = mod.1$y, predicted = mod.1$fitted.values, plot.it = TRUE)
+> # Load sample soil data
+> data(USYD_soil1)
 > 
+> # Fit a linear model
+> mod.1 <- lm(CEC ~ clay, data = USYD_soil1, y = TRUE, x = TRUE)
+> 
+> # Calculate goodness-of-fit statistics and plot
+> goof(observed = mod.1$y, predicted = mod.1$fitted.values, plot.it = TRUE)
+         R2 concordance      MSE     RMSE bias
+1 0.4213764   0.5888521 14.11304 3.756733    0
 > 
 > 
 > 
 > cleanEx()
+
+detaching 'package:MASS'
+
 > nameEx("goofcat")
 > ### * goofcat
 > 
 > flush(stderr()); flush(stdout())
 > 
-> ### Name: Goodness of fit measures for categorial variable models
-> ### Title: Goodness of fit measures for categorical variable models
+> ### Name: goofcat
+> ### Title: Goodness of Fit Measures for Categorical Models
 > ### Aliases: goofcat
 > ### Keywords: methods
 > 
 > ### ** Examples
 > 
-> ##library(ithir)
+> library(ithir)
 > 
-> ## NOT RUN
-> ## Using a pre-constructed confusion matrix
-> # con.mat <- matrix(c(5, 0, 1, 2, 0, 15, 0, 5, 0, 1, 31, 0, 0, 10, 2, 11),nrow = 4, ncol = 4)
-> # rownames(con.mat) <- c("DE", "VE", "CH", "KU")
-> # colnames(con.mat) <- c("DE", "VE", "CH", "KU")
-> # goofcat(conf.mat = con.mat, imp=TRUE)
+> # Using a pre-constructed confusion matrix
+> con.mat <- matrix(c(5, 0, 1, 2,
++                     0, 15, 0, 5,
++                     0, 1, 31, 0,
++                     0, 10, 2, 11), nrow = 4, byrow = TRUE)
+> rownames(con.mat) <- colnames(con.mat) <- c("DE", "VE", "CH", "KU")
+> goofcat(conf.mat = con.mat, imp = TRUE)
+$confusion_matrix
+   DE VE CH KU
+DE  5  0  1  2
+VE  0 15  0  5
+CH  0  1 31  0
+KU  0 10  2 11
+
+$overall_accuracy
+[1] 75
+
+$producers_accuracy
+ DE  VE  CH  KU 
+100  58  92  62 
+
+$users_accuracy
+DE VE CH KU 
+63 75 97 48 
+
+$kappa
+[1] 0.6389062
+
 > 
-> ## NOT RUN
-> ## Using observations and corresponding predictions
-> ## Using random intgers
-> # set.seed(123)
-> # observed<- sample(1:5,1000,replace=TRUE)
-> # set.seed(321)
-> # predicted<- sample(1:5,1000,replace=TRUE)
-> # goofcat(observed = observed, predicted = predicted)
-> 
+> # Using vectors of observed and predicted values
+> set.seed(123)
+> observed <- sample(1:5, 1000, replace = TRUE)
+> set.seed(321)
+> predicted <- sample(1:5, 1000, replace = TRUE)
+> goofcat(observed = observed, predicted = predicted)
+$confusion_matrix
+   1  2  3  4  5
+1 41 47 40 42 45
+2 41 37 43 39 35
+3 59 53 49 40 38
+4 36 32 28 30 35
+5 26 35 40 40 49
+
+$overall_accuracy
+[1] 21
+
+$producers_accuracy
+ 1  2  3  4  5 
+21 19 25 16 25 
+
+$users_accuracy
+ 1  2  3  4  5 
+20 19 21 19 26 
+
+$kappa
+[1] 0.007058141
+
 > 
 > 
 > 
@@ -525,11 +698,87 @@ Type 'q()' to quit R.
 > 
 > ### ** Examples
 > 
+> library(ithir)
+> data(homosoil_globeDat)
 > 
-> # library(ithir)
-> # data(homosoil_globeDat)
-> # str(homosoil_globeDat)
+> # Structure of the dataset
+> str(homosoil_globeDat)
+'data.frame':	62254 obs. of  58 variables:
+ $ X         : num  -180 -180 -180 -180 -180 ...
+ $ Y         : num  71 68.5 68 67.5 67 66.5 66 65.5 65 71 ...
+ $ amT       : num  260 261 260 261 262 ...
+ $ aTrange   : num  37 38.4 37.6 37.8 37.2 37.3 37.2 37.2 37 35.6 ...
+ $ C.mth.T   : num  241 242 242 243 244 ...
+ $ H.mth.T   : num  278 281 279 281 281 ...
+ $ DqmT      : num  247 249 254 256 256 ...
+ $ WqmT      : num  274 268 269 270 270 ...
+ $ CqmT      : num  243 244 243 245 245 ...
+ $ HqmT      : num  277 279 278 279 279 ...
+ $ Lw.qmT    : num  249 248 251 251 250 ...
+ $ Hgt.qmT   : num  274 276 275 276 276 ...
+ $ SqmT      : num  251 251 251 252 252 ...
+ $ EqmT      : num  271 273 271 273 273 ...
+ $ amRF      : num  0.000408 0.000908 0.000892 0.000967 0.001 ...
+ $ aRFrange  : num  0.0008 0.0011 0.0011 0.001 0.001 0.0011 0.001 0.0011 0.0012 0.0008 ...
+ $ D.mth.RF  : num  1e-04 4e-04 4e-04 5e-04 5e-04 5e-04 6e-04 6e-04 6e-04 1e-04 ...
+ $ W.mth.RF  : num  0.0009 0.0015 0.0015 0.0015 0.0015 0.0016 0.0016 0.0017 0.0018 0.0009 ...
+ $ DqmRF     : num  0.000167 0.000467 0.0005 0.000533 0.000567 ...
+ $ WqmRF     : num  0.0008 0.00147 0.00143 0.00147 0.0015 ...
+ $ CqmRF     : num  0.000267 0.000633 0.0007 0.0008 0.000833 ...
+ $ HqmRF     : num  0.0007 0.00113 0.00123 0.00123 0.0013 ...
+ $ Lw.qmRF   : num  0.000367 0.0007 0.000967 0.0011 0.0009 ...
+ $ Hgt.qmRF  : num  0.0007 0.00113 0.00123 0.00123 0.0013 ...
+ $ SqmRF     : num  0.000333 0.001033 0.000967 0.001133 0.001167 ...
+ $ EqmRF     : num  0.000467 0.0008 0.0009 0.0009 0.000967 ...
+ $ amRAD     : num  72 75.2 73.9 75.6 75.8 ...
+ $ aRADrange : int  196 195 190 191 190 187 184 186 188 194 ...
+ $ S.mth.RAD : int  0 0 0 0 0 0 0 0 1 0 ...
+ $ E.mth.RAD : int  196 195 190 191 190 187 184 186 189 194 ...
+ $ DqmRAD    : num  20.7 66.3 97.7 115 100.3 ...
+ $ WqmRAD    : num  103.7 54.3 88.7 91 90.3 ...
+ $ CqmRAD    : num  20.7 25 26.3 27.3 28 ...
+ $ HqmRAD    : num  154 157 151 154 153 ...
+ $ Lw.qmRAD  : num  3 4.67 1 7 6.33 ...
+ $ Hgt.qmRAD : num  154 157 151 154 153 ...
+ $ SqmRAD    : num  0 0.667 1 1.333 1.333 ...
+ $ EqmRAD    : num  176 174 168 170 169 ...
+ $ amET      : num  0.00106 0.00103 0.00103 0.00103 0.00103 ...
+ $ aETrange  : num  0.0028 0.00315 0.00273 0.00311 0.00291 ...
+ $ Lw.mth.ET : num  1.74e-04 2.66e-05 8.75e-05 0.00 0.00 ...
+ $ Hgt.mth.ET: num  0.00297 0.00317 0.00281 0.00311 0.00291 ...
+ $ DqmET     : num  0.000284 0.000244 0.000646 0.000634 0.000625 ...
+ $ WqmET     : num  0.00208 0.00123 0.00173 0.0018 0.00178 ...
+ $ CqmET     : num  2.50e-04 1.58e-04 2.27e-04 9.87e-05 1.13e-04 ...
+ $ HqmET     : num  0.00255 0.00273 0.00251 0.00273 0.00265 ...
+ $ Lw.qmET   : num  2.08e-04 8.85e-05 1.76e-04 4.70e-05 5.29e-05 ...
+ $ Hgt.qmET  : num  0.00255 0.00273 0.00251 0.00273 0.00265 ...
+ $ SqmET     : num  2.34e-04 9.26e-05 1.76e-04 6.38e-05 5.87e-05 ...
+ $ EqmET     : num  0.00238 0.00244 0.0022 0.00239 0.00231 ...
+ $ Tseason   : num  0.107 0.109 0.107 0.107 0.105 ...
+ $ RFseason  : num  1.469 0.991 0.972 0.897 0.867 ...
+ $ RADseason : num  2.45 2.3 2.26 2.23 2.21 ...
+ $ ETseason  : num  2.2 2.57 2.26 2.58 2.51 ...
+ $ dem       : num  121 277 429 388 769 395 255 43 13 196 ...
+ $ slope     : num  1.79 2.32 5.9 3.63 3.35 ...
+ $ cti       : num  5.35 3.84 3.36 4.39 4.06 ...
+ $ litho     : int  5 5 8 5 7 6 6 6 3 5 ...
 > 
+> # Summary of the first few climatic variables
+> summary(homosoil_globeDat[, 1:6])
+       X                 Y               amT           aTrange     
+ Min.   :-180.00   Min.   :-56.00   Min.   :245.1   Min.   : 8.00  
+ 1st Qu.: -62.50   1st Qu.: 10.00   1st Qu.:269.1   1st Qu.:24.30  
+ Median :  26.50   Median : 40.00   Median :281.9   Median :35.00  
+ Mean   :  17.06   Mean   : 32.68   Mean   :281.2   Mean   :35.26  
+ 3rd Qu.:  90.00   3rd Qu.: 59.50   3rd Qu.:295.9   3rd Qu.:46.20  
+ Max.   : 179.50   Max.   : 83.00   Max.   :303.2   Max.   :72.50  
+    C.mth.T         H.mth.T     
+ Min.   :216.8   Min.   :268.1  
+ 1st Qu.:245.8   1st Qu.:292.6  
+ Median :265.6   Median :300.4  
+ Mean   :263.8   Mean   :299.0  
+ 3rd Qu.:281.9   3rd Qu.:306.3  
+ Max.   :296.4   Max.   :318.8  
 > 
 > 
 > 
@@ -539,93 +788,120 @@ Type 'q()' to quit R.
 > 
 > flush(stderr()); flush(stdout())
 > 
-> ### Name: Hunter Valley covariates
-> ### Title: Suite of selected environmental covariates for the the Lower
-> ###   Hunter Valley, NSW
-> ### Aliases: hunterCovariates
+> ### Name: hunterCovariates
+> ### Title: Environmental Covariate Rasters for the Lower Hunter Valley, NSW
+> ### Aliases: hunterCovariates hunterCovariates_A_AACN
+> ###   hunterCovariates_A_elevation hunterCovariates_A_Hillshading
+> ###   hunterCovariates_A_light_insolation hunterCovariates_A_MRVBF
+> ###   hunterCovariates_A_Slope hunterCovariates_A_TRI
+> ###   hunterCovariates_A_TWI
 > ### Keywords: datasets
 > 
 > ### ** Examples
 > 
+> library(ithir)
+> library(terra)
+Warning: package 'terra' was built under R version 4.3.3
+terra 1.7.78
 > 
-> # library(ithir)
-> # library(terra)
-> 
-> # example load the altitude above channel network grid
-> # aacn <- rast(system.file("extdata/hunterCovariates_hunterCovariates_AACN.tif", package="ithir"))
-> 
-> # simple plot
-> # plot(aacn, main= "Hunter Valley AACN Map")
-> 
+> # Load and plot the slope raster layer
+> slope <- rast(system.file("extdata/hunterCovariates_A_Slope.tif", package = "ithir"))
+> plot(slope, main = "Hunter Valley - Slope")
 > 
 > 
 > 
 > cleanEx()
+
+detaching 'package:terra'
+
 > nameEx("hunterCovariates_sub")
 > ### * hunterCovariates_sub
 > 
 > flush(stderr()); flush(stdout())
 > 
-> ### Name: Hunter Valley covariates (subset area)
-> ### Title: Suite of selected environmental covariates for a subset the
-> ###   Lower Hunter Valley, NSW
-> ### Aliases: hunterCovariates_sub
+> ### Name: hunterCovariates_sub
+> ### Title: Environmental Covariate Rasters for a Subset of the Lower Hunter
+> ###   Valley, NSW
+> ### Aliases: hunterCovariates_sub hunterCovariates_sub_Elevation
+> ###   hunterCovariates_sub_Slope hunterCovariates_sub_TWI
+> ###   hunterCovariates_sub_MRVBF hunterCovariates_sub_Hillshading
+> ###   hunterCovariates_sub_Light_insolation
+> ###   hunterCovariates_sub_Landsat_Band1 hunterCovariates_sub_NDVI
+> ###   hunterCovariates_sub_AACN
+> ###   hunterCovariates_sub_Terrain_Ruggedness_Index
+> ###   hunterCovariates_sub_Mid_Slope_Position
 > ### Keywords: datasets
 > 
 > ### ** Examples
 > 
+> library(ithir)
+> library(terra)
+Warning: package 'terra' was built under R version 4.3.3
+terra 1.7.78
 > 
-> # library(ithir)
-> # library(terra)
+> # Load and plot the elevation raster
+> elevation <- rast(system.file("extdata/hunterCovariates_sub_Elevation.tif", package = "ithir"))
+> plot(elevation, main = "Hunter Valley Subset - Elevation")
 > 
-> # example load the elevation grid
-> # elevation <- rast(system.file("extdata/hunterCovariates_sub_Elevation.tif", package="ithir"))
-> 
-> # simple plot
-> #plot(elevation, main= "Hunter Valley (sub area) Elevation")
 > 
 > 
 > cleanEx()
+
+detaching 'package:terra'
+
 > nameEx("hvGrid25m")
 > ### * hvGrid25m
 > 
 > flush(stderr()); flush(stdout())
 > 
-> ### Name: Hunter Valley Grid (S1)
-> ### Title: Raster grid of the Lower Hunter Valley, NSW, Australia
-> ### Aliases: 'Hunter Valley Grid'
+> ### Name: hvGrid25m
+> ### Title: Raster Grid of the Lower Hunter Valley, NSW, Australia
+> ### Aliases: hvGrid25m
 > ### Keywords: datasets
 > 
 > ### ** Examples
 > 
-> # library(ithir)
-> # library(terra)
+> library(ithir)
+> library(terra)
+Warning: package 'terra' was built under R version 4.3.3
+terra 1.7.78
 > 
-> ## NOT RUN
-> # hv.grid<- rast(system.file("extdata/hvGrid25m_grid.tif", package="ithir"))
-> # plot(hv.grid)
-> 
+> # Load and plot the raster grid
+> hv.grid <- rast(system.file("extdata/hvGrid25m_grid.tif", package = "ithir"))
+> plot(hv.grid, main = "Hunter Valley 25m Grid Index")
 > 
 > 
 > 
 > cleanEx()
+
+detaching 'package:terra'
+
 > nameEx("hvPoints250")
 > ### * hvPoints250
 > 
 > flush(stderr()); flush(stdout())
 > 
-> ### Name: Hunter Valley Points (S1)
-> ### Title: Random selection of point locations: Hunter Valley
-> ### Aliases: 'Hunter Valley Points'
+> ### Name: hvPoints250
+> ### Title: Hunter Valley Soil Observation Points (n = 250)
+> ### Aliases: hvPoints250
 > ### Keywords: datasets
 > 
 > ### ** Examples
 > 
+> data(hvPoints250)
 > 
-> # library(ithir)
-> # data(hvPoints250)
-> # summary(hvPoints250)
+> # Summary
+> summary(hvPoints250)
+       X                Y                FID       
+ Min.   :335285   Min.   :6363466   Min.   :  2.0  
+ 1st Qu.:339191   1st Qu.:6370628   1st Qu.:223.0  
+ Median :341885   Median :6374503   Median :466.0  
+ Mean   :342176   Mean   :6374440   Mean   :487.5  
+ 3rd Qu.:344779   3rd Qu.:6378259   3rd Qu.:731.8  
+ Max.   :350685   Max.   :6383616   Max.   :996.0  
 > 
+> # Simple plot
+> plot(hvPoints250, pch = 20, col = "darkgreen", main = "Hunter Valley Sample Points")
 > 
 > 
 > 
@@ -635,18 +911,26 @@ Type 'q()' to quit R.
 > 
 > flush(stderr()); flush(stdout())
 > 
-> ### Name: Hunter Valley terron data
-> ### Title: Soil point data from the Hunter Valley, NSW, Australia
+> ### Name: hvTerronDat
+> ### Title: Soil Point Data with Terron Class Labels from the Hunter Valley,
+> ###   NSW, Australia
 > ### Aliases: hvTerronDat
 > ### Keywords: datasets
 > 
 > ### ** Examples
 > 
-> 
-> # library(ithir)
-> # data(hvTerronDat)
-> # head(hvTerronDat)
-> 
+> library(ithir)
+> data(hvTerronDat)
+> head(hvTerronDat)
+         x       y terron
+1 346534.8 6371941      3
+2 334759.8 6375841      4
+3 340909.8 6377691     12
+4 336459.8 6382041      5
+5 344509.8 6378116      6
+6 338559.8 6381366     11
+> table(hvTerronDat$terron_class)
+< table of extent 0 >
 > 
 > 
 > 
@@ -656,18 +940,26 @@ Type 'q()' to quit R.
 > 
 > flush(stderr()); flush(stdout())
 > 
-> ### Name: One soil profile
-> ### Title: One soil profile
-> ### Aliases: 'Soil carbon soil profile'
+> ### Name: oneProfile
+> ### Title: Example Soil Profile for Soil Carbon Density
+> ### Aliases: oneProfile
 > ### Keywords: datasets
 > 
 > ### ** Examples
 > 
+> data(oneProfile)
 > 
-> # library(ithir)
-> # data(oneProfile)
-> # str(oneProfile)
+> # Show profile structure
+> str(oneProfile)
+'data.frame':	8 obs. of  4 variables:
+ $ Soil.ID       : int  1 1 1 1 1 1 1 1
+ $ Upper.Boundary: int  0 10 30 50 70 120 250 350
+ $ Lower.Boundary: int  10 20 40 60 80 130 260 360
+ $ C.kg.m3.      : num  20.72 11.71 8.23 6.3 2.4 ...
 > 
+> # Fit spline (if using ithir)
+> # result <- ea_spline(oneProfile, var.name = "carbon_density")
+> # result$harmonised
 > 
 > 
 > 
@@ -678,52 +970,64 @@ Type 'q()' to quit R.
 > flush(stderr()); flush(stdout())
 > 
 > ### Name: plot_ea_spline
-> ### Title: plot soil profile outputs from 'ea_spline'
+> ### Title: Plot Soil Profile Outputs from 'ea_spline'
 > ### Aliases: plot_ea_spline
 > ### Keywords: methods
 > 
 > ### ** Examples
 > 
+> library(ithir)
+> library(aqp)
+Warning: package 'aqp' was built under R version 4.3.3
+This is aqp 2.2
 > 
-> # library(ithir)
-> # library(aqp)
->  
-> ## NOT RUN
-> # data(oneProfile)
-> # str(oneProfile)
-> ## convert to SoilProfileCollection object
-> # aqp::depths(oneProfile)<- Soil.ID ~ Upper.Boundary + Lower.Boundary
-> ## fit spline
-> # eaFit <- ea_spline(oneProfile, var.name="C.kg.m3.",d= t(c(0,5,15,30,60,100,200)),lam = 0.1, vlow=0, show.progress=FALSE )
-> ## do plot
-> # plot_ea_spline(splineOuts=eaFit, d= t(c(0,5,15,30,60,100,200)), maxd=200, type=1, label="carbon density") 
+> # Load example data and convert to SoilProfileCollection
+> data(oneProfile)
+> depths(oneProfile) <- Soil.ID ~ Upper.Boundary + Lower.Boundary
+converting profile IDs from integer to character
 > 
+> # Fit spline to the profile
+> eaFit <- ea_spline(oneProfile, var.name = "C.kg.m3.", 
++                    d = t(c(0, 5, 15, 30, 60, 100, 200)), 
++                    lam = 0.1, vlow = 0, show.progress = FALSE)
+> 
+> # Plot the fitted spline
+> plot_ea_spline(splineOuts = eaFit, 
++                d = t(c(0, 5, 15, 30, 60, 100, 200)), 
++                maxd = 200, 
++                type = 1, 
++                label = "Carbon Density")
 > 
 > 
 > 
 > cleanEx()
+
+detaching 'package:aqp'
+
 > nameEx("plot_soilProfile")
 > ### * plot_soilProfile
 > 
 > flush(stderr()); flush(stdout())
 > 
 > ### Name: plot_soilProfile
-> ### Title: plot soil profile data
+> ### Title: Plot Soil Profile Data
 > ### Aliases: plot_soilProfile
 > ### Keywords: methods
 > 
 > ### ** Examples
 > 
+> library(ithir)
 > 
-> # library(ithir)
+> # Load example profile data
+> data(oneProfile)
 > 
-> ## NOT RUN
-> # data(oneProfile)
-> # str(oneProfile)
-> 
-> ## do plot
-> # plot_soilProfile(data = oneProfile, vals = oneProfile$C.kg.m3., depths = oneProfile[,2:3], label= names(oneProfile)[4])
-> 
+> # Visualize the profile
+> plot_soilProfile(
++   data = oneProfile,
++   vals = oneProfile$C.kg.m3.,
++   depths = oneProfile[, 2:3],
++   label = names(oneProfile)[4]
++ )
 > 
 > 
 > 
@@ -765,17 +1069,21 @@ List of 6
 > flush(stderr()); flush(stdout())
 > 
 > ### Name: topo_dem
-> ### Title: matrix of digital elevation
-> ### Aliases: 'digital elevation'
+> ### Title: Example Digital Elevation Model as a Matrix
+> ### Aliases: topo_dem
 > ### Keywords: datasets
 > 
 > ### ** Examples
 > 
+> data(topo_dem)
 > 
-> # library(ithir)
-> # data(topo_dem)
-> # str(topo_dem)
-> 
+> # Basic inspection
+> str(topo_dem)
+ num [1:109, 1:110] 121 121 120 118 116 ...
+ - attr(*, "dimnames")=List of 2
+  ..$ : NULL
+  ..$ : chr [1:110] "V1" "V2" "V3" "V4" ...
+> image(topo_dem, main = "Synthetic DEM", col = terrain.colors(20))
 > 
 > 
 > 
@@ -784,7 +1092,7 @@ List of 6
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  3.5 0.07 4.76 NA NA 
+Time elapsed:  8.11 0.97 14.86 NA NA 
 > grDevices::dev.off()
 null device 
           1 

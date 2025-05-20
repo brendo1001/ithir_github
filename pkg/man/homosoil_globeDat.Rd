@@ -1,32 +1,45 @@
 \name{homosoil_globeDat}
 \docType{data}
 \alias{homosoil_globeDat}
-\title{Global Environmental Data }
-\description{A data frame of global (0.5 degree resolution) climatic, litholgoy and topographic data.}
+\title{Global Environmental Data}
+\description{
+A data frame containing global-scale (0.5° resolution) climatic, lithological, and topographic variables.
+}
 \usage{data(homosoil_globeDat)}
 \format{
-\code{homosoil_globeDat} is an 62254 row \code{data.frame} with 58 columns.  
+\code{homosoil_globeDat} is a \code{data.frame} with 62,254 rows and 58 columns.
 }
-\details{The basis is a global 0.5 degree resolution grid data of climate, topography, and lithology.
+\details{
+The dataset is structured on a global 0.5° resolution grid, integrating climate, topography, and lithology data.
 
-For climate, this consists of variables representing long-term mean monthly and seasonal temperature, rainfall, solar radiation and evapotranspiration data. We also use the DEM representing topography, and lithology, which gives broad information on the parent material. The climate data come from the ERA-40 reanalysis and Climate Research Unit (CRU) dataset. More details on the datasets are available on the website \url{http://www.ipcc-data.org/obs/get_30yr_means.html}. For each of the 4 climatic variables (rainfall, temperature, solar radiation and evapotranspiration), we calculated 13 indicators: annual mean, mean for the driest month, mean at the wettest month, annual range, driest quarter mean, wettest quarter mean, coldest quarter mean, hottest quarter mean, lowest ET quarter mean, highest ET quarter mean, darkest quarter mean, lightest quarter mean, and seasonality. From this analysis and including the acquired data, 52 global climatic variables were composed.
+\strong{Climate:} Sourced from ERA-40 reanalysis and CRU datasets, the climate variables include long-term monthly and seasonal averages of temperature, rainfall, solar radiation, and evapotranspiration. For each variable, 13 derived indicators were calculated: annual mean, wettest/driest month, annual range, wettest/driest quarter, hottest/coldest quarter, highest/lowest ET quarters, darkest/lightest quarters, and seasonality — yielding 52 total climatic predictors. More info: \url{http://www.ipcc-data.org/obs/get_30yr_means.html}
 
-The DEM is from the Hydro1k dataset supplied from the USGS (\url{https://lta.cr.usgs.gov/HYDRO1K}), which includes the mean elevation, slope, and compound topgraphic index (CTI).
+\strong{Topography:} Derived from the Hydro1k DEM (USGS), which includes elevation, slope, and the compound topographic index (CTI). Source: \url{https://lta.cr.usgs.gov/HYDRO1K}
 
-The lithology is from a global digital map (Durr et al., 2005)  with 7 values which represent the different broad groups of parent materials. The lithology classes are: non- or semi-consolidated sediments, mixed consolidated sediments, silic-clastic sediments, acid volcanic rocks, basic volcanic rocks, complex of metamorphic and igneous rocks, and complex lithology.}
-
+\strong{Lithology:} Based on the global lithological map of Dürr et al. (2005), with 7 categorical values representing parent material groups:
+\enumerate{
+  \item Non-/semi-consolidated sediments
+  \item Mixed consolidated sediments
+  \item Siliciclastic sediments
+  \item Acid volcanic rocks
+  \item Basic volcanic rocks
+  \item Metamorphic and igneous complexes
+  \item Complex lithology
+}
+}
 \references{
 \itemize{
-  \item Durr, H.H., Meybeck, M., and Durr, S.H. (2005) \href{http://dx.doi.org/10.1029/2005GB002515}{Lithologic composition of the Earth's continental surfaces derived from a new digital map emphasizing riverine material transfer}. Global Biogeochemical Cycles, 19, GB4S10. 
+  \item Dürr, H.H., Meybeck, M., and Dürr, S.H. (2005). \href{http://dx.doi.org/10.1029/2005GB002515}{Lithologic composition of the Earth's continental surfaces derived from a new digital map emphasizing riverine material transfer}. \emph{Global Biogeochemical Cycles}, 19, GB4S10.
 }
 }
-
-
 \examples{
+library(ithir)
+data(homosoil_globeDat)
 
-# library(ithir)
-# data(homosoil_globeDat)
-# str(homosoil_globeDat)
+# Structure of the dataset
+str(homosoil_globeDat)
 
+# Summary of the first few climatic variables
+summary(homosoil_globeDat[, 1:6])
 }
 \keyword{datasets}

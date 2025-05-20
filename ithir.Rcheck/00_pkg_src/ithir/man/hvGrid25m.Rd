@@ -1,28 +1,36 @@
-\name{Hunter Valley Grid (S1)}
+\name{hvGrid25m}
 \docType{data}
-\alias{Hunter Valley Grid}
-\title{Raster grid of the Lower Hunter Valley, NSW, Australia}
-\description{A Geotiff of pixel numbers for the area covering the Lower Hunter Valley, NSW, Australia. The pixel resolution is 25m}
-\usage{system.file("extdata/hvGrid25m_grid.tif", package="ithir")}
-\format{
-\code{hvGrid25m} is an 860 row, 676 column, 1 layer Geotiff of pixel numbers for the Lower Hunter Valley, NSW, Australia. The grid has a pixel resolution of 25m x 25m. It contains the following layers:
+\alias{hvGrid25m}
+\title{Raster Grid of the Lower Hunter Valley, NSW, Australia}
+\description{
+A raster layer (GeoTIFF) representing pixel indices over the Lower Hunter Valley, NSW, Australia. The grid is aligned at 25 m × 25 m resolution and is commonly used as a spatial index for simulations and soil mapping exercises.
 }
-\details{The area in question is the Hunter Wine Country Private Irrigation District (HWCPID), situated in the Lower Hunter Valley, NSW (32.83S 151.35E), and covers an area of approximately 220 km2. The HWCPID is approximately 140 km north of Sydney, NSW, Australia. Climatically, the HWCPID is situated in a temperate climatic zone, and experiences warm humid summers, and relatively cooler yet also humid winters. Rainfall is mostly uniformly distributed throughout the year. On average the HWCPID receives just over 750 mm of rainfall annually. In terms of landuse, an expansive viticultural industry is situated in the area and is possibly most widespread
-of rural industries, followed by dryland agricultural grazing systems.The projection for the \code{RasterLayer} is WGS 84 Zone 56. See Malone et al. (2014) for more detailed information about the area and research that has been conducted there by the University of Sydney.}
+\format{
+\code{hvGrid25m} is a single-layer raster (GeoTIFF format) with:
+\itemize{
+  \item 860 rows
+  \item 676 columns
+  \item Pixel resolution of 25 m × 25 m
+}
+Each pixel contains a numeric index value. The coordinate reference system is \code{GDA94 / MGA Zone 56 (EPSG:28356)}.
+}
+\details{
+The grid covers the Hunter Wine Country Private Irrigation District (HWCPID) in the Lower Hunter Valley (32.83°S, 151.35°E), approximately 140 km north of Sydney. The region spans about 220 km² and features a temperate humid climate with ~750 mm annual rainfall. Dominant land uses include viticulture and dryland grazing.
 
+This grid is used in digital soil mapping exercises, including those taught through the "Using R for Digital Soil Mapping" course. It is useful for simulations, uncertainty mapping, and raster-based modeling workflows.
+}
 \references{
 \itemize{
-\item Malone, B.P., Hughes, P.,  McBratney, A.B., Minasny, B. (2009) \href{http://dx.doi.org/10.1016/j.geodrs.2014.08.001}{A model for the identification of terrons in the Lower Hunter Valley, Australia}. Geoderma Regional 1, 31-47.
+  \item Malone, B.P., Hughes, P., McBratney, A.B., Minasny, B. (2014). \href{http://dx.doi.org/10.1016/j.geodrs.2014.08.001}{A model for the identification of terrons in the Lower Hunter Valley, Australia}. \emph{Geoderma Regional}, 1, 31–47.
 }
 }
 
 \examples{
-# library(ithir)
-# library(terra)
+library(ithir)
+library(terra)
 
-## NOT RUN
-# hv.grid<- rast(system.file("extdata/hvGrid25m_grid.tif", package="ithir"))
-# plot(hv.grid)
-
+# Load and plot the raster grid
+hv.grid <- rast(system.file("extdata/hvGrid25m_grid.tif", package = "ithir"))
+plot(hv.grid, main = "Hunter Valley 25m Grid Index")
 }
 \keyword{datasets}

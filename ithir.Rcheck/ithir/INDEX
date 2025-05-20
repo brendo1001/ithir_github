@@ -1,49 +1,50 @@
-HV_subsoilpH            Hunter Valley subsoil pH data with
-                        environmental covariates
-Hunter Valley DEM       Hunter Valley DEM
-Hunter Valley Grid      Raster grid of the Lower Hunter Valley, NSW,
+HV100                   Soil Point Data from the Hunter Valley, NSW,
                         Australia
-Hunter Valley Points    Random selection of point locations: Hunter
-                        Valley
-Hunter Valley soil data
-                        Soil point data from the Hunter Valley, NSW,
-                        Australia
-Soil carbon soil profile
-                        One soil profile
-USYD soil data          Random selection of soil point data
-USYD soil drainage data
-                        Soil drainage index data
-bbRaster                Get the bounding box information of a
-                        'SpatRaster' from its extents.
-digital elevation       matrix of digital elevation
+HV_dem                  Digital Elevation Model of the Hunter Valley,
+                        NSW
+HV_subsoilpH            Hunter Valley Subsoil pH Data with
+                        Environmental Covariates
+USYD_dIndex             Soil Drainage Index Observations and
+                        Predictions
+USYD_soil1              Random Selection of Soil Profile Data from New
+                        South Wales
+bbRaster                Get Bounding Box Coordinates from a
+                        'SpatRaster'
 ea_rasSp_fast           Fast Mass-Preserving Spline on Raster Soil Data
-ea_spline               Fits a mass preserving spline
-edgeLandClass           Point data of estimated land classes from the
-                        Edgeroi District, NSW, Australia.
-edgeroi SOC 1km         Subset of the 1km resolution soil carbon map of
+ea_spline               Fit a Mass-Preserving Spline to Soil Profile
+                        Data
+edgeLandClass           Land Classification Points from the Edgeroi
+                        District, NSW
+edgeTarget_C            1 km Resolution Soil Carbon Stock Map (Subset)
+                        – Edgeroi District, NSW
+edgeroiCovariates       Environmental Covariate Rasters for the Full
+                        Edgeroi District, NSW
+edgeroi_covariates_subset
+                        Selected Subset of Environmental Covariates for
                         the Edgeroi District, NSW
-edgeroi covariates      Selected subset of environmental covariates for
-                        the Edgeroi District, NSW
-edgeroiCovariates       Suite of selected environmental covariates for
-                        the Edgeroi District, NSW
-edgeroi_splineCarbon    Soil point data from the Edgeroi District, NSW,
-                        Australia.
+edgeroi_splineCarbon    Harmonised Soil Carbon Density Data from the
+                        Edgeroi District, NSW
 fit_mpspline_optimized
                         Fit Mass-Preserving Spline to a Single Soil
                         Profile
-fuzzyEx                 Derivation of fuzzy membership to classes
-goof                    Goodness of fit measures
-goofcat                 Goodness of fit measures for categorical
-                        variable models
+fuzzyEx                 Derivation of Fuzzy Memberships to Classes with
+                        Extragrades
+goof                    Goodness of Fit Measures
+goofcat                 Goodness of Fit Measures for Categorical Models
 homosoil_globeDat       Global Environmental Data
-hunterCovariates        Suite of selected environmental covariates for
-                        the the Lower Hunter Valley, NSW
-hunterCovariates_sub    Suite of selected environmental covariates for
-                        a subset the Lower Hunter Valley, NSW
-hvTerronDat             Soil point data from the Hunter Valley, NSW,
+hunterCovariates        Environmental Covariate Rasters for the Lower
+                        Hunter Valley, NSW
+hunterCovariates_sub    Environmental Covariate Rasters for a Subset of
+                        the Lower Hunter Valley, NSW
+hvGrid25m               Raster Grid of the Lower Hunter Valley, NSW,
                         Australia
-plot_ea_spline          plot soil profile outputs from 'ea_spline'
-plot_soilProfile        plot soil profile data
+hvPoints250             Hunter Valley Soil Observation Points (n = 250)
+hvTerronDat             Soil Point Data with Terron Class Labels from
+                        the Hunter Valley, NSW, Australia
+oneProfile              Example Soil Profile for Soil Carbon Density
+plot_ea_spline          Plot Soil Profile Outputs from 'ea_spline'
+plot_soilProfile        Plot Soil Profile Data
 precompute_spline_structures
                         Precompute Spline Matrix Structures for Soil
                         Profile Modeling
+topo_dem                Example Digital Elevation Model as a Matrix

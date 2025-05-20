@@ -1,8 +1,9 @@
 import("methods")
 import("terra")
 importFrom("graphics", "abline", "polygon")
-importFrom("stats", "lm", "mahalanobis", "sd", "var")
+importFrom("stats", "lm", "mahalanobis", "sd", "var", "IQR")
 importFrom("utils", "setTxtProgressBar", "txtProgressBar")
+importFrom("MASS", "eqscplot")
 
 export(bbRaster)
 export(ea_spline)

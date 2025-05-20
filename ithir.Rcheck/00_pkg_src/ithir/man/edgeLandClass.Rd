@@ -1,29 +1,44 @@
-\name{Edgeroi Land Class Points}
+\name{edgeLandClass}
 \docType{data}
 \alias{edgeLandClass}
-\title{Point data of estimated land classes from the Edgeroi District, NSW, Australia.}
-\description{A \code{dataframe} of 500 point locations in the Edgeroi District, NSW, Australia (30.11S 149.66E) where there is an estimated Land Classification. The Land classification is based upon an unsupervised classification of unknown date Landsat 7 ETM+ spectral bands. The points represent a random sample of grid locations of the land classification map. The are 6 land classes and have a numeric identifier. The land classes roughly correspond to: 1) dense forest; 2) open forest; 3) water bodies; 4) woody vegetation and native grassland; 5) Irrigated cropping; and 6) dry land cropping. The CRS of the points is WGS84 UTM Zone 55.}
-
+\title{Land Classification Points from the Edgeroi District, NSW}
+\description{
+A \code{data.frame} of 500 point locations in the Edgeroi District, NSW, Australia (approx. 30.11°S, 149.66°E), each assigned to one of six estimated land classes. The land classification was derived via unsupervised classification of Landsat 7 ETM+ spectral data (acquisition date unknown). These points represent a random sample from a classified land use map.
+}
 \usage{data(edgeLandClass)}
 \format{
-\code{edgeLandClass} is a 500 row \code{dataframe} with locational (2 columns) and land class information (1 column)
+A \code{data.frame} with 500 rows and 3 columns:
+\describe{
+  \item{\code{x}}{Easting (UTM Zone 55)}
+  \item{\code{y}}{Northing (UTM Zone 55)}
+  \item{\code{LandClass}}{Integer values from 1 to 6 representing land classes: 
+    \enumerate{
+      \item Dense forest
+      \item Open forest
+      \item Water bodies
+      \item Woody vegetation and native grassland
+      \item Irrigated cropping
+      \item Dryland cropping
+    }
+  }
 }
-\details{This data frame is typical point data of environmental phenomena. }
-
+}
+\details{
+This dataset represents typical point-based environmental classification data and is suitable for supervised modelling, classification accuracy assessment, or land use interpretation.
+}
 \references{
 \itemize{
-\item This data is copyright of the Soil Security Lab, The University of Sydney. If any part of this data is to be used in any publication or report, please provide a citation:
-Soil Security Laboratory, 2015. Use R for Digital Soil Mapping Manual. The University of Sydney, Sydney, Australia.
+  \item Soil Security Laboratory, 2015. \emph{Use R for Digital Soil Mapping Manual}. The University of Sydney, Sydney, Australia.
 }
 }
-
 \examples{
+data(edgeLandClass)
 
-# library(ithir)
-# data(edgeLandClass)
+# View land class summary
+summary(edgeLandClass$LandClass)
 
-## data summary
-# summary(edgeLandClass$LandClass)
-
+# Plot the locations by class
+plot(edgeLandClass$x, edgeLandClass$y, col = edgeLandClass$LandClass,
+     pch = 20, main = "Edgeroi Land Classification Points")
 }
 \keyword{datasets}

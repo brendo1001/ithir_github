@@ -1,46 +1,54 @@
-\name{Goodness of fit measures for categorial variable models}
+\name{goofcat}
 \docType{methods}
 \alias{goofcat}
-\title{Goodness of fit measures for categorical variable models}
-\description{This function performs a number of model diagnostic goodness of fit measures for categorical variables which include: Overall accuracy, Producer's Accuracy, User's Accuracy, and Kappa Statistic. See Congalton (1991) for details on these statistics. They are commonly used to assess the performance of models where the target variable is a class or category.}
-
-\usage{goofcat(observed = NULL, predicted = NULL, conf.mat, imp=FALSE)}
-\arguments{
-  \item{observed}{a vector values that could either be integer or character class that are actual observations of some categorical phenomenon.} 
-  \item{predicted}{a vector values that could either be integer or character class that are predictions of the phenomenon that was observed.}     
-  \item{conf.mat}{matrix; Optional input. A square matrix called a confusion matrix that summarizes observation and subsequent prediction from a particular model.}
-  \item{imp}{logical; If a confusion matrix is being entered directly into the function through the \code{conf.mat} parametisation, this is set to \code{TRUE}. Default is \code{FALSE}.}
+\title{Goodness of Fit Measures for Categorical Models}
+\description{
+This function computes several diagnostic statistics for evaluating the performance of classification models where the target variable is categorical. The metrics include: Overall Accuracy, Producer’s Accuracy, User’s Accuracy, and the Kappa Statistic. These are widely used in remote sensing and classification modelling (see Congalton, 1991).
 }
-
-\value{Returns an element labelled \code{list} containing the goodness of fit statistics.}
-
-\note{If for whatever reason the \code{conf.mat} input is not of \code{matrix} class, and is not square in dimension the function will halt and provide an error message.}
-
+\usage{
+goofcat(observed = NULL, predicted = NULL, conf.mat, imp = FALSE)
+}
+\arguments{
+  \item{observed}{A vector of observed class labels (numeric or character).}
+  \item{predicted}{A vector of predicted class labels (numeric or character). Must be the same length as \code{observed}.}
+  \item{conf.mat}{Optional; a confusion matrix summarizing classification outcomes. Should be a square matrix.}
+  \item{imp}{Logical; set to \code{TRUE} if providing a pre-computed confusion matrix via \code{conf.mat}. Default is \code{FALSE}.}
+}
+\value{
+A named \code{list} containing:
+\describe{
+  \item{\code{OverallAccuracy}}{Proportion of correct classifications}
+  \item{\code{ProducersAccuracy}}{Recall or sensitivity per class}
+  \item{\code{UsersAccuracy}}{Precision or positive predictive value per class}
+  \item{\code{Kappa}}{Kappa statistic (chance-corrected agreement)}
+  \item{\code{ConfusionMatrix}}{Returned confusion matrix used in the calculation}
+}
+}
+\note{
+If \code{conf.mat} is not of class \code{matrix} or is not square in dimension, the function will halt with an error.
+}
 \author{Brendan Malone}
 \references{
 \itemize{
-\item Congalton, R. G., (1991) \href{http://dx.doi.org/10.1016/0034-4257(91)90048-B}{A review of assessing the accuracy of classifications of remotely sensed data.}. Remote Sensing of the Environment, 37:35-46.
-}}
-
-
+  \item Congalton, R. G. (1991). \href{http://dx.doi.org/10.1016/0034-4257(91)90048-B}{A review of assessing the accuracy of classifications of remotely sensed data}. \emph{Remote Sensing of Environment}, 37, 35–46.
+}
+}
 \examples{
-##library(ithir)
+library(ithir)
 
-## NOT RUN
-## Using a pre-constructed confusion matrix
-# con.mat <- matrix(c(5, 0, 1, 2, 0, 15, 0, 5, 0, 1, 31, 0, 0, 10, 2, 11),nrow = 4, ncol = 4)
-# rownames(con.mat) <- c("DE", "VE", "CH", "KU")
-# colnames(con.mat) <- c("DE", "VE", "CH", "KU")
-# goofcat(conf.mat = con.mat, imp=TRUE)
+# Using a pre-constructed confusion matrix
+con.mat <- matrix(c(5, 0, 1, 2,
+                    0, 15, 0, 5,
+                    0, 1, 31, 0,
+                    0, 10, 2, 11), nrow = 4, byrow = TRUE)
+rownames(con.mat) <- colnames(con.mat) <- c("DE", "VE", "CH", "KU")
+goofcat(conf.mat = con.mat, imp = TRUE)
 
-## NOT RUN
-## Using observations and corresponding predictions
-## Using random intgers
-# set.seed(123)
-# observed<- sample(1:5,1000,replace=TRUE)
-# set.seed(321)
-# predicted<- sample(1:5,1000,replace=TRUE)
-# goofcat(observed = observed, predicted = predicted)
-
+# Using vectors of observed and predicted values
+set.seed(123)
+observed <- sample(1:5, 1000, replace = TRUE)
+set.seed(321)
+predicted <- sample(1:5, 1000, replace = TRUE)
+goofcat(observed = observed, predicted = predicted)
 }
 \keyword{methods}

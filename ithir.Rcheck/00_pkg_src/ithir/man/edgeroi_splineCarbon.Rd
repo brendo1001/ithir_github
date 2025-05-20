@@ -1,32 +1,44 @@
-\name{Edgeroi soil carbon data}
+\name{edgeroi_splineCarbon}
 \docType{data}
 \alias{edgeroi_splineCarbon}
-\title{Soil point data from the Edgeroi District, NSW, Australia.}
-\description{A soil information \code{dataframe} derived from 341 obsevations at various locations of the Edgeroi District, NSW, Australia (30.11S 149.66E). The soil data in this data set is soil carbon density and was estimated via a pedotransfer function that included measured soil attributes soil carbon concentration and soil texture information. Mass preserving splines were fitted to the original data in order to harmonise the depth intervals in accordances to specifications of the GlobalSoilMap project (Arrouays et al. 2014). In terms of the sampling locations, 210 were sampled on a systematic, equilateral triangular grid with a spacing of 2.8 km between sites (McGarry et al., 1989). The further 131 soil profiles are distributed more irregularly or on transects. Locations are attributed to a site name as designated by McGarry et al. (1989) and have a recorded coordinate location. The CRS of the points is WGS84 UTM Zone 55.}
+\title{Harmonised Soil Carbon Density Data from the Edgeroi District, NSW}
+\description{
+A \code{data.frame} containing soil carbon density estimates at 341 locations across the Edgeroi District, NSW, Australia (approx. 30.11°S, 149.66°E). Soil carbon values were derived using a pedotransfer function based on measured soil carbon concentration and texture. The resulting values were harmonised using mass-preserving splines according to the GlobalSoilMap specifications.
+}
 \usage{data(edgeroi_splineCarbon)}
 \format{
-\code{edgeroi_splineCarbon} is a 341 row \code{dataframe} with identifier, locational and soil carbon density information for the following depth intervals: 0-5cm, 5-15cm, 15-30cm, 30-60cm, 60-100cm and 100-200cm. A column which specifies the soil depth at each location irrespective of maximum spline fitted depth. 
+A \code{data.frame} with 341 rows. Columns include:
+\describe{
+  \item{\code{id}}{Profile identifier}
+  \item{\code{east}}{Easting (UTM Zone 55)}
+  \item{\code{north}}{Northing (UTM Zone 55)}
+  \item{\code{carbon_0_5cm}}{Estimated carbon density (0–5 cm)}
+  \item{\code{carbon_5_15cm}}{Estimated carbon density (5–15 cm)}
+  \item{\code{carbon_15_30cm}}{Estimated carbon density (15–30 cm)}
+  \item{\code{carbon_30_60cm}}{Estimated carbon density (30–60 cm)}
+  \item{\code{carbon_60_100cm}}{Estimated carbon density (60–100 cm)}
+  \item{\code{carbon_100_200cm}}{Estimated carbon density (100–200 cm)}
+  \item{\code{max_depth}}{Maximum spline depth fitted for each profile (cm)}
 }
-\details{This data frame is a typical soil information table}
-
+}
+\details{
+Sampling was based on a design described by McGarry et al. (1989), with 210 samples taken from a systematic equilateral triangular grid (2.8 km spacing), and 131 additional samples located along transects or more irregularly. Spline harmonisation was applied to align depths with GlobalSoilMap conventions.
+}
 \references{
 \itemize{
-\item Arrouays, D., McKenzie, N., Hempel, J., Richer de Forges, A., and McBratney, A. (eds) (2014). GlobalSoilMap: Basis of the Global Spatial Soil Information System. CRC Press.
-\item McGarry, D., Ward, W.T., McBratney, A.B. (1989) Soil Studies in the Lower Namoi Valley: Methods and Data. The Edgeroi Data Set. (2 vols) (CSIRO Division of Soils: Adelaide).
+  \item Arrouays, D., McKenzie, N., Hempel, J., Richer de Forges, A., and McBratney, A. (eds) (2014). \emph{GlobalSoilMap: Basis of the Global Spatial Soil Information System}. CRC Press.
+  \item McGarry, D., Ward, W.T., McBratney, A.B. (1989). \emph{Soil Studies in the Lower Namoi Valley: Methods and Data. The Edgeroi Data Set}. (2 vols). CSIRO Division of Soils, Adelaide.
 }
 }
-
 \examples{
+library(ithir)
+library(sf)
 
-# library(ithir)
-# library(sf)
+# Load the dataset
+data(edgeroi_splineCarbon)
 
-## load data
-# data(edgeroi_splineCarbon)
-
-## plot the point locations
-# spat_edgeroi_splineCarbon<- sf::st_as_sf(x = edgeroi_splineCarbon,coords = c("east", "north"))
-# plot(spat_edgeroi_splineCarbon, pch = 9, cex = 0.3)
-
+# Convert to sf object and plot
+spat_edgeroi <- st_as_sf(edgeroi_splineCarbon, coords = c("east", "north"), crs = 32755)
+plot(spat_edgeroi, pch = 16, cex = 0.5, main = "Edgeroi Soil Carbon Point Locations")
 }
 \keyword{datasets}

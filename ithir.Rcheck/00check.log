@@ -19,10 +19,10 @@
 * checking for portable file names ... OK
 * checking whether package 'ithir' can be installed ... OK
 * checking installed package size ... NOTE
-  installed size is 63.8Mb
+  installed size is 47.0Mb
   sub-directories of 1Mb or more:
-    data     10.8Mb
-    extdata  52.8Mb
+    data      5.9Mb
+    extdata  40.9Mb
 * checking package directory ... OK
 * checking DESCRIPTION meta-information ... OK
 * checking top-level files ... OK
@@ -36,95 +36,24 @@
 * checking whether the package can be unloaded cleanly ... OK
 * checking whether the namespace can be loaded with stated dependencies ... OK
 * checking whether the namespace can be unloaded cleanly ... OK
-* checking dependencies in R code ... OK
+* checking dependencies in R code ... NOTE
+Namespace in Imports field not imported from: 'aqp'
+  All declared Imports should be used.
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
-* checking R code for possible problems ... NOTE
-ea_spline: no visible global function definition for 'IQR'
-goof: no visible global function definition for 'eqscplot'
-Undefined global functions or variables:
-  IQR eqscplot
-Consider adding
-  importFrom("stats", "IQR")
-to your NAMESPACE file.
+* checking R code for possible problems ... OK
 * checking Rd files ... OK
 * checking Rd metadata ... OK
 * checking Rd cross-references ... OK
-* checking for missing documentation entries ... WARNING
-Undocumented code objects:
-  'HV100' 'HV_dem' 'USYD_dIndex' 'USYD_soil1' 'hvPoints250'
-  'oneProfile' 'topo_dem'
-Undocumented data sets:
-  'HV100' 'HV_dem' 'USYD_dIndex' 'USYD_soil1' '.Random.seed'
-  'hvPoints250' 'oneProfile' 'topo_dem'
-All user-level objects in a package should have documentation entries.
-See chapter 'Writing R documentation files' in the 'Writing R
-Extensions' manual.
-* checking for code/documentation mismatches ... WARNING
-Functions or methods with usage in documentation object 'edgeroi covariates (subset)' but not in code:
-  'system.file'
-
-Functions or methods with usage in documentation object '1km resolution soil carbon map of the Edgeroi District, NSW (S1)' but not in code:
-  'system.file'
-
-Functions or methods with usage in documentation object 'edgeroi covariates (whole district)' but not in code:
-  'system.file'
-
-Functions or methods with usage in documentation object 'Hunter Valley covariates' but not in code:
-  'system.file'
-
-Functions or methods with usage in documentation object 'Hunter Valley covariates (subset area)' but not in code:
-  'system.file'
-
-Functions or methods with usage in documentation object 'Hunter Valley Grid (S1)' but not in code:
-  'system.file'
-
-* checking Rd \usage sections ... WARNING
-Undocumented arguments in documentation object 'edgeroi covariates (subset)'
-  'extdata/edgeGrids_NAME.tif' 'package'
-Objects in \usage without \alias in documentation object 'edgeroi covariates (subset)':
-  'system.file'
-
-Undocumented arguments in documentation object '1km resolution soil carbon map of the Edgeroi District, NSW (S1)'
-  'extdata/edgeTarget_C.tif' 'package'
-Objects in \usage without \alias in documentation object '1km resolution soil carbon map of the Edgeroi District, NSW (S1)':
-  'system.file'
-
-Undocumented arguments in documentation object 'edgeroi covariates (whole district)'
-  'extdata/edgeCovariates_NAME.tif' 'package'
-Objects in \usage without \alias in documentation object 'edgeroi covariates (whole district)':
-  'system.file'
-
-Undocumented arguments in documentation object 'Hunter Valley covariates'
-  'extdata/hunterCovariates_NAME.tif' 'package'
-Objects in \usage without \alias in documentation object 'Hunter Valley covariates':
-  'system.file'
-
-Undocumented arguments in documentation object 'Hunter Valley covariates (subset area)'
-  'extdata/hunterCovariates_sub_NAME.tif' 'package'
-Objects in \usage without \alias in documentation object 'Hunter Valley covariates (subset area)':
-  'system.file'
-
-Undocumented arguments in documentation object 'Hunter Valley Grid (S1)'
-  'extdata/hvGrid25m_grid.tif' 'package'
-Objects in \usage without \alias in documentation object 'Hunter Valley Grid (S1)':
-  'system.file'
-
-Functions with \usage entries need to have the appropriate \alias
-entries, and all their arguments documented.
-The \usage entries must correspond to syntactically valid R code.
-See chapter 'Writing R documentation files' in the 'Writing R
-Extensions' manual.
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
 * checking Rd contents ... OK
 * checking for unstated dependencies in examples ... OK
-* checking contents of 'data' directory ... WARNING
-Object named '.Random.seed' found in dataset: 'hvPoints250'
-Please remove it.
+* checking contents of 'data' directory ... OK
 * checking data for non-ASCII characters ... OK
-* checking LazyData ... WARNING
-  LazyData DB of 10.8 MB without LazyDataCompression set
-  See §1.1.6 of 'Writing R Extensions'
+* checking LazyData ... OK
 * checking data for ASCII and uncompressed saves ... WARNING
   
   Note: significantly better compression could be obtained
@@ -142,4 +71,4 @@ This typically indicates Rd problems.
 * checking PDF version of manual without index ... ERROR
 Re-running with no redirection of stdout/stderr.
 * DONE
-Status: 1 ERROR, 7 WARNINGs, 2 NOTEs
+Status: 1 ERROR, 2 WARNINGs, 2 NOTEs

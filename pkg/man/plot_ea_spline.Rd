@@ -1,39 +1,57 @@
 \name{plot_ea_spline}
 \docType{methods}
 \alias{plot_ea_spline}
-\title{plot soil profile outputs from \code{ea_spline}}
-\description{This is a simple function for plotting outputs and soil profile data from the \code{ea_spline} function.}
-
-\usage{plot_ea_spline(splineOuts, d = t(c(0,5,15,30,60,100,200)), maxd, type = 1 , label = "", plot.which = 1)}
-\arguments{
-  \item{splineOuts}{list; This is a returned object from the \code{ea_spline} function} 
-  \item{d}{numeric; standard depths that were used during the fitting from \code{ea_spline}.} 
-  \item{maxd}{numeric; Maximum soil depth for generating the outputs plots/s}
-   \item{type}{numeric; Different themes of plot may be exported. Type 1 is to return the observed soil data plus the continuous spline (default). Type 2 is to return the observed data plus the averages of the spline at the specified depth intervals. Type 3 is to return the observed data, spline averages and continuous spline.}
-   \item{label}{Character; Optional label to put on x-axis of plot.}
-   \item{plot.which}{numeric; Integer selction of which plot to produce if multiple soil profiles have been fitted using the \code{ea_spline} function.}
+\title{Plot Soil Profile Outputs from \code{ea_spline}}
+\description{
+A plotting function for visualizing the fitted spline outputs from the \code{ea_spline} function. It displays observed horizon data alongside continuous spline fits and/or spline-averaged values at harmonised depth intervals.
 }
-\value{Function returns a labeled plot of the soil profile information and user selected \code{ea_spline} outputs.}
+\usage{
+plot_ea_spline(splineOuts, d = t(c(0, 5, 15, 30, 60, 100, 200)), maxd, 
+               type = 1, label = "", plot.which = 1)
+}
+\arguments{
+  \item{splineOuts}{A list; output from the \code{ea_spline} function containing harmonised spline results and observed/predicted values.} 
+  \item{d}{Numeric vector; harmonised standard depths used in the spline fitting.}
+  \item{maxd}{Numeric; maximum soil depth (cm) to be displayed on the plot.}
+  \item{type}{Integer (1, 2, or 3); controls which elements to display:
+    \describe{
+      \item{1}{Observed values and the continuous spline (default).}
+      \item{2}{Observed values and spline averages at standard depths.}
+      \item{3}{Observed values, spline averages, and the continuous spline.}
+    }
+  }
+  \item{label}{Character string; optional label for the x-axis of the plot.}
+  \item{plot.which}{Integer; index of the profile to plot (when multiple profiles were processed by \code{ea_spline}).}
+}
+\value{
+Generates a base R plot showing a single soil profile with user-specified spline elements overlaid. The function is designed to visualize one profile at a time.
+}
 
-\note{This is a companion function for \code{ea_spline}. This function is really designed to plot one soil profile at a time. Would need to be inserted into another function if plotting of a collection of soil profiles is required.}
+\note{
+This is a companion function for \code{ea_spline}. For plotting multiple profiles, this function should be called iteratively or wrapped in a custom loop or apply function.
+}
 
 \author{Brendan Malone}
 
-
 \examples{
+library(ithir)
+library(aqp)
 
-# library(ithir)
-# library(aqp)
- 
-## NOT RUN
-# data(oneProfile)
-# str(oneProfile)
-## convert to SoilProfileCollection object
-# aqp::depths(oneProfile)<- Soil.ID ~ Upper.Boundary + Lower.Boundary
-## fit spline
-# eaFit <- ea_spline(oneProfile, var.name="C.kg.m3.",d= t(c(0,5,15,30,60,100,200)),lam = 0.1, vlow=0, show.progress=FALSE )
-## do plot
-# plot_ea_spline(splineOuts=eaFit, d= t(c(0,5,15,30,60,100,200)), maxd=200, type=1, label="carbon density") 
+# Load example data and convert to SoilProfileCollection
+data(oneProfile)
+depths(oneProfile) <- Soil.ID ~ Upper.Boundary + Lower.Boundary
 
+# Fit spline to the profile
+eaFit <- ea_spline(oneProfile, var.name = "C.kg.m3.", 
+                   d = t(c(0, 5, 15, 30, 60, 100, 200)), 
+                   lam = 0.1, vlow = 0, show.progress = FALSE)
+
+# Plot the fitted spline
+plot_ea_spline(splineOuts = eaFit, 
+               d = t(c(0, 5, 15, 30, 60, 100, 200)), 
+               maxd = 200, 
+               type = 1, 
+               label = "Carbon Density")
 }
+
 \keyword{methods}

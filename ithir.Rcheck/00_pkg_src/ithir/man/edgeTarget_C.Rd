@@ -1,36 +1,35 @@
-\name{1km resolution soil carbon map of the Edgeroi District, NSW (S1)}
+\name{edgeTarget_C}
 \docType{data}
-\alias{edgeroi SOC 1km}
-\alias{target}
-\title{Subset of the 1km resolution soil carbon map of the Edgeroi District, NSW}
-\description{A Geotiff of a subset of the 1km SOC map for the Edgeroi District, NSW. It portrays soil carbon stock for the 0-30cm depth interval only}
-\usage{system.file("extdata/edgeTarget_C.tif", package="ithir")}
+\alias{edgeTarget_C}
+\alias{edgeTarget_C.tif}
+\title{1 km Resolution Soil Carbon Stock Map (Subset) – Edgeroi District, NSW}
+\description{
+A GeoTIFF raster representing predicted soil organic carbon (SOC) stock for the 0–30 cm depth interval over a small subset of the Edgeroi District, NSW, Australia. The map is at 1 km spatial resolution and was derived using digital soil mapping methods.
+}
 \format{
-\code{edgeTarget_C} is an 7 row, 10 column Geotiff of soil carbon stock for a small area in the Edgeroi district NSW, Australia. The grid has a pixel resolution of 1km x 1km. It contains the layer:
-  \describe{
-  \item{\code{target}}{numeric; predicted soil carbon stock for the 0-30cm depth interval}
+A single-layer raster (GeoTIFF) with 7 rows and 10 columns, each cell representing soil carbon stock in the 0–30 cm layer (e.g., Mg C/ha). The spatial resolution is 1 km x 1 km. The raster is projected in WGS84 / UTM Zone 55.
 }
+\details{
+This raster was produced using digital soil mapping techniques described in McBratney et al. (2003), and uses soil profile data from McGarry et al. (1989) combined with environmental covariates. The extent of the raster matches that of the covariate subset rasters provided in this package (see \code{edgeGrids_*}), though the resolution is coarser (1 km).
 }
-\details{The Edgeroi District, NSW is an intensive cropping area upon the fertile alluvial Namoi River plain. The District has been the subject of many soil invetigations, namely McGarry et al. (1989) whom describe an extensive soil data set collected from the area. More recently, digital soil mapping studies of the area have been conducted, for example, Malone et al. (2009). The 1km mapping of soil carbon stock was performed using digital soil mapping methods McBratney et al. (2003) using the soil data from McGarry et al. (1989) and available environmental covariates.}
-\note{The projection for the raster is WGS 84 Zone 55. It has the same mapping extent i.e. of the exact same area as the edgeroi covariates (subset) Geotiffs provided in this package, but a different resolution.}
-
+\note{
+The raster file is located in the \code{inst/extdata} directory and can be accessed using \code{system.file()}. It shares spatial coverage with the covariates in \code{edgeroi_covariates_subset} but has a coarser resolution.
+}
 \references{
 \itemize{
-\item Malone, B.P., McBratney, A.B., Minasny, B. (2009) \href{http://dx.doi.org/10.1016/j.geoderma.2009.10.007}{Mapping continuous depth functions of soil carbon storage and available water capacity}. Geoderma 154, 138-152.
-\item McBratney, A.B., Mendonca Santos, M.L., Minasny, B. (2003) \href{http://dx.doi.org/10.1016/S0016-7061(03)00223-4}{On Digtial Soil mapping}. Geoderma 117: 3-52.
-\item McGarry, D., Ward, W.T., McBratney, A.B. (1989) Soil Studies in the Lower Namoi Valley: Methods and Data. The Edgeroi Data Set. (2 vols) (CSIRO Division of Soils: Adelaide).
+  \item Malone, B.P., McBratney, A.B., Minasny, B. (2009). \href{http://dx.doi.org/10.1016/j.geoderma.2009.10.007}{Mapping continuous depth functions of soil carbon storage and available water capacity}. Geoderma, 154, 138–152.
+  \item McBratney, A.B., Mendonça Santos, M.L., Minasny, B. (2003). \href{http://dx.doi.org/10.1016/S0016-7061(03)00223-4}{On digital soil mapping}. Geoderma, 117, 3–52.
+  \item McGarry, D., Ward, W.T., McBratney, A.B. (1989). \emph{Soil Studies in the Lower Namoi Valley: Methods and Data. The Edgeroi Data Set}. (2 vols). CSIRO Division of Soils: Adelaide.
 }
 }
 \examples{
+library(terra)
 
-# library(ithir)
-# library(terra)
+# Load the raster from the package
+soc_path <- system.file("extdata/edgeTarget_C.tif", package = "ithir")
+soc_raster <- rast(soc_path)
 
-# example load the elevation grid
-# edgeroi_soc <- rast(system.file("extdata/edgeTarget_C.tif", package="ithir"))
-
-# simple plot
-#plot(edgeroi_soc, main= "Edgeroi SOC Stocks")
-
+# Plot the raster
+plot(soc_raster, main = "Edgeroi SOC Stock (0–30 cm)", col = rev(terrain.colors(20)))
 }
 \keyword{datasets}

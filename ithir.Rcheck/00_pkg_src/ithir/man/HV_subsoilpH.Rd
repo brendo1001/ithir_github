@@ -1,43 +1,47 @@
-\name{Hunter Valley subsoil pH points}
+\name{HV_subsoilpH}
 \docType{data}
 \alias{HV_subsoilpH}
-\title{Hunter Valley subsoil pH data with environmental covariates}
-\description{A \code{dataframe} carrying point coordinates for 506 observations of soil pH from the Lower Hunter Valley, NSW, Australia. The depth interval of the observation is 60-100cm. Together with the soil pH information is environmental covariate data that have been intersected with the point data. The environmental covariates have been sourced from a digital elevation model and Landsat 7 spectral band reflectance.}
+\title{Hunter Valley Subsoil pH Data with Environmental Covariates}
+\description{
+A \code{data.frame} containing 506 observations of soil pH from the Lower Hunter Valley, NSW, Australia. Each record represents the 60–100 cm depth interval and is associated with a set of intersected environmental covariates derived from digital elevation and Landsat data.
+}
 \usage{data(HV_subsoilpH)}
 
 \format{
-\code{HV_subsoilpH} is 506 row \code{dataframe} with the first 2 columns indicating the projected coordinate locations. The coordinate reference system is WGS 84 Zone 56. Soil pH for the 60-100cm depth interval is recorded in the following column. A suite of intersected environmental covariate data fills the remaining columns. This environmental covariate information refers to: 
-\itemize{
-\item \code{Terrain_Ruggedness_Index}: A quantitative measure of topographic heterogeneity. High values indicate terrain is rugged or heterogeneous.  
-\item \code{AACN}: Difference between elevation and an interpolation of a channel network base level elevation. Knowledge of the spatial distribution of channel networks (lines) is therefore necessary for this parameter.
-\item \code{Landsat_Band1}: Earth surface reflectance information derived from Landsat 7 ETM+ satellite. Band 1 spectral range is .45 to .52 microns (visible blue).
-\item \code{Elevation}: Meters above sea level; derived from a digital elevation model.
-\item \code{Hillshading}: Analytic hill shading derived from digital elevation model and a fixed sun degree angle.
-\item \code{Light_insolation}: Measure of potential incoming solar radiation, and used as a parameter for evaluating the positional aspect effect. Derived from digital elevation model, this parameter was evaluated over the duration of a single calendar year with a 5 day time step.
-\item \code{Mid_Slope_Positon}: A relative slope position parameter which gives a classification of the slope position in both valley and crest positions.
-\item \code{MRVBF}: Multi-resolution valley bottom flatness is derived using slope and elevation to classify valley bottoms as flat, low areas (Gallant and Dowling 2003). This is accomplished through a series of neighborhood operations at progressively coarser resolutions with the goal of identifying both small and large valleys. MRVBF has been used extensively for the delineation and grading of valley floor units corresponding to areas of alluvial and colluvial deposits. High values of MRVBF indicate relatively low, flat areas of the landscape.
-\item \code{NDVI}: Normalized difference vegetation index. Derived from Landsat 7 data (B4-B3)/(B4+B3). High values indicate actively growing vegetation.
-\item \code{TWI}: A secondary land form parameter which estimates for each pixel, its tendency to accumulate water.
-\item \code{Slope}: Measured in degrees, is the first derivative of elevation in the direction of greatest slope.}}
+\code{HV_subsoilpH} is a 506-row \code{data.frame}. The first two columns represent spatial coordinates in WGS 84 / UTM Zone 56. Soil pH for the 60–100 cm depth interval is stored in the next column, followed by several environmental covariates:
 
-\details{The area in question is the Hunter Wine Country Private Irrigation District (HWCPID), situated in the Lower Hunter Valley, NSW (32.83S 151.35E), and covers an area of approximately 220 km2. The HWCPID is approximately 140 km north of Sydney, NSW, Australia. Climatically, the HWCPID is situated in a temperate climatic zone, and experiences warm humid summers, and relatively cooler yet also humid winters. Rainfall is mostly uniformly distributed throughout the year. On average the HWCPID receives just over 750 mm of rainfall annually. In terms of land use, an expansive viticultural industry is situated in the area and is possibly most widespread
-of rural industries, followed by dry land agricultural grazing systems.}
+\describe{
+  \item{\code{Terrain_Ruggedness_Index}}{Quantifies topographic heterogeneity. High values indicate rugged terrain.}
+  \item{\code{AACN}}{Elevation above channel network base level. Requires known stream network.}
+  \item{\code{Landsat_Band1}}{Reflectance from Landsat 7 ETM+ Band 1 (0.45–0.52 µm).}
+  \item{\code{Elevation}}{Ground elevation (m), derived from a DEM.}
+  \item{\code{Hillshading}}{Hillshade based on DEM and fixed sun angle.}
+  \item{\code{Light_insolation}}{Potential solar radiation, modeled over a year with 5-day intervals.}
+  \item{\code{Mid_Slope_Position}}{Relative classification of slope position (valley to crest).}
+  \item{\code{MRVBF}}{Multi-resolution Valley Bottom Flatness Index (Gallant & Dowling, 2003).}
+  \item{\code{NDVI}}{Normalized Difference Vegetation Index from Landsat (B4-B3)/(B4+B3).}
+  \item{\code{TWI}}{Topographic Wetness Index.}
+  \item{\code{Slope}}{Slope angle in degrees (first derivative of elevation).}
+}
+}
 
-\note{This data set is used in the Use R for Digital Soil Mapping course of exercises in the section about quantification of uncertainties.}
+\details{
+The dataset covers the Hunter Wine Country Private Irrigation District (HWCPID), located in the Lower Hunter Valley (32.83°S, 151.35°E), about 140 km north of Sydney. The HWCPID spans ~220 km², with a temperate humid climate (~750 mm annual rainfall). The region supports extensive viticulture and dryland grazing. This dataset is used in exercises for quantifying prediction uncertainty in digital soil mapping.
+}
+
+\note{This dataset is used in the "Using R for Digital Soil Mapping" course for exercises on uncertainty quantification.}
 
 \references{
 \itemize{
-\item Gallant, J. C., Dowling, T. I., (2003) \href{http://dx.doi.org/10.1029/2002WR001426}{A multiresolution index of valley bottom flatness for mapping depositional areas}. Water Resources Research 39(12), 1347. 
-\item Malone, B.P., Hughes, P.,  McBratney, A.B., Minasny, B. (2009) \href{http://dx.doi.org/10.1016/j.geodrs.2014.08.001}{A model for the identification of terrons in the Lower Hunter Valley, Australia}. Geoderma Regional 1, 31-47.
-\item Malone, B.P., Minasny, B., McBratney, A.B. (2017) \href{https://link.springer.com/book/10.1007/978-3-319-44327-0}{Using R for Digital Soil Mapping}. Springer Cham. 262 Pages.
+  \item Gallant, J.C., Dowling, T.I. (2003). \href{http://dx.doi.org/10.1029/2002WR001426}{A multiresolution index of valley bottom flatness for mapping depositional areas}. \emph{Water Resources Research}, 39(12), 1347.
+  \item Malone, B.P., Hughes, P., McBratney, A.B., Minasny, B. (2009). \href{http://dx.doi.org/10.1016/j.geodrs.2014.08.001}{A model for the identification of terrons in the Lower Hunter Valley, Australia}. \emph{Geoderma Regional}, 1, 31–47.
+  \item Malone, B.P., Minasny, B., McBratney, A.B. (2017). \href{https://link.springer.com/book/10.1007/978-3-319-44327-0}{Using R for Digital Soil Mapping}. Springer Cham, 262 pp.
 }
 }
 
 \examples{
-
-# library(ithir)
-# data(HV_subsoilpH)
-# summary(HV_subsoilpH)
-
+library(ithir)
+data(HV_subsoilpH)
+summary(HV_subsoilpH)
 }
 \keyword{datasets}

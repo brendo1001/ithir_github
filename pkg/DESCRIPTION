@@ -9,9 +9,10 @@ Description: Provides tools and datasets to support digital soil mapping and ana
 Depends: R (>= 4.0)
 Imports: 
     methods,
-    terra
-Suggests: 
+    terra,
     MASS,
+    aqp
+Suggests: 
     sf,
     graphics,
     stats,
@@ -20,5 +21,6 @@ Suggests:
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
+LazyDataCompression: xz
 RoxygenNote: 7.2.3
 

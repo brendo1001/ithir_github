@@ -1,43 +1,52 @@
-\name{Hunter Valley covariates}
+\name{hunterCovariates}
 \docType{data}
 \alias{hunterCovariates}
-\title{Suite of selected environmental covariates for the the Lower Hunter Valley, NSW}
-\description{A set of Geotiffs of selected environmental covariates covering the Lower Hunter Valley, NSW.}
-\usage{system.file("extdata/hunterCovariates_NAME.tif", package="ithir")}
-
+\alias{hunterCovariates_A_AACN}
+\alias{hunterCovariates_A_elevation}
+\alias{hunterCovariates_A_Hillshading}
+\alias{hunterCovariates_A_light_insolation}
+\alias{hunterCovariates_A_MRVBF}
+\alias{hunterCovariates_A_Slope}
+\alias{hunterCovariates_A_TRI}
+\alias{hunterCovariates_A_TWI}
+\title{Environmental Covariate Rasters for the Lower Hunter Valley, NSW}
+\description{
+A set of GeoTIFF rasters representing environmental covariates across the full extent of the Lower Hunter Valley in New South Wales, Australia. These covariates are commonly used in digital soil mapping and terrain analysis.
+}
 \format{
-These data are Geotiffs of selected environmental covariates. The rasters have a pixel resolution of 25m x 25m. The CRS of each raster is WGS 84 UTM Zone 56. The following raster are available:
- \itemize{
-\item \code{AACN}: Difference between elevation and an interpolation of a channel network base level elevation. Knowledge of the spatial distribution of channel networks (lines) is therefore necessary for this parameter.
-\item \code{Drainage.Index}: A measure of soil water drainage capability. This index is derived from an empirical model of soil color and soil drainage. 
-\item \code{Light_insolation}: Measure of potential incoming solar radiation, and used as a parameter for evaluating the positional aspect effect. Derived from digital elevation model, this parameter was evaluated over the duration of a single calendar year with a 5 day time step.
-\item \code{TWI}: A secondary land form parameter which estimates for each pixel, its tendency to accumulate water.
-\item \code{Gamma.Total.Count}: Gamma radiometric data. Here the variable is total gamma count im ppm.
+These raster layers (GeoTIFF format) are stored in the \code{inst/extdata/} directory of the package. Each raster has a spatial resolution of 25 m × 25 m and uses the WGS 84 UTM Zone 56 coordinate reference system.
+
+Available files, all prefixed with \code{hunterCovariates_A_}, include:
+
+\describe{
+  \item{\code{hunterCovariates_A_AACN.tif}}{Elevation above channel network base level. Requires known stream network for interpretation.}
+  \item{\code{hunterCovariates_A_elevation.tif}}{Bare-earth digital elevation model (DEM), in meters above sea level.}
+  \item{\code{hunterCovariates_A_Hillshading.tif}}{DEM-derived hillshade raster with fixed illumination angle.}
+  \item{\code{hunterCovariates_A_light_insolation.tif}}{Annual solar radiation potential derived from DEM (5-day timestep resolution).}
+  \item{\code{hunterCovariates_A_MRVBF.tif}}{Multi-resolution valley bottom flatness index for identifying depositional zones.}
+  \item{\code{hunterCovariates_A_Slope.tif}}{Slope angle in degrees (first derivative of elevation).}
+  \item{\code{hunterCovariates_A_TRI.tif}}{Topographic Ruggedness Index — measures terrain heterogeneity.}
+  \item{\code{hunterCovariates_A_TWI.tif}}{Topographic Wetness Index — indicates potential for water accumulation.}
 }
 }
-
-\details{The area in question is the Hunter Wine Country Private Irrigation District (HWCPID), situated in the Lower Hunter Valley, NSW (32.83S 151.35E), and covers an area of approximately 220 km2. The HWCPID is approximately 140 km north of Sydney, NSW, Australia. Climatically, the HWCPID is situated in a temperate climatic zone, and experiences warm humid summers, and relatively cooler yet also humid winters. Rainfall is mostly uniformly distributed throughout the year. On average the HWCPID receives just over 750 mm of rainfall annually. In terms of land use, an expansive viticultural industry is situated in the area and is possibly most widespread
-of rural industries, followed by dry land agricultural grazing systems.}
-
-\note{These Geotiffs are used in the Using R for Digital Soil Mapping course of exercises.}
-
+\details{
+These rasters cover the Hunter Wine Country Private Irrigation District (HWCPID), located in the Lower Hunter Valley (approx. 32.83°S, 151.35°E), ~140 km north of Sydney. The area spans about 220 km², features a temperate humid climate, and is dominated by viticulture and dryland grazing systems. These layers are used in digital soil mapping studies and training material.
+}
+\note{
+This raster stack is used in the "Using R for Digital Soil Mapping" training course and is provided for demonstration and educational purposes.
+}
 \references{
 \itemize{
-\item Malone, B.P., Hughes, P.,  McBratney, A.B., Minasny, B. (2014) \href{http://dx.doi.org/10.1016/j.geodrs.2014.08.001}{A model for the identification of terrons in the Lower Hunter
-Valley, Australia}. Geoderma Regional 1, 31-47.
+  \item Gallant, J.C., Dowling, T.I. (2003). \href{http://dx.doi.org/10.1029/2002WR001426}{A multiresolution index of valley bottom flatness for mapping depositional areas}. \emph{Water Resources Research}, 39(12), 1347.
+  \item Malone, B.P., Hughes, P., McBratney, A.B., Minasny, B. (2014). \href{http://dx.doi.org/10.1016/j.geodrs.2014.08.001}{A model for the identification of terrons in the Lower Hunter Valley, Australia}. \emph{Geoderma Regional}, 1, 31–47.
 }
 }
-
 \examples{
+library(ithir)
+library(terra)
 
-# library(ithir)
-# library(terra)
-
-# example load the altitude above channel network grid
-# aacn <- rast(system.file("extdata/hunterCovariates_hunterCovariates_AACN.tif", package="ithir"))
-
-# simple plot
-# plot(aacn, main= "Hunter Valley AACN Map")
-
+# Load and plot the slope raster layer
+slope <- rast(system.file("extdata/hunterCovariates_A_Slope.tif", package = "ithir"))
+plot(slope, main = "Hunter Valley - Slope")
 }
 \keyword{datasets}

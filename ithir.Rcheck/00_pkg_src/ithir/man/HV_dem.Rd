@@ -1,29 +1,33 @@
-\name{Hunter Valley, NSW 100m digital elevation model}
+\name{HV_dem}
 \docType{data}
-\alias{Hunter Valley DEM}
-\title{Hunter Valley DEM}
-\description{A \code{dataframe} that is easily converted to a grid raster. It has 3 columns, with the first two being spatial coordinates, and the third being ground elevation information. The coordinates are a regular grid point pattern with 100m spacing, and when converted to raster, resolve to be a digital elevation model for the Lower Hunter Valley region, NSW, Australia. The CRS of the coordinates is WGS 84 UTM Zone 56. }
+\alias{HV_dem}
+\title{Digital Elevation Model of the Hunter Valley, NSW}
+\description{
+A \code{data.frame} containing spatial coordinates and elevation values representing a regular 100-metre resolution grid over the Lower Hunter Valley region of New South Wales, Australia. The coordinates are in WGS 84 / UTM Zone 56. When converted to a raster, the data form a digital elevation model (DEM).
+}
 \usage{data(HV_dem)}
 \format{
-\code{HV_dem} is a large \code{dataframe} with spatial coordinates, and elevation information labelled in respective columns. 
+A \code{data.frame} with three columns:
+\describe{
+  \item{\code{x}}{Easting (UTM Zone 56)}
+  \item{\code{y}}{Northing (UTM Zone 56)}
+  \item{\code{elevation}}{Elevation in metres above sea level}
 }
-\details{This \code{dataframe} stores information that depicts a regular raster grid}
-
+}
+\details{
+This dataset can be readily converted to a raster using the \code{terra::rast()} function with \code{type = "xyz"}. It can support terrain analysis and serve as a covariate for digital soil mapping.
+}
 \references{
 \itemize{
-\item Malone, B.P., Minasny, B., McBratney, A.B. (2017) \href{https://link.springer.com/book/10.1007/978-3-319-44327-0}{Using R for Digital Soil Mapping}. Springer Cham. 262 Pages.
+  \item Malone, B.P., Minasny, B., McBratney, A.B. (2017). \href{https://link.springer.com/book/10.1007/978-3-319-44327-0}{Using R for Digital Soil Mapping}. Springer, Cham.
 }
 }
-
 \examples{
+library(terra)
+data(HV_dem)
 
-## HV DEM
-# library(ithir)
-# library(terra)
- 
-# data(HV_dem)
-# map<- terra::rast(x = HV_dem, type = "xyz")
-# plot(map, main = "Hunter Valley DEM") 
-
+# Convert to raster and plot
+dem_rast <- terra::rast(x = HV_dem, type = "xyz")
+plot(dem_rast, main = "Hunter Valley DEM")
 }
 \keyword{datasets}

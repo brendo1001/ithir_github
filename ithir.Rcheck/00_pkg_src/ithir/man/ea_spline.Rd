@@ -1,66 +1,61 @@
 \name{ea_spline}
 \docType{methods}
 \alias{ea_spline}
-\alias{ea_spline}
-\title{Fits a mass preserving spline}
-\description{This function is specific for soil profile data. A continous spline function is fitted upon information recieved about a target soil property at specified depths intervals or soil horizons. The spline however has the unique property of maintaining the integrity of the observed information i.e. the spline has mass preserving properties.}
-
-\usage{ea_spline(obj, var.name, lam = 0.1, d = c(0,5,15,30,60,100,200), vlow = 0, vhigh = 1000, show.progress=TRUE)}
-
+\title{Fit a Mass-Preserving Spline to Soil Profile Data}
+\description{
+Fits a continuous mass-preserving spline to numeric soil profile data, typically horizon-structured, such as soil organic carbon or pH. The spline ensures that the integral (or mass) of the fitted curve over each horizon matches the observed values, enabling harmonisation to standard depths.
+}
+\usage{
+ea_spline(obj, var.name, lam = 0.1, d = c(0, 5, 15, 30, 60, 100, 200),
+          vlow = 0, vhigh = 1000, show.progress = TRUE)
+}
 \arguments{
-  \item{obj}{Can be an object of class \code{"data.frame"} or \code{"SoilProfileCollection"}} 
-  \item{var.name}{character; target variable name (must be a numeric variable)}     
-  \item{lam}{numeric; lambda the smoothing parameter}
-  \item{d}{numeric; standard depths that are used to extract values from fitted spline i.e harmonising depths}
-  \item{vlow}{numeric; smallest value of the target variable (smaller values will be replaced)}
-  \item{vhigh}{numeric; highest value of the target variable (larger values will be replaced)}
-  \item{show.progress}{logical; Display the progress bar?}
+  \item{obj}{An object of class \code{data.frame} or \code{SoilProfileCollection}. Must contain top and bottom depth values and a target numeric variable.}
+  \item{var.name}{Character string; name of the target numeric variable to fit the spline on.}
+  \item{lam}{Numeric; smoothing parameter (lambda). Lower values give smoother splines.}
+  \item{d}{Numeric vector of standard depths at which to estimate the harmonised values.}
+  \item{vlow}{Numeric; lower bound. Values below this will be set to \code{vlow}.}
+  \item{vhigh}{Numeric; upper bound. Values above this will be set to \code{vhigh}.}
+  \item{show.progress}{Logical; if \code{TRUE}, displays a progress bar.}
 }
-\value{Returns a list with four elements:
-  \describe{
-   \item{\code{harmonised}}{data frame; are spline-estimated values of the target variable at standard depths}
-   \item{\code{obs.preds}}{data frame; are observed values together with associated spline predictions for each profile at each depth.}
-   \item{\code{var.1cm}}{matrix; are spline-estimated values of the target variable using the 1 cm increments}  
-   \item{\code{tmse}}{matrix; True mean square error estimate between observed profiles and associated fitted splines.} 
-    
+\value{
+A list with the following components:
+\describe{
+  \item{\code{harmonised}}{A data frame of spline-estimated values at the specified standard depths.}
+  \item{\code{obs.preds}}{A data frame of observed values and corresponding spline predictions by profile and depth.}
+  \item{\code{var.1cm}}{A matrix of fitted values at 1 cm increments, for each profile.}
+  \item{\code{splineFitError}}{A data frame with root mean square error (RMSE) and RMSE divided by IQR for each profile.}
 }
 }
-\note{Target variable needs to be a numeric vector measured at least 2 horizons for the spline to be fitted. Profiles with 1 horizon are accepted and processed as per output requirements, but no spline is fitted as such. Only positive numbers for upper and lower depths can be accepted. It is assumed that soil variables collected per horizon refer to block support i.e. they represent averaged values for the whole horizon. This operation can be time-consuming for large data sets.}
-
-\author{ Brendan Malone }
+\note{
+The function requires at least two horizons with valid numeric values for spline fitting. Profiles with only one horizon are handled using value replication (no spline fitting). Only positive values for top and bottom depths are accepted. Horizon values are assumed to be block-supported averages.
+}
+\author{Brendan Malone}
 \references{
 \itemize{
-  \item Bishop, T.F.A., McBratney, A.B., Laslett, G.M., (1999) \href{http://dx.doi.org/10.1016/S0016-7061(99)00003-8}{Modelling soil attribute depth functions with equal-area quadratic smoothing splines}. Geoderma, 91(1-2): 27-45. 
-  \item Malone, B.P., McBratney, A.B., Minasny, B., Laslett, G.M. (2009) \href{http://dx.doi.org/10.1016/j.geoderma.2009.10.007}{Mapping continuous depth functions of soil carbon storage and available water capacity}. Geoderma, 154(1-2): 138-152.
+  \item Bishop, T.F.A., McBratney, A.B., Laslett, G.M. (1999). \href{http://dx.doi.org/10.1016/S0016-7061(99)00003-8}{Modelling soil attribute depth functions with equal-area quadratic smoothing splines}. Geoderma, 91(1–2), 27–45.
+  \item Malone, B.P., McBratney, A.B., Minasny, B., Laslett, G.M. (2009). \href{http://dx.doi.org/10.1016/j.geoderma.2009.10.007}{Mapping continuous depth functions of soil carbon storage and available water capacity}. Geoderma, 154(1–2), 138–152.
 }
 }
-
 \examples{
-#library(aqp)
-#library(plyr)
-#library(ithir)
+# Example using a simple data.frame
+data(oneProfile)
+str(oneProfile)
+sp_fit <- ea_spline(obj = oneProfile, var.name = "C.kg.m3.")
 
-#Fit spline 
-#data(oneProfile)
-#class(oneProfile)
-#sp.fit<- ithir::ea_spline(obj = oneProfile, var.name="C.kg.m3.")
-
-#Using a SoilProfileCollection
-## sample profile from Nigeria:
-#lon = 3.90; lat = 7.50; id = "ISRIC:NG0017"; FAO1988 = "LXp" 
-#top = c(0, 18, 36, 65, 87, 127) 
-#bottom = c(18, 36, 65, 87, 127, 181)
-#ORCDRC = c(18.4, 4.4, 3.6, 3.6, 3.2, 1.2)
-#munsell = c("7.5YR3/2", "7.5YR4/4", "2.5YR5/6", "5YR5/8", "5YR5/4", "10YR7/3")
-## prepare a SoilProfileCollection:
-#prof1 <- join(data.frame(id, top, bottom, ORCDRC, munsell), 
-#         data.frame(id, lon, lat, FAO1988), type='inner')
-#aqp::depths(prof1) <- id ~ top + bottom
-#aqp::site(prof1) <- ~ lon + lat + FAO1988 
-
-## fit spline:
-#ORCDRC.s <- ea_spline(prof1, var.name="ORCDRC")
-#str(ORCDRC.s)
-
+# Example using a SoilProfileCollection from the aqp package
+# library(aqp)
+# library(plyr)
+# lon <- 3.90; lat <- 7.50; id <- "ISRIC:NG0017"
+# top <- c(0, 18, 36, 65, 87, 127)
+# bottom <- c(18, 36, 65, 87, 127, 181)
+# ORCDRC <- c(18.4, 4.4, 3.6, 3.6, 3.2, 1.2)
+# munsell <- c("7.5YR3/2", "7.5YR4/4", "2.5YR5/6", "5YR5/8", "5YR5/4", "10YR7/3")
+# prof1 <- join(data.frame(id, top, bottom, ORCDRC, munsell),
+#               data.frame(id, lon, lat), type = 'inner')
+# depths(prof1) <- id ~ top + bottom
+# site(prof1) <- ~ lon + lat
+# ORCDRC.s <- ea_spline(prof1, var.name = "ORCDRC")
+# str(ORCDRC.s)
 }
 \keyword{methods}

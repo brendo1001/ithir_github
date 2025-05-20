@@ -12,18 +12,19 @@ nameEx("HV100")
 
 flush(stderr()); flush(stdout())
 
-### Name: Hunter Valley soil data
-### Title: Soil point data from the Hunter Valley, NSW, Australia
-### Aliases: 'Hunter Valley soil data'
+### Name: HV100
+### Title: Soil Point Data from the Hunter Valley, NSW, Australia
+### Aliases: HV100
 ### Keywords: datasets
 
 ### ** Examples
 
+# Load and inspect the dataset
+data(HV100)
 
-# library(ithir)
-# data(HV100)
-# head(HV100)
-
+# Basic structure and summary
+str(HV100)
+summary(HV100)
 
 
 
@@ -33,22 +34,19 @@ nameEx("HV_dem")
 
 flush(stderr()); flush(stdout())
 
-### Name: Hunter Valley, NSW 100m digital elevation model
-### Title: Hunter Valley DEM
-### Aliases: 'Hunter Valley DEM'
+### Name: HV_dem
+### Title: Digital Elevation Model of the Hunter Valley, NSW
+### Aliases: HV_dem
 ### Keywords: datasets
 
 ### ** Examples
 
+library(terra)
+data(HV_dem)
 
-## HV DEM
-# library(ithir)
-# library(terra)
- 
-# data(HV_dem)
-# map<- terra::rast(x = HV_dem, type = "xyz")
-# plot(map, main = "Hunter Valley DEM") 
-
+# Convert to raster and plot
+dem_rast <- terra::rast(x = HV_dem, type = "xyz")
+plot(dem_rast, main = "Hunter Valley DEM")
 
 
 
@@ -58,18 +56,16 @@ nameEx("HV_subsoilpH")
 
 flush(stderr()); flush(stdout())
 
-### Name: Hunter Valley subsoil pH points
-### Title: Hunter Valley subsoil pH data with environmental covariates
+### Name: HV_subsoilpH
+### Title: Hunter Valley Subsoil pH Data with Environmental Covariates
 ### Aliases: HV_subsoilpH
 ### Keywords: datasets
 
 ### ** Examples
 
-
-# library(ithir)
-# data(HV_subsoilpH)
-# summary(HV_subsoilpH)
-
+library(ithir)
+data(HV_subsoilpH)
+summary(HV_subsoilpH)
 
 
 
@@ -79,18 +75,22 @@ nameEx("USYD_dIndex")
 
 flush(stderr()); flush(stdout())
 
-### Name: USYD drainage index data
-### Title: Soil drainage index data
-### Aliases: 'USYD soil drainage data'
+### Name: USYD_dIndex
+### Title: Soil Drainage Index Observations and Predictions
+### Aliases: USYD_dIndex
 ### Keywords: datasets
 
 ### ** Examples
 
+data(USYD_dIndex)
 
-# library(ithir)
-# data(USYD_dIndex)
-# summary(USYD_dIndex)
+# View summary statistics
+summary(USYD_dIndex)
 
+# Plot observed vs predicted
+with(USYD_dIndex, plot(DI_observed, DI_predicted,
+     main = "Observed vs Predicted Drainage Index",
+     xlab = "Observed", ylab = "Predicted"))
 
 
 
@@ -100,18 +100,20 @@ nameEx("USYD_soil1")
 
 flush(stderr()); flush(stdout())
 
-### Name: USYD soil data
-### Title: Random selection of soil point data
-### Aliases: 'USYD soil data'
+### Name: USYD_soil1
+### Title: Random Selection of Soil Profile Data from New South Wales
+### Aliases: USYD_soil1
 ### Keywords: datasets
 
 ### ** Examples
 
+data(USYD_soil1)
 
-# library(ithir)
-# data(USYD_soil1)
-# summary(USYD_soil1)
+# Overview
+summary(USYD_soil1)
 
+# Show profile IDs
+table(USYD_soil1$id)
 
 
 
@@ -122,19 +124,19 @@ nameEx("bbRaster")
 flush(stderr()); flush(stdout())
 
 ### Name: bbRaster
-### Title: Get the bounding box information of a 'SpatRaster' from its
-###   extents.
+### Title: Get Bounding Box Coordinates from a 'SpatRaster'
 ### Aliases: bbRaster
 ### Keywords: methods
 
 ### ** Examples
 
+library(terra)
 
-# library(terra)
-# target <- rast(system.file("extdata/edgeTarget_C.tif", package="ithir"))
-# target
-# bbRaster(target)
+# Example raster
+target <- rast(system.file("extdata/edgeTarget_C.tif", package = "ithir"))
 
+# Get bounding box coordinates
+bbRaster(target)
 
 
 
@@ -192,65 +194,31 @@ nameEx("ea_spline")
 flush(stderr()); flush(stdout())
 
 ### Name: ea_spline
-### Title: Fits a mass preserving spline
-### Aliases: ea_spline ea_spline
+### Title: Fit a Mass-Preserving Spline to Soil Profile Data
+### Aliases: ea_spline
 ### Keywords: methods
 
 ### ** Examples
 
-#library(aqp)
-#library(plyr)
-#library(ithir)
+# Example using a simple data.frame
+data(oneProfile)
+str(oneProfile)
+sp_fit <- ea_spline(obj = oneProfile, var.name = "C.kg.m3.")
 
-#Fit spline 
-#data(oneProfile)
-#class(oneProfile)
-#sp.fit<- ithir::ea_spline(obj = oneProfile, var.name="C.kg.m3.")
-
-#Using a SoilProfileCollection
-## sample profile from Nigeria:
-#lon = 3.90; lat = 7.50; id = "ISRIC:NG0017"; FAO1988 = "LXp" 
-#top = c(0, 18, 36, 65, 87, 127) 
-#bottom = c(18, 36, 65, 87, 127, 181)
-#ORCDRC = c(18.4, 4.4, 3.6, 3.6, 3.2, 1.2)
-#munsell = c("7.5YR3/2", "7.5YR4/4", "2.5YR5/6", "5YR5/8", "5YR5/4", "10YR7/3")
-## prepare a SoilProfileCollection:
-#prof1 <- join(data.frame(id, top, bottom, ORCDRC, munsell), 
-#         data.frame(id, lon, lat, FAO1988), type='inner')
-#aqp::depths(prof1) <- id ~ top + bottom
-#aqp::site(prof1) <- ~ lon + lat + FAO1988 
-
-## fit spline:
-#ORCDRC.s <- ea_spline(prof1, var.name="ORCDRC")
-#str(ORCDRC.s)
-
-
-
-
-cleanEx()
-nameEx("edgeGrids")
-### * edgeGrids
-
-flush(stderr()); flush(stdout())
-
-### Name: edgeroi covariates (subset)
-### Title: Selected subset of environmental covariates for the Edgeroi
-###   District, NSW
-### Aliases: 'edgeroi covariates' edgeGrids
-### Keywords: datasets
-
-### ** Examples
-
-
-# library(ithir)
-# library(terra)
-
-# example load the elevation grid
-# elevation <- rast(system.file("extdata/edgeGrids_Elevation.tif", package="ithir"))
-
-# simple plot
-#plot(elevation, main= "Edgeroi Elevation Map")
-
+# Example using a SoilProfileCollection from the aqp package
+# library(aqp)
+# library(plyr)
+# lon <- 3.90; lat <- 7.50; id <- "ISRIC:NG0017"
+# top <- c(0, 18, 36, 65, 87, 127)
+# bottom <- c(18, 36, 65, 87, 127, 181)
+# ORCDRC <- c(18.4, 4.4, 3.6, 3.6, 3.2, 1.2)
+# munsell <- c("7.5YR3/2", "7.5YR4/4", "2.5YR5/6", "5YR5/8", "5YR5/4", "10YR7/3")
+# prof1 <- join(data.frame(id, top, bottom, ORCDRC, munsell),
+#               data.frame(id, lon, lat), type = 'inner')
+# depths(prof1) <- id ~ top + bottom
+# site(prof1) <- ~ lon + lat
+# ORCDRC.s <- ea_spline(prof1, var.name = "ORCDRC")
+# str(ORCDRC.s)
 
 
 
@@ -260,21 +228,21 @@ nameEx("edgeLandClass")
 
 flush(stderr()); flush(stdout())
 
-### Name: Edgeroi Land Class Points
-### Title: Point data of estimated land classes from the Edgeroi District,
-###   NSW, Australia.
+### Name: edgeLandClass
+### Title: Land Classification Points from the Edgeroi District, NSW
 ### Aliases: edgeLandClass
 ### Keywords: datasets
 
 ### ** Examples
 
+data(edgeLandClass)
 
-# library(ithir)
-# data(edgeLandClass)
+# View land class summary
+summary(edgeLandClass$LandClass)
 
-## data summary
-# summary(edgeLandClass$LandClass)
-
+# Plot the locations by class
+plot(edgeLandClass$x, edgeLandClass$y, col = edgeLandClass$LandClass,
+     pch = 20, main = "Edgeroi Land Classification Points")
 
 
 
@@ -284,24 +252,22 @@ nameEx("edgeTarget_C")
 
 flush(stderr()); flush(stdout())
 
-### Name: 1km resolution soil carbon map of the Edgeroi District, NSW (S1)
-### Title: Subset of the 1km resolution soil carbon map of the Edgeroi
+### Name: edgeTarget_C
+### Title: 1 km Resolution Soil Carbon Stock Map (Subset) – Edgeroi
 ###   District, NSW
-### Aliases: 'edgeroi SOC 1km' target
+### Aliases: edgeTarget_C edgeTarget_C.tif
 ### Keywords: datasets
 
 ### ** Examples
 
+library(terra)
 
-# library(ithir)
-# library(terra)
+# Load the raster from the package
+soc_path <- system.file("extdata/edgeTarget_C.tif", package = "ithir")
+soc_raster <- rast(soc_path)
 
-# example load the elevation grid
-# edgeroi_soc <- rast(system.file("extdata/edgeTarget_C.tif", package="ithir"))
-
-# simple plot
-#plot(edgeroi_soc, main= "Edgeroi SOC Stocks")
-
+# Plot the raster
+plot(soc_raster, main = "Edgeroi SOC Stock (0–30 cm)", col = rev(terrain.colors(20)))
 
 
 
@@ -311,24 +277,47 @@ nameEx("edgeroiCovariates")
 
 flush(stderr()); flush(stdout())
 
-### Name: edgeroi covariates (whole district)
-### Title: Suite of selected environmental covariates for the Edgeroi
-###   District, NSW
-### Aliases: edgeroiCovariates
+### Name: edgeroiCovariates
+### Title: Environmental Covariate Rasters for the Full Edgeroi District,
+###   NSW
+### Aliases: edgeroiCovariates edgeroiCovariates_elevation.tif
+###   edgeroiCovariates_twi.tif edgeroiCovariates_radK.tif
+###   edgeroiCovariates_landsat_b3.tif edgeroiCovariates_landsat_b4.tif
 ### Keywords: datasets
 
 ### ** Examples
 
+library(terra)
 
-# library(ithir)
-# library(terra)
+# Load elevation layer
+elev_path <- system.file("extdata/edgeroiCovariates_elevation.tif", package = "ithir")
+elev_rast <- rast(elev_path)
+plot(elev_rast, main = "Edgeroi Elevation Map")
 
-# example load the elevation grid
-# elevation <- rast(system.file("extdata/edgeroiCovariates_elevation.tif", package="ithir"))
 
-# simple plot
-#plot(elevation, main= "Edgeroi Elevation Map")
 
+cleanEx()
+nameEx("edgeroi_covariates_subset")
+### * edgeroi_covariates_subset
+
+flush(stderr()); flush(stdout())
+
+### Name: edgeroi_covariates_subset
+### Title: Selected Subset of Environmental Covariates for the Edgeroi
+###   District, NSW
+### Aliases: edgeroi_covariates_subset edgeGrids_Doserate
+###   edgeGrids_Elevation edgeGrids_Panchromat edgeGrids_Slope
+###   edgeGrids_TWI
+### Keywords: datasets
+
+### ** Examples
+
+library(ithir)
+library(terra)
+
+# Load and plot the elevation raster
+elevation <- rast(system.file("extdata/edgeGrids_Elevation.tif", package = "ithir"))
+plot(elevation, main = "Edgeroi Elevation Map")
 
 
 
@@ -338,24 +327,23 @@ nameEx("edgeroi_splineCarbon")
 
 flush(stderr()); flush(stdout())
 
-### Name: Edgeroi soil carbon data
-### Title: Soil point data from the Edgeroi District, NSW, Australia.
+### Name: edgeroi_splineCarbon
+### Title: Harmonised Soil Carbon Density Data from the Edgeroi District,
+###   NSW
 ### Aliases: edgeroi_splineCarbon
 ### Keywords: datasets
 
 ### ** Examples
 
+library(ithir)
+library(sf)
 
-# library(ithir)
-# library(sf)
+# Load the dataset
+data(edgeroi_splineCarbon)
 
-## load data
-# data(edgeroi_splineCarbon)
-
-## plot the point locations
-# spat_edgeroi_splineCarbon<- sf::st_as_sf(x = edgeroi_splineCarbon,coords = c("east", "north"))
-# plot(spat_edgeroi_splineCarbon, pch = 9, cex = 0.3)
-
+# Convert to sf object and plot
+spat_edgeroi <- st_as_sf(edgeroi_splineCarbon, coords = c("east", "north"), crs = 32755)
+plot(spat_edgeroi, pch = 16, cex = 0.5, main = "Edgeroi Soil Carbon Point Locations")
 
 
 
@@ -420,15 +408,20 @@ nameEx("fuzzyEx")
 flush(stderr()); flush(stdout())
 
 ### Name: fuzzyEx
-### Title: Derivation of fuzzy membership to classes
+### Title: Derivation of Fuzzy Memberships to Classes with Extragrades
 ### Aliases: fuzzyEx
 ### Keywords: methods
 
 ### ** Examples
 
-## NOT RUN
-
-
+## Not run: 
+# Example (requires compatible centroid and covariance data)
+# memberships <- fuzzyEx(data = input_data, 
+#                        centroid = centroid_matrix, 
+#                        cv = cov_matrix, 
+#                        expon = 2, 
+#                        alfa = 0.01)
+## End(Not run)
 
 
 
@@ -438,24 +431,24 @@ nameEx("goof")
 
 flush(stderr()); flush(stdout())
 
-### Name: Goodness of fit measures
-### Title: Goodness of fit measures
+### Name: goof
+### Title: Goodness of Fit Measures
 ### Aliases: goof
 ### Keywords: methods
 
 ### ** Examples
 
+library(ithir)
+library(MASS)
 
-## NOT RUN
-# library(ithir)
-# library(MASS)
-## some data
-# data(USYD_soil1)
-## fit a linear model
-# mod.1 <- lm(CEC ~ clay, data = USYD_soil1 , y = TRUE, x = TRUE)
-## Goodness of fit
-# goof(observed = mod.1$y, predicted = mod.1$fitted.values, plot.it = TRUE)
+# Load sample soil data
+data(USYD_soil1)
 
+# Fit a linear model
+mod.1 <- lm(CEC ~ clay, data = USYD_soil1, y = TRUE, x = TRUE)
+
+# Calculate goodness-of-fit statistics and plot
+goof(observed = mod.1$y, predicted = mod.1$fitted.values, plot.it = TRUE)
 
 
 
@@ -465,31 +458,29 @@ nameEx("goofcat")
 
 flush(stderr()); flush(stdout())
 
-### Name: Goodness of fit measures for categorial variable models
-### Title: Goodness of fit measures for categorical variable models
+### Name: goofcat
+### Title: Goodness of Fit Measures for Categorical Models
 ### Aliases: goofcat
 ### Keywords: methods
 
 ### ** Examples
 
-##library(ithir)
+library(ithir)
 
-## NOT RUN
-## Using a pre-constructed confusion matrix
-# con.mat <- matrix(c(5, 0, 1, 2, 0, 15, 0, 5, 0, 1, 31, 0, 0, 10, 2, 11),nrow = 4, ncol = 4)
-# rownames(con.mat) <- c("DE", "VE", "CH", "KU")
-# colnames(con.mat) <- c("DE", "VE", "CH", "KU")
-# goofcat(conf.mat = con.mat, imp=TRUE)
+# Using a pre-constructed confusion matrix
+con.mat <- matrix(c(5, 0, 1, 2,
+                    0, 15, 0, 5,
+                    0, 1, 31, 0,
+                    0, 10, 2, 11), nrow = 4, byrow = TRUE)
+rownames(con.mat) <- colnames(con.mat) <- c("DE", "VE", "CH", "KU")
+goofcat(conf.mat = con.mat, imp = TRUE)
 
-## NOT RUN
-## Using observations and corresponding predictions
-## Using random intgers
-# set.seed(123)
-# observed<- sample(1:5,1000,replace=TRUE)
-# set.seed(321)
-# predicted<- sample(1:5,1000,replace=TRUE)
-# goofcat(observed = observed, predicted = predicted)
-
+# Using vectors of observed and predicted values
+set.seed(123)
+observed <- sample(1:5, 1000, replace = TRUE)
+set.seed(321)
+predicted <- sample(1:5, 1000, replace = TRUE)
+goofcat(observed = observed, predicted = predicted)
 
 
 
@@ -506,11 +497,14 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
+library(ithir)
+data(homosoil_globeDat)
 
-# library(ithir)
-# data(homosoil_globeDat)
-# str(homosoil_globeDat)
+# Structure of the dataset
+str(homosoil_globeDat)
 
+# Summary of the first few climatic variables
+summary(homosoil_globeDat[, 1:6])
 
 
 
@@ -520,24 +514,23 @@ nameEx("hunterCovariates")
 
 flush(stderr()); flush(stdout())
 
-### Name: Hunter Valley covariates
-### Title: Suite of selected environmental covariates for the the Lower
-###   Hunter Valley, NSW
-### Aliases: hunterCovariates
+### Name: hunterCovariates
+### Title: Environmental Covariate Rasters for the Lower Hunter Valley, NSW
+### Aliases: hunterCovariates hunterCovariates_A_AACN
+###   hunterCovariates_A_elevation hunterCovariates_A_Hillshading
+###   hunterCovariates_A_light_insolation hunterCovariates_A_MRVBF
+###   hunterCovariates_A_Slope hunterCovariates_A_TRI
+###   hunterCovariates_A_TWI
 ### Keywords: datasets
 
 ### ** Examples
 
+library(ithir)
+library(terra)
 
-# library(ithir)
-# library(terra)
-
-# example load the altitude above channel network grid
-# aacn <- rast(system.file("extdata/hunterCovariates_hunterCovariates_AACN.tif", package="ithir"))
-
-# simple plot
-# plot(aacn, main= "Hunter Valley AACN Map")
-
+# Load and plot the slope raster layer
+slope <- rast(system.file("extdata/hunterCovariates_A_Slope.tif", package = "ithir"))
+plot(slope, main = "Hunter Valley - Slope")
 
 
 
@@ -547,23 +540,28 @@ nameEx("hunterCovariates_sub")
 
 flush(stderr()); flush(stdout())
 
-### Name: Hunter Valley covariates (subset area)
-### Title: Suite of selected environmental covariates for a subset the
-###   Lower Hunter Valley, NSW
-### Aliases: hunterCovariates_sub
+### Name: hunterCovariates_sub
+### Title: Environmental Covariate Rasters for a Subset of the Lower Hunter
+###   Valley, NSW
+### Aliases: hunterCovariates_sub hunterCovariates_sub_Elevation
+###   hunterCovariates_sub_Slope hunterCovariates_sub_TWI
+###   hunterCovariates_sub_MRVBF hunterCovariates_sub_Hillshading
+###   hunterCovariates_sub_Light_insolation
+###   hunterCovariates_sub_Landsat_Band1 hunterCovariates_sub_NDVI
+###   hunterCovariates_sub_AACN
+###   hunterCovariates_sub_Terrain_Ruggedness_Index
+###   hunterCovariates_sub_Mid_Slope_Position
 ### Keywords: datasets
 
 ### ** Examples
 
+library(ithir)
+library(terra)
 
-# library(ithir)
-# library(terra)
+# Load and plot the elevation raster
+elevation <- rast(system.file("extdata/hunterCovariates_sub_Elevation.tif", package = "ithir"))
+plot(elevation, main = "Hunter Valley Subset - Elevation")
 
-# example load the elevation grid
-# elevation <- rast(system.file("extdata/hunterCovariates_sub_Elevation.tif", package="ithir"))
-
-# simple plot
-#plot(elevation, main= "Hunter Valley (sub area) Elevation")
 
 
 cleanEx()
@@ -572,20 +570,19 @@ nameEx("hvGrid25m")
 
 flush(stderr()); flush(stdout())
 
-### Name: Hunter Valley Grid (S1)
-### Title: Raster grid of the Lower Hunter Valley, NSW, Australia
-### Aliases: 'Hunter Valley Grid'
+### Name: hvGrid25m
+### Title: Raster Grid of the Lower Hunter Valley, NSW, Australia
+### Aliases: hvGrid25m
 ### Keywords: datasets
 
 ### ** Examples
 
-# library(ithir)
-# library(terra)
+library(ithir)
+library(terra)
 
-## NOT RUN
-# hv.grid<- rast(system.file("extdata/hvGrid25m_grid.tif", package="ithir"))
-# plot(hv.grid)
-
+# Load and plot the raster grid
+hv.grid <- rast(system.file("extdata/hvGrid25m_grid.tif", package = "ithir"))
+plot(hv.grid, main = "Hunter Valley 25m Grid Index")
 
 
 
@@ -595,18 +592,20 @@ nameEx("hvPoints250")
 
 flush(stderr()); flush(stdout())
 
-### Name: Hunter Valley Points (S1)
-### Title: Random selection of point locations: Hunter Valley
-### Aliases: 'Hunter Valley Points'
+### Name: hvPoints250
+### Title: Hunter Valley Soil Observation Points (n = 250)
+### Aliases: hvPoints250
 ### Keywords: datasets
 
 ### ** Examples
 
+data(hvPoints250)
 
-# library(ithir)
-# data(hvPoints250)
-# summary(hvPoints250)
+# Summary
+summary(hvPoints250)
 
+# Simple plot
+plot(hvPoints250, pch = 20, col = "darkgreen", main = "Hunter Valley Sample Points")
 
 
 
@@ -616,18 +615,18 @@ nameEx("hvTerronDat")
 
 flush(stderr()); flush(stdout())
 
-### Name: Hunter Valley terron data
-### Title: Soil point data from the Hunter Valley, NSW, Australia
+### Name: hvTerronDat
+### Title: Soil Point Data with Terron Class Labels from the Hunter Valley,
+###   NSW, Australia
 ### Aliases: hvTerronDat
 ### Keywords: datasets
 
 ### ** Examples
 
-
-# library(ithir)
-# data(hvTerronDat)
-# head(hvTerronDat)
-
+library(ithir)
+data(hvTerronDat)
+head(hvTerronDat)
+table(hvTerronDat$terron_class)
 
 
 
@@ -637,18 +636,21 @@ nameEx("oneProfile")
 
 flush(stderr()); flush(stdout())
 
-### Name: One soil profile
-### Title: One soil profile
-### Aliases: 'Soil carbon soil profile'
+### Name: oneProfile
+### Title: Example Soil Profile for Soil Carbon Density
+### Aliases: oneProfile
 ### Keywords: datasets
 
 ### ** Examples
 
+data(oneProfile)
 
-# library(ithir)
-# data(oneProfile)
-# str(oneProfile)
+# Show profile structure
+str(oneProfile)
 
+# Fit spline (if using ithir)
+# result <- ea_spline(oneProfile, var.name = "carbon_density")
+# result$harmonised
 
 
 
@@ -659,26 +661,30 @@ nameEx("plot_ea_spline")
 flush(stderr()); flush(stdout())
 
 ### Name: plot_ea_spline
-### Title: plot soil profile outputs from 'ea_spline'
+### Title: Plot Soil Profile Outputs from 'ea_spline'
 ### Aliases: plot_ea_spline
 ### Keywords: methods
 
 ### ** Examples
 
+library(ithir)
+library(aqp)
 
-# library(ithir)
-# library(aqp)
- 
-## NOT RUN
-# data(oneProfile)
-# str(oneProfile)
-## convert to SoilProfileCollection object
-# aqp::depths(oneProfile)<- Soil.ID ~ Upper.Boundary + Lower.Boundary
-## fit spline
-# eaFit <- ea_spline(oneProfile, var.name="C.kg.m3.",d= t(c(0,5,15,30,60,100,200)),lam = 0.1, vlow=0, show.progress=FALSE )
-## do plot
-# plot_ea_spline(splineOuts=eaFit, d= t(c(0,5,15,30,60,100,200)), maxd=200, type=1, label="carbon density") 
+# Load example data and convert to SoilProfileCollection
+data(oneProfile)
+depths(oneProfile) <- Soil.ID ~ Upper.Boundary + Lower.Boundary
 
+# Fit spline to the profile
+eaFit <- ea_spline(oneProfile, var.name = "C.kg.m3.", 
+                   d = t(c(0, 5, 15, 30, 60, 100, 200)), 
+                   lam = 0.1, vlow = 0, show.progress = FALSE)
+
+# Plot the fitted spline
+plot_ea_spline(splineOuts = eaFit, 
+               d = t(c(0, 5, 15, 30, 60, 100, 200)), 
+               maxd = 200, 
+               type = 1, 
+               label = "Carbon Density")
 
 
 
@@ -689,22 +695,24 @@ nameEx("plot_soilProfile")
 flush(stderr()); flush(stdout())
 
 ### Name: plot_soilProfile
-### Title: plot soil profile data
+### Title: Plot Soil Profile Data
 ### Aliases: plot_soilProfile
 ### Keywords: methods
 
 ### ** Examples
 
+library(ithir)
 
-# library(ithir)
+# Load example profile data
+data(oneProfile)
 
-## NOT RUN
-# data(oneProfile)
-# str(oneProfile)
-
-## do plot
-# plot_soilProfile(data = oneProfile, vals = oneProfile$C.kg.m3., depths = oneProfile[,2:3], label= names(oneProfile)[4])
-
+# Visualize the profile
+plot_soilProfile(
+  data = oneProfile,
+  vals = oneProfile$C.kg.m3.,
+  depths = oneProfile[, 2:3],
+  label = names(oneProfile)[4]
+)
 
 
 
@@ -739,17 +747,17 @@ nameEx("topo_dem")
 flush(stderr()); flush(stdout())
 
 ### Name: topo_dem
-### Title: matrix of digital elevation
-### Aliases: 'digital elevation'
+### Title: Example Digital Elevation Model as a Matrix
+### Aliases: topo_dem
 ### Keywords: datasets
 
 ### ** Examples
 
+data(topo_dem)
 
-# library(ithir)
-# data(topo_dem)
-# str(topo_dem)
-
+# Basic inspection
+str(topo_dem)
+image(topo_dem, main = "Synthetic DEM", col = terrain.colors(20))
 
 
 
