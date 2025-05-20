@@ -53,7 +53,7 @@ goof <- function(observed,predicted, plot.it = FALSE, type="DSM"){
   sxy <- mean((observed-mx) * (predicted-my))
   ccc <- 2 * sxy / (s2x + s2y + (mx - my)^2)
   
-  if (plot.it==TRUE){eqscplot(observed, predicted)
+  if (plot.it==TRUE){MASS::eqscplot(observed, predicted)
   abline(a = 0, b = 1, col = "brown4")}
   
   if (type == "DSM"){ gf <- data.frame(R2=R2, concordance=ccc, MSE=SEP2, RMSE=SEP, bias=bias, row.names=NULL)}
