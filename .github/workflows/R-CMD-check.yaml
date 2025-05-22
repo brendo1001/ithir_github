@@ -2,9 +2,9 @@ name: pkg-test
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [main, master]
   pull_request:
-    branches: [ main, master ]
+    branches: [main, master]
 
 jobs:
   pkg-test:
@@ -20,19 +20,10 @@ jobs:
           r-version: '4.2.1'
           use-public-rspm: true
 
-      - name: Install system dependencies
+      - name: Install LaTeX for PDF manual
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-            libcurl4-openssl-dev \
-            libssl-dev \
-            libxml2-dev \
-            libgdal-dev \
-            libgeos-dev \
-            libproj-dev \
-            libudunits2-dev \
-            cmake \
-            libabsl-dev \
             texlive-base \
             texlive-latex-base \
             texlive-latex-extra \
@@ -42,10 +33,17 @@ jobs:
             lmodern \
             pandoc
 
-      - name: Install pak and package dependencies
-        run: |
-          Rscript -e 'install.packages("pak", repos="https://r-lib.github.io/p/pak/dev")'
-          Rscript -e 'pak::pkg_install_deps(dependencies = TRUE)'
+      - name: Install R package dependencies
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: |
+            devtools
+            sf
+            terra
+            digest
+            rmarkdown
+            knitr
+            tinytex
 
       - name: Run R CMD check
-        run: R CMD check --no-manual --as-cran .
+        run: R CMD check --as-cran .
