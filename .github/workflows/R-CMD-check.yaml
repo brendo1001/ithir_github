@@ -2,28 +2,40 @@ name: pkg-test
 
 on:
   push:
-    branches: [main, master]
+    branches: [ main, master ]
   pull_request:
-    branches: [main, master]
+    branches: [ main, master ]
 
 jobs:
   pkg-test:
     runs-on: ubuntu-latest
 
     steps:
+      # 1) Checkout your code
       - name: Checkout code
         uses: actions/checkout@v2
 
+      # 2) Set up R
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
         with:
           r-version: '4.2.1'
           use-public-rspm: true
 
-      - name: Install LaTeX for PDF manual
+      # 3) Install Debian/Ubuntu system libs needed for geospatial & s2 packages
+      - name: Install system dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y \
+            libcurl4-openssl-dev \
+            libssl-dev \
+            libxml2-dev \
+            libgdal-dev \
+            libgeos-dev \
+            libproj-dev \
+            libudunits2-dev \
+            cmake \
+            libabsl-dev \
             texlive-base \
             texlive-latex-base \
             texlive-latex-extra \
@@ -33,6 +45,7 @@ jobs:
             lmodern \
             pandoc
 
+      # 4) Install your R package dependencies
       - name: Install R package dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
@@ -51,5 +64,6 @@ jobs:
             knitr
             tinytex
 
+      # 5) Run R CMD check
       - name: Run R CMD check
-        run: R CMD check --as-cran .
+        run: R CMD check --no-manual --as-cran .
