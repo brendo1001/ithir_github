@@ -42,7 +42,7 @@ jobs:
             lmodern \
             pandoc
 
-       - name: Install pak and package dependencies
+      - name: Install pak and package dependencies
         run: |
           Rscript -e 'install.packages("pak", repos="https://r-lib.github.io/p/pak/dev")'
           Rscript -e 'pak::pkg_install_deps(dependencies = TRUE)'
