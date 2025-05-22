@@ -1,11 +1,6 @@
 \name{edgeroiCovariates}
 \docType{data}
 \alias{edgeroiCovariates}
-\alias{edgeroiCovariates_elevation.tif}
-\alias{edgeroiCovariates_twi.tif}
-\alias{edgeroiCovariates_radK.tif}
-\alias{edgeroiCovariates_landsat_b3.tif}
-\alias{edgeroiCovariates_landsat_b4.tif}
 \title{Environmental Covariate Rasters for the Full Edgeroi District, NSW}
 \description{
 GeoTIFF raster files of selected environmental covariates covering the full Edgeroi District in northern New South Wales, Australia. These spatial layers are commonly used in digital soil mapping as predictor variables.

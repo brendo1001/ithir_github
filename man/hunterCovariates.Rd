@@ -1,14 +1,6 @@
 \name{hunterCovariates}
 \docType{data}
 \alias{hunterCovariates}
-\alias{hunterCovariates_A_AACN}
-\alias{hunterCovariates_A_elevation}
-\alias{hunterCovariates_A_Hillshading}
-\alias{hunterCovariates_A_light_insolation}
-\alias{hunterCovariates_A_MRVBF}
-\alias{hunterCovariates_A_Slope}
-\alias{hunterCovariates_A_TRI}
-\alias{hunterCovariates_A_TWI}
 \title{Environmental Covariate Rasters for the Lower Hunter Valley, NSW}
 \description{
 A set of GeoTIFF rasters representing environmental covariates across the full extent of the Lower Hunter Valley in New South Wales, Australia. These covariates are commonly used in digital soil mapping and terrain analysis.

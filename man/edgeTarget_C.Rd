@@ -1,7 +1,6 @@
 \name{edgeTarget_C}
 \docType{data}
 \alias{edgeTarget_C}
-\alias{edgeTarget_C.tif}
 \title{1 km Resolution Soil Carbon Stock Map (Subset) – Edgeroi District, NSW}
 \description{
 A GeoTIFF raster representing predicted soil organic carbon (SOC) stock for the 0–30 cm depth interval over a small subset of the Edgeroi District, NSW, Australia. The map is at 1 km spatial resolution and was derived using digital soil mapping methods.

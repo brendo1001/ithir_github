@@ -1,11 +1,6 @@
 \name{edgeroi_covariates_subset}
 \docType{data}
 \alias{edgeroi_covariates_subset}
-\alias{edgeGrids_Doserate}
-\alias{edgeGrids_Elevation}
-\alias{edgeGrids_Panchromat}
-\alias{edgeGrids_Slope}
-\alias{edgeGrids_TWI}
 \title{Selected Subset of Environmental Covariates for the Edgeroi District, NSW}
 \description{
 A set of GeoTIFF rasters representing selected environmental covariates for a small area in the Edgeroi District, New South Wales, Australia.

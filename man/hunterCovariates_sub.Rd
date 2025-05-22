@@ -1,17 +1,6 @@
 \name{hunterCovariates_sub}
 \docType{data}
 \alias{hunterCovariates_sub}
-\alias{hunterCovariates_sub_Elevation}
-\alias{hunterCovariates_sub_Slope}
-\alias{hunterCovariates_sub_TWI}
-\alias{hunterCovariates_sub_MRVBF}
-\alias{hunterCovariates_sub_Hillshading}
-\alias{hunterCovariates_sub_Light_insolation}
-\alias{hunterCovariates_sub_Landsat_Band1}
-\alias{hunterCovariates_sub_NDVI}
-\alias{hunterCovariates_sub_AACN}
-\alias{hunterCovariates_sub_Terrain_Ruggedness_Index}
-\alias{hunterCovariates_sub_Mid_Slope_Position}
 \title{Environmental Covariate Rasters for a Subset of the Lower Hunter Valley, NSW}
 \description{
 A suite of GeoTIFF rasters representing environmental covariates for a subset of the Lower Hunter Valley in New South Wales, Australia. These covariates are used in digital soil mapping and terrain analysis.

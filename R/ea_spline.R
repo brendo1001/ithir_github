@@ -19,9 +19,9 @@
 #' \item{var.1cm}{Matrix of 1cm spline predictions for each profile.}
 #'
 ea_spline <- function(obj, var.name, lam = 0.1,
-                      d = c(0, 5, 15, 30, 60, 100, 200),
-                      vlow = 0, vhigh = 1000,
-                      show.progress = TRUE) {
+                        d = c(0, 5, 15, 30, 60, 100, 200),
+                        vlow = 0, vhigh = 1000,
+                        show.progress = TRUE) {
   
   # --- Validate and prepare input ---
   if (inherits(obj, "SoilProfileCollection")) {

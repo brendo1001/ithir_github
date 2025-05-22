@@ -4,9 +4,32 @@
 #library(ithir)
 
 #Fit spline 
-#data(oneProfile)
-#class(oneProfile)
-#sp.fit<- ithir::ea_spline(obj = oneProfile, var.name="C.kg.m3.")
+data(oneProfile)
+class(oneProfile)
+sp.fit1<- ithir::ea_spline(obj = oneProfile, var.name="C.kg.m3.")
+sp.fit1.h<- sp.fit1$harmonised
+
+sp.fit2<- ea_spline.t(obj = oneProfile, var.name="C.kg.m3.")
+sp.fit2.h<- sp.fit2$harmonised
+
+# load data
+Carbon_10sites<- read.csv("~Carbon_10sites.csv")
+
+# fit spline to each profile
+eaFit.1 <- ithir::ea_spline(obj = Carbon_10sites,
+                          var.name="C.kg.m3.", d= t(c(0,5,15,30,60,100,200)),lam = 0.1, vlow=0, show.progress=FALSE )
+eaFit.1.h<- eaFit.1$harmonised
+
+# fit spline to each profile
+eaFit.2 <- ea_spline.t(obj = Carbon_10sites,
+                            var.name="C.kg.m3.", d= t(c(0,5,15,30,60,100,200)),lam = 0.1, vlow=0, show.progress=FALSE )
+eaFit.2.h<- eaFit.2$harmonised
+
+str(eaFit)
+
+
+
+
 
 #Using a SoilProfileCollection
 ## sample profile from Nigeria:

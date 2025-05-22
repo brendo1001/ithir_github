@@ -15,13 +15,13 @@ precompute_spline_structures(dIn, lam = 0.1)
 }
 \value{
 Returns a \code{list} containing precomputed matrix components used in mass-preserving spline fitting:
-\itemize{
-  \item{\code{z}}{ - coefficient matrix used to solve for spline coefficients}
-  \item{\code{rinv}}{ - inverse of spline smoothness matrix}
-  \item{\code{q}}{ - difference matrix for first derivatives}
-  \item{\code{u}}{ - upper depths of each interval}
-  \item{\code{v}}{ - lower depths of each interval}
-  \item{\code{delta}}{ - thickness of each interval}
+\describe{
+  \item{\code{z}}{coefficient matrix used to solve for spline coefficients}
+  \item{\code{rinv}}{inverse of spline smoothness matrix}
+  \item{\code{q}}{difference matrix for first derivatives}
+  \item{\code{u}}{upper depths of each interval}
+  \item{\code{v}}{lower depths of each interval}
+  \item{\code{delta}}{thickness of each interval}
 }
 }
 \author{Brendan Malone}

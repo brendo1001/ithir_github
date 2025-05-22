@@ -1,7 +1,7 @@
 Package: ithir
 Type: Package
 Title: Tools and Data for Digital Soil Informatics
-Version: 1.0.0
+Version: 2.0.0
 Date: 2025-05-20
 Author: Brendan Malone [aut, cre]
 Maintainer: Brendan Malone <brendan.malone@csiro.au>
@@ -10,14 +10,14 @@ Depends: R (>= 4.0)
 Imports: 
     methods,
     terra,
-    MASS,
-    aqp
+    MASS
 Suggests: 
     sf,
     graphics,
     stats,
     utils,
-    testthat
+    testthat,
+    aqp
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
