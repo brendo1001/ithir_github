@@ -41,7 +41,6 @@ jobs:
             sf
             methods
             MASS
-            aqp
             graphics
             stats
             utils

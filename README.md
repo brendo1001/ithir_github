@@ -1,3 +1,5 @@
+[![pkg-test](https://github.com/brendo1001/ithir_github/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/brendo1001/ithir_github/actions/workflows/R-CMD-check.yaml)
+
 # ithir R Package
 
 The `ithir` package provides data, models, and utility functions for digital soil informatics. It supports soil data analysis from both raster (gridded) and profile (point) formats, with tools for interpolation, prediction assessment, and general soil model diagnostics.
